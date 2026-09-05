@@ -969,34 +969,54 @@
         <!-- Injected by JS -->
       </div>
 
+      <!-- Regional Selection Rules by Period -->
       <div class="section-card">
         <div class="section-header">
           <div class="section-title">
-            <span>🗺️ 時期別 地域選択ガイド（2:3:5比率・特化配分）</span>
-          </div>
-          <span style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700;" id="region-current-dist">短距離</span>
-        </div>
-
-        <!-- Dedicated Distance Selector within Region Tab for seamless switching -->
-        <div style="margin-bottom: 14px; background: rgba(0,0,0,0.18); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--card-border);">
-          <div style="font-size: 0.8rem; color: var(--highlight); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
-            <span>📍</span> 育成距離を選択（距離ごとの2:3:5配分・適正地域が即座に切り替わります）:
-          </div>
-          <div style="display: flex; gap: 8px; overflow-x: auto;" id="region-dist-bar">
-            <!-- Injected by JS -->
+            <span>📅 時期別の選択ルールと選択可能地域プール</span>
           </div>
         </div>
-
-        <!-- Grade Filter -->
-        <div class="grade-selector" style="margin-bottom: 16px;">
-          <button class="grade-btn active" data-grade="all" onclick="filterGrade('all')">全期一括</button>
-          <button class="grade-btn" data-grade="0" onclick="filterGrade(0)">ジュニア級 (序盤)</button>
-          <button class="grade-btn" data-grade="1" onclick="filterGrade(1)">クラシック級 (中盤・合宿)</button>
-          <button class="grade-btn" data-grade="2" onclick="filterGrade(2)">シニア級 (終盤・カンスト)</button>
-        </div>
-
-        <div id="region-matrix-list">
+        <div id="region-pools-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 14px;">
           <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- Deck-type based 2:3:5 Region Combinations -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>🍜 サポカ編成タイプ別 推奨3地域選択プラン（麺2：スープ3：トッピング5）</span>
+          </div>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
+          トレセン軒では、サポカ編成の得意練習に合わせて各期3つの地域を選択し、習得ゲージを「麺2：スープ3：トッピング5」に調整します。
+        </p>
+        <div id="deck-strategies-list">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- 10 Region Master List -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>🗾 全10地域・ラーメン特徴＆効果マスター早見表</span>
+          </div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table class="skills-table">
+            <thead>
+              <tr>
+                <th style="min-width: 70px;">地域名</th>
+                <th style="min-width: 140px;">選択可能時期</th>
+                <th>ラーメン特徴と効果</th>
+                <th>主な役割・育成適性</th>
+              </tr>
+            </thead>
+            <tbody id="region-master-tbody">
+              <!-- Injected by JS -->
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -1152,16 +1172,14 @@
       document.getElementById('section-uncaps').style.display = sectionId === 'uncaps' ? 'block' : 'none';
 
       // Selector bar visibility
-      document.getElementById('dist-bar').style.display = (sectionId === 'builds' || sectionId === 'regions') ? 'flex' : 'none';
+      document.getElementById('dist-bar').style.display = sectionId === 'builds' ? 'flex' : 'none';
       document.getElementById('style-bar').style.display = sectionId === 'styles' ? 'flex' : 'none';
       document.getElementById('event-bar').style.display = sectionId === 'events' ? 'flex' : 'none';
     }
 
     function renderDistanceBar() {
       const bar = document.getElementById('dist-bar');
-      const regBar = document.getElementById('region-dist-bar');
       if (bar) bar.innerHTML = '';
-      if (regBar) regBar.innerHTML = '';
       const builds = window.UMA_META_DATA.distance_style_builds;
       if (!builds) return;
 
@@ -1177,25 +1195,8 @@
             currentDistance = key;
             renderDistanceBar();
             renderBuilds();
-            renderRegions();
           };
           bar.appendChild(pill);
-        }
-
-        // Region Tab Embedded Dist Bar
-        if (regBar) {
-          const pill2 = document.createElement('button');
-          pill2.className = `pill-btn ${key === currentDistance ? 'active' : ''}`;
-          pill2.style.padding = '6px 14px';
-          pill2.style.fontSize = '0.8rem';
-          pill2.innerHTML = `<span>${item.icon}</span> <span>${item.name}</span>`;
-          pill2.onclick = () => {
-            currentDistance = key;
-            renderDistanceBar();
-            renderBuilds();
-            renderRegions();
-          };
-          regBar.appendChild(pill2);
         }
       });
     }
@@ -1329,7 +1330,7 @@
         <div class="distance-region-plan">
           <div class="distance-region-plan-header">
             <div class="distance-region-plan-title">
-              <span>🗺️</span> この距離×編成の推奨地域選択（2:3:5比率）
+              <span>🗺️</span> この距離×編成の推奨3地域選択（2:3:5比率）
             </div>
             <button class="pill-btn" style="padding: 3px 10px; font-size: 0.74rem;" onclick="switchSection('regions')">時期別ガイド詳細を見る →</button>
           </div>
@@ -1340,8 +1341,9 @@
             <div class="distance-region-step">
               <div class="distance-region-step-title">
                 <span>🌱 ジュニア級</span>
-                <span class="distance-region-ratio-badge">比率 ${distData.region_plan.junior.ratio}</span>
+                <span class="distance-region-ratio-badge">${distData.region_plan.junior.ingredient_target || '麺2:スープ3:トッピング5'}</span>
               </div>
+              <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.junior.selectable_pool || '東日本5地域から選択'}</div>
               <div class="region-tags" style="margin-bottom: 6px;">
                 ${distData.region_plan.junior.regions.map(r => `<span class="region-pill" style="font-size: 0.72rem; padding: 2px 7px;">📍 ${r}</span>`).join('')}
               </div>
@@ -1350,8 +1352,9 @@
             <div class="distance-region-step">
               <div class="distance-region-step-title">
                 <span>⚔️ クラシック級</span>
-                <span class="distance-region-ratio-badge">比率 ${distData.region_plan.classic.ratio}</span>
+                <span class="distance-region-ratio-badge">${distData.region_plan.classic.ingredient_target || '麺2:スープ3:トッピング5'}</span>
               </div>
+              <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.classic.selectable_pool || '西日本5地域から選択'}</div>
               <div class="region-tags" style="margin-bottom: 6px;">
                 ${distData.region_plan.classic.regions.map(r => `<span class="region-pill" style="font-size: 0.72rem; padding: 2px 7px;">📍 ${r}</span>`).join('')}
               </div>
@@ -1360,8 +1363,9 @@
             <div class="distance-region-step">
               <div class="distance-region-step-title">
                 <span>👑 シニア級</span>
-                <span class="distance-region-ratio-badge">比率 ${distData.region_plan.senior.ratio}</span>
+                <span class="distance-region-ratio-badge">${distData.region_plan.senior.ingredient_target || '麺2:スープ3:トッピング5'}</span>
               </div>
+              <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.senior.selectable_pool || '全10地域から選択'}</div>
               <div class="region-tags" style="margin-bottom: 6px;">
                 ${distData.region_plan.senior.regions.map(r => `<span class="region-pill" style="font-size: 0.72rem; padding: 2px 7px;">📍 ${r}</span>`).join('')}
               </div>
@@ -1476,62 +1480,105 @@
 
     function renderRegions() {
       const data = window.UMA_META_DATA.region_strategies;
-      const currentDistObj = window.UMA_META_DATA.distance_style_builds ? window.UMA_META_DATA.distance_style_builds[currentDistance] : null;
-      document.getElementById('region-current-dist').textContent = `現在選択: ${currentDistObj ? currentDistObj.name : ''}`;
+      if (!data) return;
 
       // Rule Banner
       const rule = data.rule_explanation;
       document.getElementById('rule-banner').innerHTML = `
         <h3>✨ ${rule.title}</h3>
-        <p>${rule.summary}</p>
-        <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 4px;">💡 <strong>メカニズム:</strong> ${rule.mechanism}</p>
+        <p><strong>【結論】</strong> ${rule.summary}</p>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 6px; line-height: 1.5;">💡 <strong>メカニズム:</strong> ${rule.mechanism}</p>
+        <p style="color: var(--accent-gold); font-size: 0.8rem; margin-top: 4px;">🏆 <strong>効果:</strong> ${rule.benefit}</p>
       `;
 
-      // Matrix
-      const matrixList = document.getElementById('region-matrix-list');
-      matrixList.innerHTML = '';
+      // 1. Regional Rules Container
+      const poolsContainer = document.getElementById('region-pools-container');
+      if (poolsContainer && data.regional_rules) {
+        poolsContainer.innerHTML = Object.keys(data.regional_rules).map(k => {
+          const ruleItem = data.regional_rules[k];
+          return `
+            <div style="background: var(--card-sub); border: 1px solid var(--card-border); border-radius: 10px; padding: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <strong style="color: var(--highlight); font-size: 0.95rem;">${ruleItem.grade}</strong>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">${ruleItem.period}</span>
+              </div>
+              <div style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 6px;">
+                📌 ${ruleItem.selectable_count}
+              </div>
+              <div style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px;">
+                ${ruleItem.pool.map(p => `<span class="region-pill" style="font-size: 0.75rem; padding: 2px 7px;">${p}</span>`).join('')}
+              </div>
+              <div style="font-size: 0.74rem; color: var(--text-muted); border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 4px;">
+                ⚠️ ${ruleItem.note}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
 
-      data.matrix.forEach((gradeItem, idx) => {
-        if (currentGradeFilter !== 'all' && currentGradeFilter !== idx) {
-          return;
-        }
+      // 2. Deck-type based 2:3:5 region recommendations
+      const deckList = document.getElementById('deck-strategies-list');
+      if (deckList && data.deck_recommendations) {
+        deckList.innerHTML = data.deck_recommendations.map(deck => `
+          <div style="background: var(--card-sub); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; border-bottom: 1px solid var(--card-border); padding-bottom: 6px;">
+              <strong style="color: var(--highlight); font-size: 0.95rem;">🎴 ${deck.deck_type}</strong>
+              <span class="tier-badge tier-s" style="font-size: 0.72rem;">適応: ${deck.target_distances}</span>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
+              <!-- Junior -->
+              <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #10b981;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="font-size: 0.85rem; color: #6ee7b7;">🌱 ジュニア級 (東日本限定)</strong>
+                  <span class="distance-region-ratio-badge">${deck.junior.ingredient_ratio}</span>
+                </div>
+                <div style="display: flex; gap: 4px; margin-bottom: 6px;">
+                  ${deck.junior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.junior.purpose}</div>
+              </div>
 
-        const distInfo = gradeItem.distances[currentDistance];
-        if (!distInfo) return;
+              <!-- Classic -->
+              <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #3b82f6;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="font-size: 0.85rem; color: #93c5fd;">⚔️ クラシック級 (西日本限定)</strong>
+                  <span class="distance-region-ratio-badge">${deck.classic.ingredient_ratio}</span>
+                </div>
+                <div style="display: flex; gap: 4px; margin-bottom: 6px;">
+                  ${deck.classic.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.classic.purpose}</div>
+              </div>
 
-        const card = document.createElement('div');
-        card.className = 'region-card';
-        card.innerHTML = `
-          <div class="region-header">
-            <span class="region-grade-title">${gradeItem.grade}</span>
-            <span class="region-period">${gradeItem.period}</span>
+              <!-- Senior -->
+              <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #f59e0b;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="font-size: 0.85rem; color: #fde047;">👑 シニア級 (全10地域解禁)</strong>
+                  <span class="distance-region-ratio-badge">${deck.senior.ingredient_ratio}</span>
+                </div>
+                <div style="display: flex; gap: 4px; margin-bottom: 6px;">
+                  ${deck.senior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.senior.purpose}</div>
+              </div>
+            </div>
           </div>
-          <div style="font-size: 0.8rem; color: var(--accent-gold); margin-bottom: 8px;">🎯 重点方針: ${gradeItem.focus}</div>
-          
-          <div class="region-tags">
-            ${distInfo.recommended.map(r => `<span class="region-pill">📍 ${r}</span>`).join('')}
-          </div>
+        `).join('');
+      }
 
-          <div class="region-meta-row">
-            <span class="region-meta-label">優先ステ:</span>
-            <span>${distInfo.priority_stats}</span>
-          </div>
-          <div class="region-meta-row">
-            <span class="region-meta-label">立ち回り:</span>
-            <span>${distInfo.action_plan}</span>
-          </div>
-        `;
-        matrixList.appendChild(card);
-      });
-    }
-
-    function filterGrade(grade) {
-      currentGradeFilter = grade;
-      document.querySelectorAll('.grade-btn').forEach(btn => {
-        const bg = btn.getAttribute('data-grade');
-        btn.classList.toggle('active', String(bg) === String(grade));
-      });
-      renderRegions();
+      // 3. Region Master Table
+      const masterTbody = document.getElementById('region-master-tbody');
+      if (masterTbody && data.region_master_list) {
+        masterTbody.innerHTML = data.region_master_list.map(reg => `
+          <tr>
+            <td><strong>📍 ${reg.name}</strong></td>
+            <td><span class="uncap-pill uncap-standard" style="font-size: 0.72rem;">${reg.pool}</span></td>
+            <td><span style="color: var(--text-main); font-size: 0.8rem;">${reg.effect}</span></td>
+            <td><span style="color: var(--highlight); font-size: 0.78rem;">${reg.role}</span></td>
+          </tr>
+        `).join('');
+      }
     }
 
     
