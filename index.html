@@ -647,7 +647,21 @@
           </div>
         </div>
 
-        <p id="current-dist-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;"></p>
+        <!-- Running Style Sub-Selector within Distance -->
+        <div style="margin-bottom: 14px; background: rgba(0,0,0,0.18); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--card-border);">
+          <div style="font-size: 0.8rem; color: var(--accent-gold); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+            <span>🏃</span> 脚質を選択（距離 × 脚質で編成・スキルが最適化されます）:
+          </div>
+          <div style="display: flex; gap: 6px; overflow-x: auto;" id="build-style-bar">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Key Skills for this Distance x Style -->
+        <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid var(--highlight); border-radius: 8px; padding: 10px 12px; margin-bottom: 14px;">
+          <strong style="color: var(--highlight); font-size: 0.82rem;">⚡ この距離×脚質の最重要・必須スキル:</strong>
+          <div id="build-key-skills" style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"></div>
+        </div>
 
         <!-- Stats Goal -->
         <div class="stats-container" id="stats-container">
@@ -868,6 +882,7 @@
   <script>
     // State
     let currentDistance = 'short';
+    let currentBuildStyle = 'leader';
     let currentStyle = 'runner';
     let currentEventId = 'cm_sep2026';
     let currentGradeFilter = 'all'; // 'all', 0, 1, 2
@@ -945,14 +960,16 @@
     function renderDistanceBar() {
       const bar = document.getElementById('dist-bar');
       bar.innerHTML = '';
-      const builds = window.UMA_META_DATA.builds_by_distance;
+      const builds = window.UMA_META_DATA.distance_style_builds;
+      if (!builds) return;
 
-      builds.forEach(item => {
+      Object.keys(builds).forEach(key => {
+        const item = builds[key];
         const pill = document.createElement('button');
-        pill.className = `pill-btn ${item.id === currentDistance ? 'active' : ''}`;
+        pill.className = `pill-btn ${key === currentDistance ? 'active' : ''}`;
         pill.innerHTML = `<span>${item.icon}</span> <span>${item.name}</span>`;
         pill.onclick = () => {
-          currentDistance = item.id;
+          currentDistance = key;
           renderDistanceBar();
           renderBuilds();
           renderRegions();
@@ -961,134 +978,118 @@
       });
     }
 
-    function renderStyleBar() {
-      const bar = document.getElementById('style-bar');
+    const STYLES_LIST = [
+      { id: 'runner', name: '逃げ', icon: '🏃' },
+      { id: 'leader', name: '先行', icon: '🏇' },
+      { id: 'betweener', name: '差し', icon: '⚡' },
+      { id: 'chaser', name: '追込', icon: '🌪️' }
+    ];
+
+    function renderBuildStyleBar() {
+      const bar = document.getElementById('build-style-bar');
+      if (!bar) return;
       bar.innerHTML = '';
-      const styles = window.UMA_META_DATA.running_styles;
-      if (!styles) return;
 
-      styles.forEach(item => {
+      STYLES_LIST.forEach(st => {
         const pill = document.createElement('button');
-        pill.className = `pill-btn ${item.id === currentStyle ? 'active' : ''}`;
-        pill.innerHTML = `<span>${item.icon}</span> <span>${item.name.split(' ')[0]}</span>`;
+        pill.className = `pill-btn ${st.id === currentBuildStyle ? 'active' : ''}`;
+        pill.style.padding = '6px 14px';
+        pill.style.fontSize = '0.8rem';
+        pill.innerHTML = `<span>${st.icon}</span> <span>${st.name}</span>`;
         pill.onclick = () => {
-          currentStyle = item.id;
-          renderStyleBar();
-          renderStyles();
-        };
-        bar.appendChild(pill);
-      });
-    }
-
-    function renderEventBar() {
-      const bar = document.getElementById('event-bar');
-      bar.innerHTML = '';
-      const events = window.UMA_META_DATA.events;
-      if (!events) return;
-
-      events.forEach(ev => {
-        const pill = document.createElement('button');
-        pill.className = `pill-btn ${ev.id === currentEventId ? 'active' : ''}`;
-        const icon = ev.badge_type === 'cm' ? '👑' : '🏅';
-        pill.innerHTML = `<span>${icon}</span> <span>${ev.title.split(' ')[0]} ${ev.title.split(' ')[1] || ''}</span>`;
-        pill.onclick = () => {
-          currentEventId = ev.id;
-          renderEventBar();
-          renderEvents();
+          currentBuildStyle = st.id;
+          renderBuildStyleBar();
+          renderBuilds();
         };
         bar.appendChild(pill);
       });
     }
 
     function renderBuilds() {
-      const data = window.UMA_META_DATA.builds_by_distance.find(b => b.id === currentDistance);
-      if (!data) return;
+      const distData = window.UMA_META_DATA.distance_style_builds[currentDistance];
+      if (!distData) return;
+      const styleData = distData.styles[currentBuildStyle] || distData.styles.leader;
 
-      document.getElementById('current-dist-icon').textContent = data.icon;
-      document.getElementById('current-dist-title').textContent = `${data.name} 育成推奨設定`;
-      document.getElementById('current-dist-desc').textContent = data.description;
+      renderBuildStyleBar();
+
+      document.getElementById('current-dist-icon').textContent = distData.icon;
+      document.getElementById('current-dist-title').textContent = `${distData.name} × ${styleData.style_name} 最適編成`;
+
+      // Key Skills
+      const skillsContainer = document.getElementById('build-key-skills');
+      skillsContainer.innerHTML = styleData.key_skills.map(k => `
+        <span class="region-pill" style="font-size: 0.78rem; padding: 3px 8px;">⚡ ${k}</span>
+      `).join('');
 
       // Stats
       const statsContainer = document.getElementById('stats-container');
       statsContainer.innerHTML = `
-        <div class="stat-box"><div class="stat-label">スピード</div><div class="stat-val">${data.target_stats.speed}</div></div>
-        <div class="stat-box"><div class="stat-label">スタミナ</div><div class="stat-val">${data.target_stats.stamina}</div></div>
-        <div class="stat-box"><div class="stat-label">パワー</div><div class="stat-val">${data.target_stats.power}</div></div>
-        <div class="stat-box"><div class="stat-label">根性</div><div class="stat-val">${data.target_stats.guts}</div></div>
-        <div class="stat-box"><div class="stat-label">賢さ</div><div class="stat-val">${data.target_stats.wit}</div></div>
+        <div class="stat-box"><div class="stat-label">スピード</div><div class="stat-val">${styleData.target_stats.speed}</div></div>
+        <div class="stat-box"><div class="stat-label">スタミナ</div><div class="stat-val">${styleData.target_stats.stamina}</div></div>
+        <div class="stat-box"><div class="stat-label">パワー</div><div class="stat-val">${styleData.target_stats.power}</div></div>
+        <div class="stat-box"><div class="stat-label">根性</div><div class="stat-val">${styleData.target_stats.guts}</div></div>
+        <div class="stat-box"><div class="stat-label">賢さ</div><div class="stat-val">${styleData.target_stats.wit}</div></div>
       `;
 
       // Factor
       document.getElementById('factor-box').innerHTML = `
         <span>🧬</span>
-        <span><strong>推奨継承因子:</strong> ${data.factor_recommend}</span>
+        <span><strong>推奨継承因子:</strong> ${styleData.factor_recommend}</span>
       `;
 
-      // Templates
+      // Templates / Deck
       const templatesList = document.getElementById('deck-templates-list');
       templatesList.innerHTML = '';
 
-      data.templates.forEach(tpl => {
-        let tierClass = 'tier-s';
-        if (tpl.tier.includes('Tier 2')) tierClass = 'tier-a';
-        if (tpl.tier.includes('Budget')) tierClass = 'tier-b';
-
-        const deckDiv = document.createElement('div');
-        deckDiv.className = 'deck-item';
-        deckDiv.innerHTML = `
-          <div class="deck-top">
-            <span class="tier-badge ${tierClass}">${tpl.tier}</span>
-            <span class="deck-composition">${tpl.tag}</span>
-          </div>
-          <div class="deck-concept">${tpl.concept}</div>
-          <div class="card-list">
-            ${tpl.cards.map(c => `
-              <div class="support-card ${c.key ? 'is-key' : ''}">
-                <div class="card-type-icon type-${c.type}">${TYPE_CHARS[c.type] || 'サ'}</div>
-                <div class="card-info">
-                  <div class="card-name">
-                    ${c.name}
-                    ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
-                  </div>
-                  <div class="card-role">${c.role}</div>
+      const deckDiv = document.createElement('div');
+      deckDiv.className = 'deck-item';
+      deckDiv.innerHTML = `
+        <div class="deck-top">
+          <span class="tier-badge tier-s">Tier 1 (距離×脚質 最適編成)</span>
+          <span class="deck-composition">${distData.name} × ${styleData.style_name}</span>
+        </div>
+        <div class="deck-concept">脚質特化の金スキル・最速加速を確保し、最新シナリオの練習性能とスキルPtボーナスを極大化する現環境の結論編成</div>
+        <div class="card-list">
+          ${styleData.cards.map(c => `
+            <div class="support-card ${c.key ? 'is-key' : ''}">
+              <div class="card-type-icon type-${c.type}">${TYPE_CHARS[c.type] || 'サ'}</div>
+              <div class="card-info">
+                <div class="card-name">
+                  ${c.name}
+                  ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
                 </div>
+                <div class="card-role">${c.role}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="substitute-box">
+          <div style="font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 0.88rem;">
+            <span>🔄</span> タイプ別 代用・入れ替え候補
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            ${distData.substitutes_by_type.map(grp => `
+              <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 8px 10px; border-left: 3px solid var(--type-${grp.type});">
+                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                  <span class="card-type-icon type-${grp.type}" style="width: 20px; height: 20px; font-size: 0.65rem;">${TYPE_CHARS[grp.type] || 'サ'}</span>
+                  <strong style="color: var(--text-main); font-size: 0.82rem;">${grp.name}</strong>
+                  ${grp.irreplaceable ? '<span style="font-size: 0.68rem; background: #ef4444; color: white; padding: 1px 6px; border-radius: 4px; font-weight: 700;">代替不可</span>' : ''}
+                </div>
+                ${grp.irreplaceable ? `
+                  <div style="font-size: 0.78rem; color: #fca5a5; padding-left: 26px;">
+                    <strong>${grp.cards[0].name}</strong>: ${grp.cards[0].desc}
+                  </div>
+                ` : `
+                  <ul style="padding-left: 26px; font-size: 0.78rem; color: var(--text-muted); margin: 0;">
+                    ${grp.cards.map(c => `<li><span style="color: var(--text-main); font-weight: 600;">${c.name}</span> <span style="font-size: 0.74rem;">— ${c.desc}</span></li>`).join('')}
+                  </ul>
+                `}
               </div>
             `).join('')}
           </div>
-          <div class="substitute-box">
-            <div style="font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 0.88rem;">
-              <span>🔄</span> タイプ別 代用・入れ替え候補
-            </div>
-            ${tpl.substitutes_by_type ? `
-              <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${tpl.substitutes_by_type.map(grp => `
-                  <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 8px 10px; border-left: 3px solid var(--type-${grp.type});">
-                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-                      <span class="card-type-icon type-${grp.type}" style="width: 20px; height: 20px; font-size: 0.65rem;">${TYPE_CHARS[grp.type] || 'サ'}</span>
-                      <strong style="color: var(--text-main); font-size: 0.82rem;">${grp.name}</strong>
-                      ${grp.irreplaceable ? '<span style="font-size: 0.68rem; background: #ef4444; color: white; padding: 1px 6px; border-radius: 4px; font-weight: 700;">代替不可</span>' : ''}
-                    </div>
-                    ${grp.irreplaceable ? `
-                      <div style="font-size: 0.78rem; color: #fca5a5; padding-left: 26px;">
-                        <strong>${grp.cards[0].name}</strong>: ${grp.cards[0].desc}
-                      </div>
-                    ` : `
-                      <ul style="padding-left: 26px; font-size: 0.78rem; color: var(--text-muted); margin: 0;">
-                        ${grp.cards.map(c => `<li><span style="color: var(--text-main); font-weight: 600;">${c.name}</span> <span style="font-size: 0.74rem;">— ${c.desc}</span></li>`).join('')}
-                      </ul>
-                    `}
-                  </div>
-                `).join('')}
-              </div>
-            ` : `
-              <ul style="padding-left: 18px; margin-top: 4px;">
-                ${tpl.substitutes.map(s => `<li>${s}</li>`).join('')}
-              </ul>
-            `}
-          </div>
-        `;
-        templatesList.appendChild(deckDiv);
-      });
+        </div>
+      `;
+      templatesList.appendChild(deckDiv);
     }
 
     function renderStyles() {
@@ -1190,7 +1191,7 @@
 
     function renderRegions() {
       const data = window.UMA_META_DATA.region_strategies;
-      const currentDistObj = window.UMA_META_DATA.builds_by_distance.find(b => b.id === currentDistance);
+      const currentDistObj = window.UMA_META_DATA.distance_style_builds ? window.UMA_META_DATA.distance_style_builds[currentDistance] : null;
       document.getElementById('region-current-dist').textContent = `現在選択: ${currentDistObj ? currentDistObj.name : ''}`;
 
       // Rule Banner
