@@ -1465,9 +1465,12 @@
             <span class="source-badge ${badgeClass}">${src.badge}</span>
             <span class="source-title">${src.title}</span>
           </div>
-          <div class="source-author">情報提供 / 引用元: ${src.author}</div>
-          <ul class="takeaway-list">
-            ${src.key_takeaways.map(t => `<li>${t}</li>`).join('')}
+          <div class="source-author" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px;">
+            <span>情報提供 / 引用元: <strong>${src.author}</strong></span>
+            ${src.url ? `<a href="${src.url}" target="_blank" rel="noopener noreferrer" style="color: #ef4444; font-weight: 700; text-decoration: none; font-size: 0.76rem; background: rgba(239, 68, 68, 0.15); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(239, 68, 68, 0.4);">▶️ YouTubeで見る</a>` : ''}
+          </div>
+          <ul class="takeaway-list" style="margin-top: 8px;">
+            ${src.key_takeaways.map(t => `<li style="margin-bottom: 4px;">${t}</li>`).join('')}
           </ul>
         `;
         list.appendChild(card);
