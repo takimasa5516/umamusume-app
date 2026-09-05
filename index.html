@@ -108,7 +108,7 @@
     /* Main Navigation Tabs (5 Tabs) */
     .main-nav {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 4px;
       margin-bottom: 16px;
       background: var(--card-bg);
@@ -554,8 +554,8 @@
         padding: 4px;
       }
       .nav-btn {
-        padding: 6px 1px;
-        font-size: 0.68rem;
+        padding: 5px 1px;
+        font-size: 0.63rem;
       }
       .stats-container {
         grid-template-columns: repeat(5, 1fr);
@@ -586,6 +586,67 @@
         margin-top: -28px;
       }
     }
+
+    /* Uncap Badge Styling */
+    .uncap-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+    }
+    .uncap-rainbow {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(245, 158, 11, 0.25));
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+    .uncap-gold {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fde047;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .uncap-friend {
+      background: rgba(16, 185, 129, 0.2);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .uncap-free {
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+    .uncap-sr {
+      background: rgba(168, 85, 247, 0.2);
+      color: #d8b4fe;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+    .uncap-standard {
+      background: rgba(148, 163, 184, 0.2);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    /* Uncap Guide Banner */
+    .uncap-summary-box {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(168, 85, 247, 0.08));
+      border: 1px solid var(--highlight);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 0.82rem;
+    }
+    .uncap-summary-title {
+      font-weight: 700;
+      color: var(--highlight);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
   </style>
 </head>
 <body>
@@ -619,6 +680,9 @@
       </button>
       <button class="nav-btn" onclick="switchSection('sources')">
         <span>📺 動画集約</span>
+      </button>
+      <button class="nav-btn" onclick="switchSection('uncaps')">
+        <span>⭐ 凸数一覧</span>
       </button>
     </nav>
 
@@ -661,6 +725,19 @@
         <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid var(--highlight); border-radius: 8px; padding: 10px 12px; margin-bottom: 14px;">
           <strong style="color: var(--highlight); font-size: 0.82rem;">⚡ この距離×脚質の最重要・必須スキル:</strong>
           <div id="build-key-skills" style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;"></div>
+        </div>
+
+        <!-- Practical Uncap Guide Banner -->
+        <div class="uncap-summary-box">
+          <div class="uncap-summary-title">
+            <span>⭐</span> <strong>主要サポートカードの実用凸数（上限解放）基準:</strong>
+          </div>
+          <div style="color: var(--text-main); font-size: 0.78rem; line-height: 1.6;">
+            各カード名右側に実用ライン（推奨凸数）を明記しています。<br>
+            ・<span class="uncap-pill uncap-friend" style="margin: 0 2px;">無凸運用可 / 完凸推奨</span> <strong>友人枠（駿川たづな）:</strong> ギミック・コツ加速は無凸から100%機能。完凸で体力回復とお出かけ安定度が極大化。<br>
+            ・<span class="uncap-pill uncap-gold" style="margin: 0 2px;">1凸〜実用</span> <strong>加速・金スキル枠（ミホノブルボン/ダイイチルビー等）:</strong> スキル目的なら1凸から即戦力として編成可能。<br>
+            ・<span class="uncap-pill uncap-rainbow" style="margin: 0 2px;">完凸推奨</span> <strong>練習主力（トウカイテイオー/エアグルーヴ/デアリングタクト等）:</strong> 得意率とトレ効果の観点から3凸〜完凸が必須ライン。
+          </div>
         </div>
 
         <!-- Stats Goal -->
@@ -876,10 +953,65 @@
       </div>
     </section>
 
+
+    <!-- SECTION 6: Support Card Practical Uncap Guide Table -->
+    <section id="section-uncaps" style="display: none;">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>⭐ 主要サポートカード実用凸数（上限解放）データベース</span>
+          </div>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
+          現環境の主要SSR・配布・SRサポートカードの実用凸数（無凸運用可 / 1凸実用 / 3凸〜完凸 / 完凸必須）および凸基準の理由・恩恵をまとめています。<br>
+          ※虹の解放結晶や引換券の使用優先度判断の参考にしてください。
+        </p>
+
+        <!-- Uncap Filter Pills -->
+        <div style="display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px;" id="uncap-filter-bar">
+          <button class="pill-btn active" style="padding: 5px 12px; font-size: 0.78rem;" onclick="filterUncapTable('all')">すべて</button>
+          <button class="pill-btn" style="padding: 5px 12px; font-size: 0.78rem;" onclick="filterUncapTable('friend')">友人枠（無凸可）</button>
+          <button class="pill-btn" style="padding: 5px 12px; font-size: 0.78rem;" onclick="filterUncapTable('gold_skill')">1凸〜実用（スキル枠）</button>
+          <button class="pill-btn" style="padding: 5px 12px; font-size: 0.78rem;" onclick="filterUncapTable('rainbow')">3凸〜完凸推奨（練習主力）</button>
+          <button class="pill-btn" style="padding: 5px 12px; font-size: 0.78rem;" onclick="filterUncapTable('free_card')">完凸前提（配布・SR）</button>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="skills-table" style="font-size: 0.8rem;">
+            <thead>
+              <tr>
+                <th style="width: 28%;">サポートカード名</th>
+                <th style="width: 22%;">実用ライン (推奨凸数)</th>
+                <th>凸数の判断基準・実用理由</th>
+              </tr>
+            </thead>
+            <tbody id="uncap-table-body">
+              <!-- Injected by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <script src="data.js"></script>
   <script>
+    
+    function getUncapBadgeHtml(cardName) {
+      const guide = window.UMA_META_DATA.card_uncap_guide || {};
+      const u = guide[cardName];
+      if (!u) return '';
+      let cls = 'uncap-standard';
+      if (u.tag === 'rainbow') cls = 'uncap-rainbow';
+      else if (u.tag === 'gold_skill') cls = 'uncap-gold';
+      else if (u.tag === 'friend') cls = 'uncap-friend';
+      else if (u.tag === 'free_card') cls = 'uncap-free';
+      else if (u.tag === 'sr_card') cls = 'uncap-sr';
+
+      return '<span class="uncap-pill ' + cls + '" title="' + u.detail + '">⭐ ' + u.badge + '</span>';
+    }
+
     // State
     let currentDistance = 'short';
     let currentBuildStyle = 'leader';
@@ -919,6 +1051,7 @@
       renderEvents();
       renderRegions();
       renderSources();
+      renderUncapTable();
     }
 
     function toggleTheme() {
@@ -941,7 +1074,8 @@
           (sectionId === 'styles' && idx === 1) ||
           (sectionId === 'events' && idx === 2) ||
           (sectionId === 'regions' && idx === 3) ||
-          (sectionId === 'sources' && idx === 4)
+          (sectionId === 'sources' && idx === 4) ||
+          (sectionId === 'uncaps' && idx === 5)
         );
       });
 
@@ -950,6 +1084,7 @@
       document.getElementById('section-events').style.display = sectionId === 'events' ? 'block' : 'none';
       document.getElementById('section-regions').style.display = sectionId === 'regions' ? 'block' : 'none';
       document.getElementById('section-sources').style.display = sectionId === 'sources' ? 'block' : 'none';
+      document.getElementById('section-uncaps').style.display = sectionId === 'uncaps' ? 'block' : 'none';
 
       // Selector bar visibility
       document.getElementById('dist-bar').style.display = (sectionId === 'builds' || sectionId === 'regions') ? 'flex' : 'none';
@@ -1054,9 +1189,12 @@
             <div class="support-card ${c.key ? 'is-key' : ''}">
               <div class="card-type-icon type-${c.type}">${TYPE_CHARS[c.type] || 'サ'}</div>
               <div class="card-info">
-                <div class="card-name">
-                  ${c.name}
-                  ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
+                <div class="card-name" style="display: flex; align-items: center; justify-content: space-between; gap: 4px;">
+                  <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${c.name}</span>
+                  <div style="display: flex; gap: 4px; flex-shrink: 0; align-items: center;">
+                    ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
+                    ${getUncapBadgeHtml(c.name)}
+                  </div>
                 </div>
                 <div class="card-role">${c.role}</div>
               </div>
@@ -1077,11 +1215,23 @@
                 </div>
                 ${grp.irreplaceable ? `
                   <div style="font-size: 0.78rem; color: #fca5a5; padding-left: 26px;">
-                    <strong>${grp.cards[0].name}</strong>: ${grp.cards[0].desc}
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; margin-bottom: 2px;">
+                      <strong>${grp.cards[0].name}</strong>
+                      ${getUncapBadgeHtml(grp.cards[0].name)}
+                    </div>
+                    <div>${grp.cards[0].desc}</div>
                   </div>
                 ` : `
                   <ul style="padding-left: 26px; font-size: 0.78rem; color: var(--text-muted); margin: 0;">
-                    ${grp.cards.map(c => `<li><span style="color: var(--text-main); font-weight: 600;">${c.name}</span> <span style="font-size: 0.74rem;">— ${c.desc}</span></li>`).join('')}
+                    ${grp.cards.map(c => `
+                    <li style="margin-bottom: 5px;">
+                      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px;">
+                        <span style="color: var(--text-main); font-weight: 600;">${c.name}</span>
+                        ${getUncapBadgeHtml(c.name)}
+                      </div>
+                      <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 1px;">${c.desc}</div>
+                    </li>
+                  `).join('')}
                   </ul>
                 `}
               </div>
@@ -1125,9 +1275,12 @@
         <div class="support-card ${c.key ? 'is-key' : ''}">
           <div class="card-type-icon type-${c.type}">${TYPE_CHARS[c.type] || 'サ'}</div>
           <div class="card-info">
-            <div class="card-name">
-              ${c.name}
-              ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
+            <div class="card-name" style="display: flex; align-items: center; justify-content: space-between; gap: 4px;">
+              <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${c.name}</span>
+              <div style="display: flex; gap: 4px; flex-shrink: 0; align-items: center;">
+                ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
+                ${getUncapBadgeHtml(c.name)}
+              </div>
             </div>
             <div class="card-role">${c.role}</div>
           </div>
@@ -1251,6 +1404,48 @@
         );
       });
       renderRegions();
+    }
+
+    
+    let currentUncapFilter = 'all';
+
+    function renderUncapTable() {
+      const guide = window.UMA_META_DATA.card_uncap_guide || {};
+      const tbody = document.getElementById('uncap-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      Object.keys(guide).forEach(cardName => {
+        const item = guide[cardName];
+        if (currentUncapFilter !== 'all') {
+          if (currentUncapFilter === 'free_card' && (item.tag !== 'free_card' && item.tag !== 'sr_card')) return;
+          if (currentUncapFilter !== 'free_card' && item.tag !== currentUncapFilter) return;
+        }
+
+        let cls = 'uncap-standard';
+        if (item.tag === 'rainbow') cls = 'uncap-rainbow';
+        else if (item.tag === 'gold_skill') cls = 'uncap-gold';
+        else if (item.tag === 'friend') cls = 'uncap-friend';
+        else if (item.tag === 'free_card') cls = 'uncap-free';
+        else if (item.tag === 'sr_card') cls = 'uncap-sr';
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${cardName}</strong></td>
+          <td><span class="uncap-pill ${cls}">⭐ ${item.badge}</span></td>
+          <td style="color: var(--text-muted); font-size: 0.78rem;">${item.detail}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function filterUncapTable(filter) {
+      currentUncapFilter = filter;
+      document.querySelectorAll('#uncap-filter-bar .pill-btn').forEach((btn, idx) => {
+        const filters = ['all', 'friend', 'gold_skill', 'rainbow', 'free_card'];
+        btn.classList.toggle('active', filters[idx] === filter);
+      });
+      renderUncapTable();
     }
 
     function renderSources() {
