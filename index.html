@@ -1208,6 +1208,24 @@
       { id: 'chaser', name: '追込', icon: '🌪️' }
     ];
 
+    function renderStyleBar() {
+      const bar = document.getElementById('style-bar');
+      if (!bar) return;
+      bar.innerHTML = '';
+
+      STYLES_LIST.forEach(st => {
+        const pill = document.createElement('button');
+        pill.className = `pill-btn ${st.id === currentStyle ? 'active' : ''}`;
+        pill.innerHTML = `<span>${st.icon}</span> <span>${st.name}</span>`;
+        pill.onclick = () => {
+          currentStyle = st.id;
+          renderStyleBar();
+          renderStyles();
+        };
+        bar.appendChild(pill);
+      });
+    }
+
     function renderBuildStyleBar() {
       const bar = document.getElementById('build-style-bar');
       if (!bar) return;
@@ -1422,6 +1440,27 @@
           </div>
         </div>
       `).join('');
+    }
+
+    function renderEventBar() {
+      const bar = document.getElementById('event-bar');
+      if (!bar) return;
+      bar.innerHTML = '';
+      const events = window.UMA_META_DATA.events;
+      if (!events) return;
+
+      events.forEach(ev => {
+        const pill = document.createElement('button');
+        pill.className = `pill-btn ${ev.id === currentEventId ? 'active' : ''}`;
+        const icon = ev.badge_type === 'cm' ? '👑' : '🏅';
+        pill.innerHTML = `<span>${icon}</span> <span>${ev.title.split(' ')[0]} ${ev.title.split(' ')[1] || ''}</span>`;
+        pill.onclick = () => {
+          currentEventId = ev.id;
+          renderEventBar();
+          renderEvents();
+        };
+        bar.appendChild(pill);
+      });
     }
 
     function renderEvents() {
