@@ -1086,7 +1086,21 @@
     
     function getUncapBadgeHtml(cardName) {
       const guide = window.UMA_META_DATA.card_uncap_guide || {};
-      const u = guide[cardName];
+      let u = guide[cardName];
+      if (!u) {
+        const stripped = cardName.replace(/［.*?］|（.*?）/g, '').trim();
+        u = guide[stripped];
+      }
+      if (!u) {
+        const baseName = cardName.replace(/SSR|SR|［.*?］|（.*?）|\s+/g, '');
+        for (const [k, val] of Object.entries(guide)) {
+          const kBase = k.replace(/SSR|SR|［.*?］|（.*?）|\s+/g, '');
+          if (kBase === baseName) {
+            u = val;
+            break;
+          }
+        }
+      }
       if (!u) return '';
       let cls = 'uncap-standard';
       if (u.tag === 'rainbow') cls = 'uncap-rainbow';
