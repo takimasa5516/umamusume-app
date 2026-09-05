@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ウマ娘 育成サポートツール | 最新シナリオ対応</title>
+  <title>ウマ娘 育成サポートツール | 最新シナリオ・イベント対応</title>
   <style>
     :root {
       --primary: #2d9cdb;
@@ -105,11 +105,11 @@
       padding: 16px;
     }
 
-    /* Main Navigation Tabs */
+    /* Main Navigation Tabs (5 Tabs) */
     .main-nav {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
       margin-bottom: 16px;
       background: var(--card-bg);
       padding: 6px;
@@ -120,8 +120,8 @@
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 8px 4px;
-      font-size: 0.82rem;
+      padding: 8px 2px;
+      font-size: 0.76rem;
       font-weight: 600;
       border-radius: 8px;
       cursor: pointer;
@@ -138,7 +138,7 @@
       box-shadow: 0 2px 8px rgba(45, 156, 219, 0.35);
     }
 
-    /* Distance / Style Selector Pills */
+    /* Distance / Style / Event Selector Pills */
     .selector-bar {
       display: flex;
       gap: 8px;
@@ -353,7 +353,7 @@
       color: var(--text-main);
     }
 
-    /* Skills Box for Running Styles */
+    /* Skills Table */
     .skills-table {
       width: 100%;
       border-collapse: collapse;
@@ -389,6 +389,24 @@
       background: rgba(56, 189, 248, 0.2);
       color: #38bdf8;
       border: 1px solid #38bdf8;
+    }
+
+    /* Sub-section Box */
+    .sub-section-box {
+      background: var(--card-sub);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .sub-section-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
     }
 
     /* Region Selection Section */
@@ -532,11 +550,12 @@
     /* Responsive Tweaks */
     @media (max-width: 600px) {
       .main-nav {
-        gap: 4px;
+        gap: 2px;
+        padding: 4px;
       }
       .nav-btn {
-        padding: 6px 2px;
-        font-size: 0.72rem;
+        padding: 6px 1px;
+        font-size: 0.68rem;
       }
       .stats-container {
         grid-template-columns: repeat(5, 1fr);
@@ -584,13 +603,16 @@
 
   <div class="container">
 
-    <!-- Main Navigation Tabs (4 Tabs) -->
+    <!-- Main Navigation Tabs (5 Tabs) -->
     <nav class="main-nav">
       <button class="nav-btn active" onclick="switchSection('builds')">
         <span>🎴 距離別</span>
       </button>
       <button class="nav-btn" onclick="switchSection('styles')">
         <span>🏃 脚質別</span>
+      </button>
+      <button class="nav-btn" onclick="switchSection('events')">
+        <span>🏆 イベント</span>
       </button>
       <button class="nav-btn" onclick="switchSection('regions')">
         <span>🗺️ 地域選択</span>
@@ -607,6 +629,11 @@
 
     <!-- Running Style Selector (Used in styles) -->
     <div class="selector-bar" id="style-bar" style="display: none;">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Event Selector (Used in events) -->
+    <div class="selector-bar" id="event-bar" style="display: none;">
       <!-- Injected by JS -->
     </div>
 
@@ -639,7 +666,7 @@
       </div>
     </section>
 
-    <!-- SECTION 2: Builds by Running Style (NEW!) -->
+    <!-- SECTION 2: Builds by Running Style -->
     <section id="section-styles" style="display: none;">
       <div class="section-card">
         <div class="section-header">
@@ -649,7 +676,6 @@
           </div>
         </div>
 
-        <!-- Meta status badge -->
         <div style="background: rgba(242, 153, 74, 0.12); border: 1px solid var(--accent); padding: 10px 12px; border-radius: 8px; font-size: 0.82rem; margin-bottom: 14px;">
           <strong style="color: var(--accent-gold);">🏆 現環境の評価・立ち位置:</strong>
           <span id="current-style-meta" style="color: var(--text-main); margin-left: 6px;"></span>
@@ -697,7 +723,100 @@
       </div>
     </section>
 
-    <!-- SECTION 3: Region Selection Guide -->
+    <!-- SECTION 3: Events (Champions Meeting / League of Heroes) -->
+    <section id="section-events" style="display: none;">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span id="event-title">9月 チャンピオンズミーティング</span>
+          </div>
+          <span class="tier-badge tier-s" id="event-badge">開催予定</span>
+        </div>
+
+        <!-- Course condition box -->
+        <div style="background: rgba(45, 156, 219, 0.12); border: 1px solid var(--primary); border-radius: 10px; padding: 12px; margin-bottom: 16px;">
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--highlight); margin-bottom: 4px;" id="event-course-loc"></div>
+          <div style="font-size: 0.78rem; color: var(--accent-gold); margin-bottom: 6px;" id="event-course-cond"></div>
+          <p style="font-size: 0.82rem; color: var(--text-main);" id="event-course-desc"></p>
+        </div>
+
+        <!-- Fast Accel Skills Table -->
+        <div style="margin-bottom: 18px;">
+          <h4 style="font-size: 0.9rem; color: var(--highlight); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <span>⚡</span> コース最速・有効加速スキル早見表
+          </h4>
+          <div style="overflow-x: auto;">
+            <table class="skills-table">
+              <thead>
+                <tr>
+                  <th>スキル名</th>
+                  <th>対象脚質</th>
+                  <th>入手元・発動条件</th>
+                  <th>評価</th>
+                </tr>
+              </thead>
+              <tbody id="event-skills-tbody">
+                <!-- Injected by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 1. Team Composition -->
+        <div class="sub-section-box">
+          <div class="sub-section-title">
+            <span>👥</span> おすすめチーム構成 (3エース運用 / 脚質シナジー)
+          </div>
+          <div id="event-team-list">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- 2. Factor Farming -->
+        <div class="sub-section-box">
+          <div class="sub-section-title">
+            <span>🧬</span> 因子周回ガイド (推奨親・必須白因子・オート周回)
+          </div>
+          <div style="font-size: 0.82rem; margin-bottom: 8px;">
+            <strong style="color: var(--highlight);">推奨親・祖父母：</strong>
+            <span id="event-factor-parents"></span>
+          </div>
+          <div style="font-size: 0.82rem; margin-bottom: 8px;">
+            <strong style="color: var(--accent-gold);">必須級 白因子リスト：</strong>
+            <ul id="event-factor-white" style="padding-left: 18px; margin-top: 4px;"></ul>
+          </div>
+          <div style="font-size: 0.8rem; background: rgba(0,0,0,0.2); padding: 8px 10px; border-radius: 6px; color: var(--text-muted);">
+            🤖 <strong>トレセン軒 オート育成周回Tips:</strong> <span id="event-factor-auto"></span>
+          </div>
+        </div>
+
+        <!-- 3. Main Training -->
+        <div class="sub-section-box">
+          <div class="sub-section-title">
+            <span>🎯</span> 本育成ガイド (目標ステ・サポカ編成・必須金スキル)
+          </div>
+          <div style="font-size: 0.82rem; margin-bottom: 6px;">
+            <strong style="color: var(--success);">目標ステータス：</strong>
+            <span id="event-main-stats"></span>
+          </div>
+          <div style="font-size: 0.82rem; margin-bottom: 6px;">
+            <strong style="color: #f87171;">スタミナ注意点：</strong>
+            <span id="event-main-stamina"></span>
+          </div>
+          <div style="font-size: 0.82rem; margin-bottom: 6px;">
+            <strong style="color: var(--highlight);">推奨サポカ編成：</strong>
+            <span id="event-main-deck"></span>
+          </div>
+          <div style="font-size: 0.82rem;">
+            <strong style="color: var(--accent-gold);">狙うべき金スキル：</strong>
+            <span id="event-main-gold"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: Region Selection Guide -->
     <section id="section-regions" style="display: none;">
       <!-- Rule explanation Banner -->
       <div class="rule-banner" id="rule-banner">
@@ -726,7 +845,7 @@
       </div>
     </section>
 
-    <!-- SECTION 4: Knowledge & YouTube Sources -->
+    <!-- SECTION 5: Knowledge & YouTube Sources -->
     <section id="section-sources" style="display: none;">
       <div class="section-card">
         <div class="section-header">
@@ -750,6 +869,7 @@
     // State
     let currentDistance = 'short';
     let currentStyle = 'runner';
+    let currentEventId = 'cm_sep2026';
     let currentGradeFilter = 'all'; // 'all', 0, 1, 2
     let activeSection = 'builds';
 
@@ -776,10 +896,12 @@
       // Render Bars
       renderDistanceBar();
       renderStyleBar();
+      renderEventBar();
 
       // Render Views
       renderBuilds();
       renderStyles();
+      renderEvents();
       renderRegions();
       renderSources();
     }
@@ -802,19 +924,22 @@
         btn.classList.toggle('active', 
           (sectionId === 'builds' && idx === 0) ||
           (sectionId === 'styles' && idx === 1) ||
-          (sectionId === 'regions' && idx === 2) ||
-          (sectionId === 'sources' && idx === 3)
+          (sectionId === 'events' && idx === 2) ||
+          (sectionId === 'regions' && idx === 3) ||
+          (sectionId === 'sources' && idx === 4)
         );
       });
 
       document.getElementById('section-builds').style.display = sectionId === 'builds' ? 'block' : 'none';
       document.getElementById('section-styles').style.display = sectionId === 'styles' ? 'block' : 'none';
+      document.getElementById('section-events').style.display = sectionId === 'events' ? 'block' : 'none';
       document.getElementById('section-regions').style.display = sectionId === 'regions' ? 'block' : 'none';
       document.getElementById('section-sources').style.display = sectionId === 'sources' ? 'block' : 'none';
 
       // Selector bar visibility
       document.getElementById('dist-bar').style.display = (sectionId === 'builds' || sectionId === 'regions') ? 'flex' : 'none';
       document.getElementById('style-bar').style.display = sectionId === 'styles' ? 'flex' : 'none';
+      document.getElementById('event-bar').style.display = sectionId === 'events' ? 'flex' : 'none';
     }
 
     function renderDistanceBar() {
@@ -850,6 +975,26 @@
           currentStyle = item.id;
           renderStyleBar();
           renderStyles();
+        };
+        bar.appendChild(pill);
+      });
+    }
+
+    function renderEventBar() {
+      const bar = document.getElementById('event-bar');
+      bar.innerHTML = '';
+      const events = window.UMA_META_DATA.events;
+      if (!events) return;
+
+      events.forEach(ev => {
+        const pill = document.createElement('button');
+        pill.className = `pill-btn ${ev.id === currentEventId ? 'active' : ''}`;
+        const icon = ev.badge_type === 'cm' ? '👑' : '🏅';
+        pill.innerHTML = `<span>${icon}</span> <span>${ev.title.split(' ')[0]} ${ev.title.split(' ')[1] || ''}</span>`;
+        pill.onclick = () => {
+          currentEventId = ev.id;
+          renderEventBar();
+          renderEvents();
         };
         bar.appendChild(pill);
       });
@@ -962,6 +1107,60 @@
           </div>
         </div>
       `).join('');
+    }
+
+    function renderEvents() {
+      const events = window.UMA_META_DATA.events;
+      if (!events) return;
+      const ev = events.find(e => e.id === currentEventId);
+      if (!ev) return;
+
+      document.getElementById('event-title').textContent = ev.title;
+      document.getElementById('event-badge').textContent = ev.badge;
+      document.getElementById('event-badge').className = `tier-badge ${ev.badge_type === 'cm' ? 'tier-s' : 'tier-a'}`;
+
+      // Course
+      document.getElementById('event-course-loc').textContent = `📍 ${ev.course.location}`;
+      document.getElementById('event-course-cond').textContent = `🌤️ ${ev.course.conditions}`;
+      document.getElementById('event-course-desc').textContent = ev.course.key_characteristics;
+
+      // Skills Table
+      const stbody = document.getElementById('event-skills-tbody');
+      stbody.innerHTML = ev.fast_accel_skills.map(sk => `
+        <tr>
+          <td><strong>${sk.name}</strong></td>
+          <td><span class="region-pill" style="font-size: 0.72rem; padding: 2px 6px;">${sk.style}</span></td>
+          <td>${sk.from}</td>
+          <td><span class="skill-importance importance-must">${sk.eval}</span></td>
+        </tr>
+      `).join('');
+
+      // Teams
+      const teamList = document.getElementById('event-team-list');
+      teamList.innerHTML = ev.team_compositions.map(tm => `
+        <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; margin-bottom: 8px;">
+          <div style="font-weight: 700; color: var(--text-main); font-size: 0.85rem; margin-bottom: 2px;">${tm.name}</div>
+          <div style="font-size: 0.8rem; color: var(--highlight); margin-bottom: 4px;">👥 編成構成: ${tm.members}</div>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px;">${tm.concept}</p>
+          <div style="font-size: 0.78rem; color: var(--text-main);">
+            <strong>🌟 推奨ウマ娘:</strong>
+            <ul style="padding-left: 18px; margin-top: 2px;">
+              ${tm.recommended_uma.map(u => `<li>${u}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      `).join('');
+
+      // Factor
+      document.getElementById('event-factor-parents').textContent = ev.factor_farming.parents_recommend;
+      document.getElementById('event-factor-white').innerHTML = ev.factor_farming.must_white_factors.map(w => `<li>${w}</li>`).join('');
+      document.getElementById('event-factor-auto').textContent = ev.factor_farming.auto_farming_tips;
+
+      // Main Training
+      document.getElementById('event-main-stats').textContent = ev.main_training.target_stats;
+      document.getElementById('event-main-stamina').textContent = ev.main_training.stamina_note;
+      document.getElementById('event-main-deck').textContent = ev.main_training.deck_template;
+      document.getElementById('event-main-gold').textContent = ev.main_training.key_gold_skills;
     }
 
     function renderRegions() {
