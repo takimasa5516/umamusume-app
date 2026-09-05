@@ -31,17 +31,156 @@ window.UMA_META_DATA = {
           "tag": "スピ1〜2・根性1・賢さ2・友人1",
           "concept": "超練習性能の最新テイオー/タップダンスに、根性ビコーペガサスと賢さ2枚でスキルptとステータスを極限化",
           "cards": [
-            { "type": "speed", "name": "SSR トウカイテイオー（天才的ユートピア）", "role": "現環境Tier SS+・圧倒的練習性能", "key": false },
-            { "type": "speed", "name": "SSR タップダンスシチー（刀光散らしてClash！）", "role": "逃げ/先行最強スピード枠・スキルptボーナス", "key": false },
-            { "type": "guts", "name": "SSR ビコーペガサス", "role": "最新Tier S・短距離後方/先行高火力根性", "key": false },
-            { "type": "wit", "name": "SSR スティルインラブ", "role": "最高峰の賢さ練習性能・連続イベント", "key": false },
-            { "type": "wit", "name": "SSR ダイワスカーレット", "role": "先行/マイル短距離加速・賢さ上限", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人枠（コツ獲得・ゲージ加速）", "key": true }
+            {
+              "type": "speed",
+              "name": "SSR トウカイテイオー（天才的ユートピア）",
+              "role": "現環境Tier SS+・圧倒的練習性能",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "SSR タップダンスシチー（刀光散らしてClash！）",
+              "role": "逃げ/先行最強スピード枠・スキルptボーナス",
+              "key": false
+            },
+            {
+              "type": "guts",
+              "name": "SSR ビコーペガサス",
+              "role": "最新Tier S・短距離後方/先行高火力根性",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR スティルインラブ",
+              "role": "最高峰の賢さ練習性能・連続イベント",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR ダイワスカーレット",
+              "role": "先行/マイル短距離加速・賢さ上限",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様）",
+              "role": "シナリオ必須友人枠（コツ獲得・ゲージ加速）",
+              "key": true
+            }
           ],
           "substitutes": [
             "スピード枠 → SSRカルストンライトオ / SSRミスターシービー",
             "根性枠 → SSRオルフェーヴル / SSRサクラバクシンオー",
             "賢さ枠 → SSRメジロラモーヌ / SSRアグネスタキオン"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR カルストンライトオ",
+                  "desc": "短距離特化・先手必勝所持"
+                },
+                {
+                  "name": "SSR ミスターシービー",
+                  "desc": "汎用最高峰の練習性能SS"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "得意率80・汎用性"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀なSR・愛嬌○イベント"
+                },
+                {
+                  "name": "配布SSR スペシャルウィーク",
+                  "desc": "イベント配布・扱いやすい性能"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・根性練習の爆発力"
+                },
+                {
+                  "name": "SSR サクラバクシンオー",
+                  "desc": "短距離速度スキル・高得意率"
+                },
+                {
+                  "name": "SSR ケイエスミラクル",
+                  "desc": "短距離加速スキル所持"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "高ステータスSR根性"
+                },
+                {
+                  "name": "配布SSR ハルウララ",
+                  "desc": "ステータス盛り特化"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR ニシノフラワー",
+                  "desc": "短距離加速・愛嬌○所持"
+                },
+                {
+                  "name": "SSR ヒシアケボノ",
+                  "desc": "短距離スキル豊富・得意率高"
+                },
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "豪脚・パワー底上げ"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "高練習性能SRパワー"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "汎用速度・高練習性能"
+                },
+                {
+                  "name": "SSR アグネスタキオン",
+                  "desc": "先行賢さ・高い得意率"
+                },
+                {
+                  "name": "SR マーベラスサンデー",
+                  "desc": "得意率・練習性能が優秀"
+                },
+                {
+                  "name": "配布SSR ミホノブルボン",
+                  "desc": "イベント配布賢さ枠"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         },
         {
@@ -49,15 +188,154 @@ window.UMA_META_DATA = {
           "tag": "スピ2・根性1・パワー1・賢1・友人1",
           "concept": "パワーのSSRニシノフラワーやハルウララを差し込み、前線争いと登坂加速を安定化",
           "cards": [
-            { "type": "speed", "name": "SSR トウカイテイオー", "role": "スピード要員", "key": false },
-            { "type": "speed", "name": "SSR ミスターシービー", "role": "追込/汎用超練習性能SS", "key": false },
-            { "type": "guts", "name": "SSR ビコーペガサス", "role": "短距離根性", "key": false },
-            { "type": "power", "name": "SSR ニシノフラワー", "role": "短距離金加速・愛嬌○", "key": false },
-            { "type": "wit", "name": "SSR スティルインラブ", "role": "賢さ枠", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人", "key": true }
+            {
+              "type": "speed",
+              "name": "SSR トウカイテイオー",
+              "role": "スピード要員",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "SSR ミスターシービー",
+              "role": "追込/汎用超練習性能SS",
+              "key": false
+            },
+            {
+              "type": "guts",
+              "name": "SSR ビコーペガサス",
+              "role": "短距離根性",
+              "key": false
+            },
+            {
+              "type": "power",
+              "name": "SSR ニシノフラワー",
+              "role": "短距離金加速・愛嬌○",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR スティルインラブ",
+              "role": "賢さ枠",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様）",
+              "role": "シナリオ必須友人",
+              "key": true
+            }
           ],
           "substitutes": [
             "SSRニシノフラワー → SSRウオッカ / SSRヒシアケボノ"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR カルストンライトオ",
+                  "desc": "短距離特化・先手必勝所持"
+                },
+                {
+                  "name": "SSR ミスターシービー",
+                  "desc": "汎用最高峰の練習性能SS"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "得意率80・汎用性"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀なSR・愛嬌○イベント"
+                },
+                {
+                  "name": "配布SSR スペシャルウィーク",
+                  "desc": "イベント配布・扱いやすい性能"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・根性練習の爆発力"
+                },
+                {
+                  "name": "SSR サクラバクシンオー",
+                  "desc": "短距離速度スキル・高得意率"
+                },
+                {
+                  "name": "SSR ケイエスミラクル",
+                  "desc": "短距離加速スキル所持"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "高ステータスSR根性"
+                },
+                {
+                  "name": "配布SSR ハルウララ",
+                  "desc": "ステータス盛り特化"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR ニシノフラワー",
+                  "desc": "短距離加速・愛嬌○所持"
+                },
+                {
+                  "name": "SSR ヒシアケボノ",
+                  "desc": "短距離スキル豊富・得意率高"
+                },
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "豪脚・パワー底上げ"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "高練習性能SRパワー"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "汎用速度・高練習性能"
+                },
+                {
+                  "name": "SSR アグネスタキオン",
+                  "desc": "先行賢さ・高い得意率"
+                },
+                {
+                  "name": "SR マーベラスサンデー",
+                  "desc": "得意率・練習性能が優秀"
+                },
+                {
+                  "name": "配布SSR ミホノブルボン",
+                  "desc": "イベント配布賢さ枠"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         },
         {
@@ -65,16 +343,155 @@ window.UMA_META_DATA = {
           "tag": "スピ2・根性1・パワ1・賢1・友人1(レンタル)",
           "concept": "SSRたづなをフレンドからレンタルし、SRと配布の最新実用枠で枠を埋める高コスパ構成",
           "cards": [
-            { "type": "speed", "name": "SR スイープトウショウ", "role": "優秀なSRスピード枠", "key": false },
-            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "イベント配布スピード", "key": false },
-            { "type": "guts", "name": "SR オグリキャップ", "role": "高コスパ根性枠", "key": false },
-            { "type": "power", "name": "SR ヒシアケボノ", "role": "短距離向けSRパワー", "key": false },
-            { "type": "wit", "name": "SR マーベラスサンデー", "role": "練習効率・得意率", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様） [レンタル]", "role": "フレンド枠固定", "key": true }
+            {
+              "type": "speed",
+              "name": "SR スイープトウショウ",
+              "role": "優秀なSRスピード枠",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "配布SSR スペシャルウィーク",
+              "role": "イベント配布スピード",
+              "key": false
+            },
+            {
+              "type": "guts",
+              "name": "SR オグリキャップ",
+              "role": "高コスパ根性枠",
+              "key": false
+            },
+            {
+              "type": "power",
+              "name": "SR ヒシアケボノ",
+              "role": "短距離向けSRパワー",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SR マーベラスサンデー",
+              "role": "練習効率・得意率",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様） [レンタル]",
+              "role": "フレンド枠固定",
+              "key": true
+            }
           ],
           "substitutes": [
             "SRマーベラスサンデー → 配布SSRミホノブルボン",
             "SRオグリキャップ → 配布SSRハルウララ"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR カルストンライトオ",
+                  "desc": "短距離特化・先手必勝所持"
+                },
+                {
+                  "name": "SSR ミスターシービー",
+                  "desc": "汎用最高峰の練習性能SS"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "得意率80・汎用性"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀なSR・愛嬌○イベント"
+                },
+                {
+                  "name": "配布SSR スペシャルウィーク",
+                  "desc": "イベント配布・扱いやすい性能"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・根性練習の爆発力"
+                },
+                {
+                  "name": "SSR サクラバクシンオー",
+                  "desc": "短距離速度スキル・高得意率"
+                },
+                {
+                  "name": "SSR ケイエスミラクル",
+                  "desc": "短距離加速スキル所持"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "高ステータスSR根性"
+                },
+                {
+                  "name": "配布SSR ハルウララ",
+                  "desc": "ステータス盛り特化"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR ニシノフラワー",
+                  "desc": "短距離加速・愛嬌○所持"
+                },
+                {
+                  "name": "SSR ヒシアケボノ",
+                  "desc": "短距離スキル豊富・得意率高"
+                },
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "豪脚・パワー底上げ"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "高練習性能SRパワー"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "汎用速度・高練習性能"
+                },
+                {
+                  "name": "SSR アグネスタキオン",
+                  "desc": "先行賢さ・高い得意率"
+                },
+                {
+                  "name": "SR マーベラスサンデー",
+                  "desc": "得意率・練習性能が優秀"
+                },
+                {
+                  "name": "配布SSR ミホノブルボン",
+                  "desc": "イベント配布賢さ枠"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         }
       ]
@@ -98,17 +515,166 @@ window.UMA_META_DATA = {
           "tag": "スピ2・賢さ2・スタ1・友人1",
           "concept": "最新スタミナ枠メイショウドトウでスタミナ950+を担保し、エアグルーヴ＆テイオーでスピード・賢さを完封",
           "cards": [
-            { "type": "speed", "name": "SSR エアグルーヴ（心覚えし、京の華）", "role": "現環境Tier SS+・先行/マイル中距離必須級", "key": false },
-            { "type": "speed", "name": "SSR トウカイテイオー（天才的ユートピア）", "role": "現環境Tier SS+・爆発的ステータス上昇", "key": false },
-            { "type": "stamina", "name": "SSR メイショウドトウ", "role": "トレセン軒環境で超高評価の最新スタミナ枠", "key": false },
-            { "type": "wit", "name": "SSR スティルインラブ", "role": "最新最高峰の賢さ枠", "key": false },
-            { "type": "wit", "name": "SSR ダイワスカーレット", "role": "ハイボルテージ・マイル金スキル", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人枠", "key": true }
+            {
+              "type": "speed",
+              "name": "SSR エアグルーヴ（心覚えし、京の華）",
+              "role": "現環境Tier SS+・先行/マイル中距離必須級",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "SSR トウカイテイオー（天才的ユートピア）",
+              "role": "現環境Tier SS+・爆発的ステータス上昇",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR メイショウドトウ",
+              "role": "トレセン軒環境で超高評価の最新スタミナ枠",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR スティルインラブ",
+              "role": "最新最高峰の賢さ枠",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR ダイワスカーレット",
+              "role": "ハイボルテージ・マイル金スキル",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様）",
+              "role": "シナリオ必須友人枠",
+              "key": true
+            }
           ],
           "substitutes": [
             "スタミナ枠 → SSRサウンズオブアース",
             "スピード枠 → SSRグランアレグリア / SSRタイキシャトル / SSRラインクラフト",
             "賢さ枠 → SSRメジロラモーヌ"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR グランアレグリア",
+                  "desc": "マイル特化・加速所持"
+                },
+                {
+                  "name": "SSR タイキシャトル",
+                  "desc": "マイル先行・速度スキル豊富"
+                },
+                {
+                  "name": "SSR ラインクラフト",
+                  "desc": "マイルスキル・高練習性能"
+                },
+                {
+                  "name": "SSR ミスターシービー",
+                  "desc": "汎用最高峰の練習性能"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR サウンズオブアース",
+                  "desc": "練習性能・金回復「好転一息」"
+                },
+                {
+                  "name": "SSR スーパークリーク",
+                  "desc": "金回復「円弧のマエストロ」"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SR最高峰のスタミナ練習性能"
+                },
+                {
+                  "name": "配布SSR メジロマックイーン",
+                  "desc": "配布スタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR ダイイチルビー",
+                  "desc": "電光石火・マイル差し必須級"
+                },
+                {
+                  "name": "SSR ニシノフラワー",
+                  "desc": "つぼみ継承親・愛嬌○"
+                },
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "マイル加速スキル所持"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "マイル適性SRパワー"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・圧倒的練習性能"
+                },
+                {
+                  "name": "SSR ゴールドシチー",
+                  "desc": "ハイボルテージ・マイル加速"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "マイルスキル所持SR根性"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "マイルスキル多数・速度"
+                },
+                {
+                  "name": "SSR ダイワスカーレット",
+                  "desc": "ハイボルテージ・先行マイル"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "高得意率SR賢さ"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         },
         {
@@ -116,15 +682,164 @@ window.UMA_META_DATA = {
           "tag": "スピ2・根性1・賢さ1・スタ1・友人1",
           "concept": "終盤追い比べの弾幕争いに勝つため根性ビコーペガサスを採用し、ドトウでスタミナを確保",
           "cards": [
-            { "type": "speed", "name": "SSR エアグルーヴ", "role": "スピード要員", "key": false },
-            { "type": "speed", "name": "SSR トウカイテイオー", "role": "スピード要員", "key": false },
-            { "type": "stamina", "name": "SSR メイショウドトウ", "role": "スタミナ確保", "key": false },
-            { "type": "guts", "name": "SSR ビコーペガサス", "role": "根性枠", "key": false },
-            { "type": "wit", "name": "SSR スティルインラブ", "role": "賢さ枠", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人", "key": true }
+            {
+              "type": "speed",
+              "name": "SSR エアグルーヴ",
+              "role": "スピード要員",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "SSR トウカイテイオー",
+              "role": "スピード要員",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR メイショウドトウ",
+              "role": "スタミナ確保",
+              "key": false
+            },
+            {
+              "type": "guts",
+              "name": "SSR ビコーペガサス",
+              "role": "根性枠",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR スティルインラブ",
+              "role": "賢さ枠",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様）",
+              "role": "シナリオ必須友人",
+              "key": true
+            }
           ],
           "substitutes": [
             "SSRビコーペガサス → SSRオルフェーヴル"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR グランアレグリア",
+                  "desc": "マイル特化・加速所持"
+                },
+                {
+                  "name": "SSR タイキシャトル",
+                  "desc": "マイル先行・速度スキル豊富"
+                },
+                {
+                  "name": "SSR ラインクラフト",
+                  "desc": "マイルスキル・高練習性能"
+                },
+                {
+                  "name": "SSR ミスターシービー",
+                  "desc": "汎用最高峰の練習性能"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR サウンズオブアース",
+                  "desc": "練習性能・金回復「好転一息」"
+                },
+                {
+                  "name": "SSR スーパークリーク",
+                  "desc": "金回復「円弧のマエストロ」"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SR最高峰のスタミナ練習性能"
+                },
+                {
+                  "name": "配布SSR メジロマックイーン",
+                  "desc": "配布スタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR ダイイチルビー",
+                  "desc": "電光石火・マイル差し必須級"
+                },
+                {
+                  "name": "SSR ニシノフラワー",
+                  "desc": "つぼみ継承親・愛嬌○"
+                },
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "マイル加速スキル所持"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "マイル適性SRパワー"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・圧倒的練習性能"
+                },
+                {
+                  "name": "SSR ゴールドシチー",
+                  "desc": "ハイボルテージ・マイル加速"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "マイルスキル所持SR根性"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "マイルスキル多数・速度"
+                },
+                {
+                  "name": "SSR ダイワスカーレット",
+                  "desc": "ハイボルテージ・先行マイル"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "高得意率SR賢さ"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         },
         {
@@ -132,15 +847,164 @@ window.UMA_META_DATA = {
           "tag": "スピ2・スタ1・賢1・根1・友人1(レンタル)",
           "concept": "レンタルSSRたづなを固定し、配布・SRでスタミナとスピードの基礎ラインを死守",
           "cards": [
-            { "type": "speed", "name": "SR スイープトウショウ", "role": "スピードSR枠", "key": false },
-            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "配布スピード", "key": false },
-            { "type": "stamina", "name": "SR マンハッタンカフェ", "role": "優秀なSRスタミナ", "key": false },
-            { "type": "wit", "name": "SR アグネスタキオン", "role": "高練習効率SR賢さ", "key": false },
-            { "type": "guts", "name": "SR オグリキャップ", "role": "SR根性", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様） [レンタル]", "role": "フレンド枠固定", "key": true }
+            {
+              "type": "speed",
+              "name": "SR スイープトウショウ",
+              "role": "スピードSR枠",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "配布SSR スペシャルウィーク",
+              "role": "配布スピード",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SR マンハッタンカフェ",
+              "role": "優秀なSRスタミナ",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SR アグネスタキオン",
+              "role": "高練習効率SR賢さ",
+              "key": false
+            },
+            {
+              "type": "guts",
+              "name": "SR オグリキャップ",
+              "role": "SR根性",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様） [レンタル]",
+              "role": "フレンド枠固定",
+              "key": true
+            }
           ],
           "substitutes": [
             "SRカフェ → 配布SSRメジロマックイーン"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR グランアレグリア",
+                  "desc": "マイル特化・加速所持"
+                },
+                {
+                  "name": "SSR タイキシャトル",
+                  "desc": "マイル先行・速度スキル豊富"
+                },
+                {
+                  "name": "SSR ラインクラフト",
+                  "desc": "マイルスキル・高練習性能"
+                },
+                {
+                  "name": "SSR ミスターシービー",
+                  "desc": "汎用最高峰の練習性能"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR サウンズオブアース",
+                  "desc": "練習性能・金回復「好転一息」"
+                },
+                {
+                  "name": "SSR スーパークリーク",
+                  "desc": "金回復「円弧のマエストロ」"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SR最高峰のスタミナ練習性能"
+                },
+                {
+                  "name": "配布SSR メジロマックイーン",
+                  "desc": "配布スタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR ダイイチルビー",
+                  "desc": "電光石火・マイル差し必須級"
+                },
+                {
+                  "name": "SSR ニシノフラワー",
+                  "desc": "つぼみ継承親・愛嬌○"
+                },
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "マイル加速スキル所持"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "マイル適性SRパワー"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・圧倒的練習性能"
+                },
+                {
+                  "name": "SSR ゴールドシチー",
+                  "desc": "ハイボルテージ・マイル加速"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "マイルスキル所持SR根性"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "マイルスキル多数・速度"
+                },
+                {
+                  "name": "SSR ダイワスカーレット",
+                  "desc": "ハイボルテージ・先行マイル"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "高得意率SR賢さ"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         }
       ]
@@ -164,17 +1028,166 @@ window.UMA_META_DATA = {
           "tag": "スピ2・スタ1・賢1・パワー1・友人1",
           "concept": "先行Tier SS+のエフフォーリアとエアグルーヴにメイショウドトウを合わせ、中距離金スキルと超ステータスを両立",
           "cards": [
-            { "type": "speed", "name": "SSR エフフォーリア", "role": "現環境Tier SS・中距離先行最強スピード枠", "key": false },
-            { "type": "speed", "name": "SSR エアグルーヴ（心覚えし、京の華）", "role": "現環境Tier SS+・中距離必須級スピード枠", "key": false },
-            { "type": "stamina", "name": "SSR メイショウドトウ", "role": "トレセン軒環境の最高峰スタミナ枠", "key": false },
-            { "type": "power", "name": "SSR ニシノフラワー", "role": "パワー確保・中距離スキルヒント", "key": false },
-            { "type": "wit", "name": "SSR スティルインラブ", "role": "最新最高峰の賢さ枠", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人枠", "key": true }
+            {
+              "type": "speed",
+              "name": "SSR エフフォーリア",
+              "role": "現環境Tier SS・中距離先行最強スピード枠",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "SSR エアグルーヴ（心覚えし、京の華）",
+              "role": "現環境Tier SS+・中距離必須級スピード枠",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR メイショウドトウ",
+              "role": "トレセン軒環境の最高峰スタミナ枠",
+              "key": false
+            },
+            {
+              "type": "power",
+              "name": "SSR ニシノフラワー",
+              "role": "パワー確保・中距離スキルヒント",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR スティルインラブ",
+              "role": "最新最高峰の賢さ枠",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様）",
+              "role": "シナリオ必須友人枠",
+              "key": true
+            }
           ],
           "substitutes": [
             "スピード枠 → SSRトウカイテイオー / SSRサトノダイヤモンド",
             "スタミナ枠 → SSRサウンズオブアース / SSRスーパークリーク",
             "パワー枠 → SSRハルウララ / SSRウオッカ"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR トウカイテイオー",
+                  "desc": "中距離先行・爆発的練習性能"
+                },
+                {
+                  "name": "SSR サトノダイヤモンド",
+                  "desc": "中距離特化・高練習性能"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "得意率・弧線のプロフェッサー"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR サウンズオブアース",
+                  "desc": "好転一息・圧倒的練習性能"
+                },
+                {
+                  "name": "SSR スーパークリーク",
+                  "desc": "円弧のマエストロ所持"
+                },
+                {
+                  "name": "SSR シュヴァルグラン",
+                  "desc": "中長距離スタミナ・高練習性能"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SR最高峰スタミナ枠"
+                },
+                {
+                  "name": "配布SSR メジロマックイーン",
+                  "desc": "配布スタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "好転一息・中距離パワー底上げ"
+                },
+                {
+                  "name": "SSR ゴールドシップ",
+                  "desc": "中距離差し追込パワー"
+                },
+                {
+                  "name": "SSR アグネスデジタル",
+                  "desc": "中距離汎用パワー"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "SRパワー枠"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・根性練習性能重視"
+                },
+                {
+                  "name": "SSR シリウスシンボリ",
+                  "desc": "起死回生・中距離差し特化"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "SR根性枠"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "中距離スキル豊富・高ステータス"
+                },
+                {
+                  "name": "SSR ダイワスカーレット",
+                  "desc": "先行賢さ枠"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "先行SR賢さ枠"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         },
         {
@@ -182,15 +1195,164 @@ window.UMA_META_DATA = {
           "tag": "スピ2・スタ2・賢1・友人1",
           "concept": "スタミナ事故を100%防ぎ、スタミナ1300+金回復で菊花賞・天皇賞秋を完全走破",
           "cards": [
-            { "type": "speed", "name": "SSR トウカイテイオー", "role": "スピード要員", "key": false },
-            { "type": "speed", "name": "SSR エフフォーリア", "role": "スピード要員", "key": false },
-            { "type": "stamina", "name": "SSR メイショウドトウ", "role": "スタミナ要員1", "key": false },
-            { "type": "stamina", "name": "SSR サウンズオブアース", "role": "スタミナ要員2・好転一息", "key": false },
-            { "type": "wit", "name": "SSR ダイワスカーレット", "role": "賢さ要員", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人", "key": true }
+            {
+              "type": "speed",
+              "name": "SSR トウカイテイオー",
+              "role": "スピード要員",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "SSR エフフォーリア",
+              "role": "スピード要員",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR メイショウドトウ",
+              "role": "スタミナ要員1",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR サウンズオブアース",
+              "role": "スタミナ要員2・好転一息",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR ダイワスカーレット",
+              "role": "賢さ要員",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様）",
+              "role": "シナリオ必須友人",
+              "key": true
+            }
           ],
           "substitutes": [
             "SSRサウンズオブアース → SSRスーパークリーク"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR トウカイテイオー",
+                  "desc": "中距離先行・爆発的練習性能"
+                },
+                {
+                  "name": "SSR サトノダイヤモンド",
+                  "desc": "中距離特化・高練習性能"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "得意率・弧線のプロフェッサー"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR サウンズオブアース",
+                  "desc": "好転一息・圧倒的練習性能"
+                },
+                {
+                  "name": "SSR スーパークリーク",
+                  "desc": "円弧のマエストロ所持"
+                },
+                {
+                  "name": "SSR シュヴァルグラン",
+                  "desc": "中長距離スタミナ・高練習性能"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SR最高峰スタミナ枠"
+                },
+                {
+                  "name": "配布SSR メジロマックイーン",
+                  "desc": "配布スタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "好転一息・中距離パワー底上げ"
+                },
+                {
+                  "name": "SSR ゴールドシップ",
+                  "desc": "中距離差し追込パワー"
+                },
+                {
+                  "name": "SSR アグネスデジタル",
+                  "desc": "中距離汎用パワー"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "SRパワー枠"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・根性練習性能重視"
+                },
+                {
+                  "name": "SSR シリウスシンボリ",
+                  "desc": "起死回生・中距離差し特化"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "SR根性枠"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "中距離スキル豊富・高ステータス"
+                },
+                {
+                  "name": "SSR ダイワスカーレット",
+                  "desc": "先行賢さ枠"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "先行SR賢さ枠"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         },
         {
@@ -198,15 +1360,164 @@ window.UMA_META_DATA = {
           "tag": "スピ2・スタ2・賢1・友人1(レンタル)",
           "concept": "配布とSRスタミナ2枚でスタミナ1200を安全に確保し、レンタルたづなで育成完走",
           "cards": [
-            { "type": "speed", "name": "SR スイープトウショウ", "role": "スピードSR", "key": false },
-            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "配布スピード", "key": false },
-            { "type": "stamina", "name": "配布SSR メジロマックイーン", "role": "配布スタミナ", "key": false },
-            { "type": "stamina", "name": "SR マンハッタンカフェ", "role": "SRスタミナ最高峰", "key": false },
-            { "type": "wit", "name": "SR アグネスタキオン", "role": "高得意率SR賢さ", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様） [レンタル]", "role": "フレンド枠固定", "key": true }
+            {
+              "type": "speed",
+              "name": "SR スイープトウショウ",
+              "role": "スピードSR",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "配布SSR スペシャルウィーク",
+              "role": "配布スピード",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "配布SSR メジロマックイーン",
+              "role": "配布スタミナ",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SR マンハッタンカフェ",
+              "role": "SRスタミナ最高峰",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SR アグネスタキオン",
+              "role": "高得意率SR賢さ",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様） [レンタル]",
+              "role": "フレンド枠固定",
+              "key": true
+            }
           ],
           "substitutes": [
             "SRカフェ → SRゼンノロブロイ"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR トウカイテイオー",
+                  "desc": "中距離先行・爆発的練習性能"
+                },
+                {
+                  "name": "SSR サトノダイヤモンド",
+                  "desc": "中距離特化・高練習性能"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "得意率・弧線のプロフェッサー"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR サウンズオブアース",
+                  "desc": "好転一息・圧倒的練習性能"
+                },
+                {
+                  "name": "SSR スーパークリーク",
+                  "desc": "円弧のマエストロ所持"
+                },
+                {
+                  "name": "SSR シュヴァルグラン",
+                  "desc": "中長距離スタミナ・高練習性能"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SR最高峰スタミナ枠"
+                },
+                {
+                  "name": "配布SSR メジロマックイーン",
+                  "desc": "配布スタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "好転一息・中距離パワー底上げ"
+                },
+                {
+                  "name": "SSR ゴールドシップ",
+                  "desc": "中距離差し追込パワー"
+                },
+                {
+                  "name": "SSR アグネスデジタル",
+                  "desc": "中距離汎用パワー"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "SRパワー枠"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・根性練習性能重視"
+                },
+                {
+                  "name": "SSR シリウスシンボリ",
+                  "desc": "起死回生・中距離差し特化"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "SR根性枠"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "中距離スキル豊富・高ステータス"
+                },
+                {
+                  "name": "SSR ダイワスカーレット",
+                  "desc": "先行賢さ枠"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "先行SR賢さ枠"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         }
       ]
@@ -230,16 +1541,157 @@ window.UMA_META_DATA = {
           "tag": "スピ2・スタ2・賢1・友人1",
           "concept": "新環境スタミナ枠ドトウ＋アースでスタミナ1450カンストを狙い、エフフォーリアでスピード1750を両立",
           "cards": [
-            { "type": "speed", "name": "SSR エフフォーリア", "role": "長距離先行・圧倒的スピード練習", "key": false },
-            { "type": "speed", "name": "SSR サトノダイヤモンド", "role": "長距離特化・現環境Tier SS+スピード枠", "key": false },
-            { "type": "stamina", "name": "SSR メイショウドトウ", "role": "トレセン軒環境の最新スタミナ枠", "key": false },
-            { "type": "stamina", "name": "SSR サウンズオブアース", "role": "好転一息・超練習性能", "key": false },
-            { "type": "wit", "name": "SSR スティルインラブ", "role": "賢さ上限・スキル回収", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人枠", "key": true }
+            {
+              "type": "speed",
+              "name": "SSR エフフォーリア",
+              "role": "長距離先行・圧倒的スピード練習",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "SSR サトノダイヤモンド",
+              "role": "長距離特化・現環境Tier SS+スピード枠",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR メイショウドトウ",
+              "role": "トレセン軒環境の最新スタミナ枠",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR サウンズオブアース",
+              "role": "好転一息・超練習性能",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR スティルインラブ",
+              "role": "賢さ上限・スキル回収",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様）",
+              "role": "シナリオ必須友人枠",
+              "key": true
+            }
           ],
           "substitutes": [
             "スタミナ枠 → SSRスーパークリーク / SSRシュヴァルグラン",
             "スピード枠 → SSRトウカイテイオー / SSRミスターシービー"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR トウカイテイオー",
+                  "desc": "長距離先行向けスピード"
+                },
+                {
+                  "name": "SSR ミスターシービー",
+                  "desc": "追込長距離必須級"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "弧線のプロフェッサー"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR スーパークリーク",
+                  "desc": "円弧のマエストロ（金回復必須級）"
+                },
+                {
+                  "name": "SSR シュヴァルグラン",
+                  "desc": "長距離スタミナ・金回復"
+                },
+                {
+                  "name": "SSR サクラローレル",
+                  "desc": "差し長距離スタミナ枠"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SRスタミナ最高峰"
+                },
+                {
+                  "name": "配布SSR メジロマックイーン",
+                  "desc": "配布スタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR タマモクロス",
+                  "desc": "長距離追込パワー枠"
+                },
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "パワー底上げ"
+                },
+                {
+                  "name": "SR ビワハヤヒデ",
+                  "desc": "長距離パワー枠"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・根性練習性能"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "SR根性枠"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "汎用賢さ枠"
+                },
+                {
+                  "name": "SSR マンハッタンカフェ",
+                  "desc": "長距離賢さ枠"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "優秀SR賢さ"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         },
         {
@@ -247,15 +1699,156 @@ window.UMA_META_DATA = {
           "tag": "スピ2・スタ2・賢1・友人1",
           "concept": "追込必須のSSRミスターシービーを採用し、終盤の直線一気と圧倒的末脚を叩き込む構成",
           "cards": [
-            { "type": "speed", "name": "SSR ミスターシービー", "role": "追込育成必須級・現環境Tier SS", "key": false },
-            { "type": "speed", "name": "SSR サトノダイヤモンド", "role": "スピード要員", "key": false },
-            { "type": "stamina", "name": "SSR メイショウドトウ", "role": "スタミナ要員1", "key": false },
-            { "type": "stamina", "name": "SSR スーパークリーク", "role": "円弧のマエストロ（金回復）", "key": false },
-            { "type": "wit", "name": "SSR ダイワスカーレット", "role": "賢さ枠", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人", "key": true }
+            {
+              "type": "speed",
+              "name": "SSR ミスターシービー",
+              "role": "追込育成必須級・現環境Tier SS",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "SSR サトノダイヤモンド",
+              "role": "スピード要員",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR メイショウドトウ",
+              "role": "スタミナ要員1",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR スーパークリーク",
+              "role": "円弧のマエストロ（金回復）",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR ダイワスカーレット",
+              "role": "賢さ枠",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様）",
+              "role": "シナリオ必須友人",
+              "key": true
+            }
           ],
           "substitutes": [
             "SSRクリーク → SSRサウンズオブアース"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR トウカイテイオー",
+                  "desc": "長距離先行向けスピード"
+                },
+                {
+                  "name": "SSR ミスターシービー",
+                  "desc": "追込長距離必須級"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "弧線のプロフェッサー"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR スーパークリーク",
+                  "desc": "円弧のマエストロ（金回復必須級）"
+                },
+                {
+                  "name": "SSR シュヴァルグラン",
+                  "desc": "長距離スタミナ・金回復"
+                },
+                {
+                  "name": "SSR サクラローレル",
+                  "desc": "差し長距離スタミナ枠"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SRスタミナ最高峰"
+                },
+                {
+                  "name": "配布SSR メジロマックイーン",
+                  "desc": "配布スタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR タマモクロス",
+                  "desc": "長距離追込パワー枠"
+                },
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "パワー底上げ"
+                },
+                {
+                  "name": "SR ビワハヤヒデ",
+                  "desc": "長距離パワー枠"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・根性練習性能"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "SR根性枠"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "汎用賢さ枠"
+                },
+                {
+                  "name": "SSR マンハッタンカフェ",
+                  "desc": "長距離賢さ枠"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "優秀SR賢さ"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         },
         {
@@ -263,15 +1856,156 @@ window.UMA_META_DATA = {
           "tag": "スピ2・スタ2・賢1・友人1(レンタル)",
           "concept": "レンタルSSRクリークでマエストロを確保し、配布・SRでスタミナを死守",
           "cards": [
-            { "type": "speed", "name": "SR スイープトウショウ", "role": "スピードSR", "key": false },
-            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "配布スピード", "key": false },
-            { "type": "stamina", "name": "SSR スーパークリーク [レンタル]", "role": "金回復マエストロ確保枠", "key": false },
-            { "type": "stamina", "name": "SR マンハッタンカフェ", "role": "スタミナSR", "key": false },
-            { "type": "wit", "name": "SR アグネスタキオン", "role": "賢さSR", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様） [自前所持前提/または逆レンタル]", "role": "シナリオ友人枠", "key": true }
+            {
+              "type": "speed",
+              "name": "SR スイープトウショウ",
+              "role": "スピードSR",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "配布SSR スペシャルウィーク",
+              "role": "配布スピード",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SSR スーパークリーク [レンタル]",
+              "role": "金回復マエストロ確保枠",
+              "key": false
+            },
+            {
+              "type": "stamina",
+              "name": "SR マンハッタンカフェ",
+              "role": "スタミナSR",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SR アグネスタキオン",
+              "role": "賢さSR",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様） [自前所持前提/または逆レンタル]",
+              "role": "シナリオ友人枠",
+              "key": true
+            }
           ],
           "substitutes": [
             "たづなを持っていない場合はたづなレンタル、スタミナ枠を配布SSRマックイーン等に切替"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR トウカイテイオー",
+                  "desc": "長距離先行向けスピード"
+                },
+                {
+                  "name": "SSR ミスターシービー",
+                  "desc": "追込長距離必須級"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "弧線のプロフェッサー"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR スーパークリーク",
+                  "desc": "円弧のマエストロ（金回復必須級）"
+                },
+                {
+                  "name": "SSR シュヴァルグラン",
+                  "desc": "長距離スタミナ・金回復"
+                },
+                {
+                  "name": "SSR サクラローレル",
+                  "desc": "差し長距離スタミナ枠"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SRスタミナ最高峰"
+                },
+                {
+                  "name": "配布SSR メジロマックイーン",
+                  "desc": "配布スタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR タマモクロス",
+                  "desc": "長距離追込パワー枠"
+                },
+                {
+                  "name": "SSR ウオッカ",
+                  "desc": "パワー底上げ"
+                },
+                {
+                  "name": "SR ビワハヤヒデ",
+                  "desc": "長距離パワー枠"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "神速・根性練習性能"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "SR根性枠"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "汎用賢さ枠"
+                },
+                {
+                  "name": "SSR マンハッタンカフェ",
+                  "desc": "長距離賢さ枠"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "優秀SR賢さ"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         }
       ]
@@ -295,17 +2029,154 @@ window.UMA_META_DATA = {
           "tag": "スピ2・パワー1・根性1・賢1・友人1",
           "concept": "現環境ダート最強パワー枠のハルウララとタップダンスシチー/エアグルーヴで砂の直線を完全制圧",
           "cards": [
-            { "type": "speed", "name": "SSR タップダンスシチー（刀光散らしてClash！）", "role": "逃げ/先行最高峰スピード", "key": false },
-            { "type": "speed", "name": "SSR トウカイテイオー（天才的ユートピア）", "role": "圧倒的練習性能SS+", "key": false },
-            { "type": "power", "name": "SSR ハルウララ", "role": "現環境Tier S・ダート専用金スキル＆超高練習性能", "key": false },
-            { "type": "guts", "name": "SSR ビコーペガサス", "role": "根性練習の爆発力", "key": false },
-            { "type": "wit", "name": "SSR スティルインラブ", "role": "賢さ上限・汎用スキル", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人枠", "key": true }
+            {
+              "type": "speed",
+              "name": "SSR タップダンスシチー（刀光散らしてClash！）",
+              "role": "逃げ/先行最高峰スピード",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "SSR トウカイテイオー（天才的ユートピア）",
+              "role": "圧倒的練習性能SS+",
+              "key": false
+            },
+            {
+              "type": "power",
+              "name": "SSR ハルウララ",
+              "role": "現環境Tier S・ダート専用金スキル＆超高練習性能",
+              "key": false
+            },
+            {
+              "type": "guts",
+              "name": "SSR ビコーペガサス",
+              "role": "根性練習の爆発力",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SSR スティルインラブ",
+              "role": "賢さ上限・汎用スキル",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様）",
+              "role": "シナリオ必須友人枠",
+              "key": true
+            }
           ],
           "substitutes": [
             "パワー枠 → SSRスマートファルコン / SSRコパノリッキー",
             "根性枠 → SSRオルフェーヴル / SSRゴールドシチー",
             "スピード枠 → SSRエアグルーヴ"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR エアグルーヴ",
+                  "desc": "高練習性能スピード"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "汎用得意率高"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR メイショウドトウ",
+                  "desc": "中距離ダートスタミナ"
+                },
+                {
+                  "name": "SSR サウンズオブアース",
+                  "desc": "好転一息・練習性能"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SRスタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR スマートファルコン",
+                  "desc": "ダート逃げパワー"
+                },
+                {
+                  "name": "SSR コパノリッキー",
+                  "desc": "ダート先行パワー"
+                },
+                {
+                  "name": "SSR アグネスデジタル",
+                  "desc": "狙うは最前列・ダート金加速"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "SRパワー枠"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "汎用高根性性能"
+                },
+                {
+                  "name": "SSR ゴールドシチー",
+                  "desc": "マイルダート加速"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "SR根性枠"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR スティルインラブ",
+                  "desc": "最高峰賢さ枠"
+                },
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "汎用賢さ枠"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "優秀SR賢さ"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         },
         {
@@ -313,15 +2184,152 @@ window.UMA_META_DATA = {
           "tag": "スピ2・根性1・パワ1・賢1・友人1(レンタル)",
           "concept": "SR枠でダートスキルとステータスを補い、SSRたづなで育成を安定化",
           "cards": [
-            { "type": "speed", "name": "SR スイープトウショウ", "role": "スピードSR", "key": false },
-            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "配布スピード", "key": false },
-            { "type": "power", "name": "SR ダイタクヘリオス", "role": "パワーSR", "key": false },
-            { "type": "guts", "name": "SR オグリキャップ", "role": "根性SR", "key": false },
-            { "type": "wit", "name": "SR アグネスタキオン", "role": "賢さSR", "key": false },
-            { "type": "friend", "name": "SSR 駿川たづな（新仕様） [レンタル]", "role": "フレンド枠固定", "key": true }
+            {
+              "type": "speed",
+              "name": "SR スイープトウショウ",
+              "role": "スピードSR",
+              "key": false
+            },
+            {
+              "type": "speed",
+              "name": "配布SSR スペシャルウィーク",
+              "role": "配布スピード",
+              "key": false
+            },
+            {
+              "type": "power",
+              "name": "SR ダイタクヘリオス",
+              "role": "パワーSR",
+              "key": false
+            },
+            {
+              "type": "guts",
+              "name": "SR オグリキャップ",
+              "role": "根性SR",
+              "key": false
+            },
+            {
+              "type": "wit",
+              "name": "SR アグネスタキオン",
+              "role": "賢さSR",
+              "key": false
+            },
+            {
+              "type": "friend",
+              "name": "SSR 駿川たづな（新仕様） [レンタル]",
+              "role": "フレンド枠固定",
+              "key": true
+            }
           ],
           "substitutes": [
             "SRダイタクヘリオス → 配布SSRミホノブルボン"
+          ],
+          "substitutes_by_type": [
+            {
+              "type": "speed",
+              "name": "スピード枠",
+              "cards": [
+                {
+                  "name": "SSR エアグルーヴ",
+                  "desc": "高練習性能スピード"
+                },
+                {
+                  "name": "SSR キタサンブラック",
+                  "desc": "汎用得意率高"
+                },
+                {
+                  "name": "SR スイープトウショウ",
+                  "desc": "優秀SRスピード"
+                }
+              ]
+            },
+            {
+              "type": "stamina",
+              "name": "スタミナ枠",
+              "cards": [
+                {
+                  "name": "SSR メイショウドトウ",
+                  "desc": "中距離ダートスタミナ"
+                },
+                {
+                  "name": "SSR サウンズオブアース",
+                  "desc": "好転一息・練習性能"
+                },
+                {
+                  "name": "SR マンハッタンカフェ",
+                  "desc": "SRスタミナ枠"
+                }
+              ]
+            },
+            {
+              "type": "power",
+              "name": "パワー枠",
+              "cards": [
+                {
+                  "name": "SSR スマートファルコン",
+                  "desc": "ダート逃げパワー"
+                },
+                {
+                  "name": "SSR コパノリッキー",
+                  "desc": "ダート先行パワー"
+                },
+                {
+                  "name": "SSR アグネスデジタル",
+                  "desc": "狙うは最前列・ダート金加速"
+                },
+                {
+                  "name": "SR ダイタクヘリオス",
+                  "desc": "SRパワー枠"
+                }
+              ]
+            },
+            {
+              "type": "guts",
+              "name": "根性枠",
+              "cards": [
+                {
+                  "name": "SSR オルフェーヴル",
+                  "desc": "汎用高根性性能"
+                },
+                {
+                  "name": "SSR ゴールドシチー",
+                  "desc": "マイルダート加速"
+                },
+                {
+                  "name": "SR オグリキャップ",
+                  "desc": "SR根性枠"
+                }
+              ]
+            },
+            {
+              "type": "wit",
+              "name": "賢さ枠",
+              "cards": [
+                {
+                  "name": "SSR スティルインラブ",
+                  "desc": "最高峰賢さ枠"
+                },
+                {
+                  "name": "SSR メジロラモーヌ",
+                  "desc": "汎用賢さ枠"
+                },
+                {
+                  "name": "SR アグネスタキオン",
+                  "desc": "優秀SR賢さ"
+                }
+              ]
+            },
+            {
+              "type": "friend",
+              "name": "友人枠",
+              "irreplaceable": true,
+              "cards": [
+                {
+                  "name": "SSR 駿川たづな（新仕様）",
+                  "desc": "【代替不可】シナリオ専用ギミック（コツ獲得・ゲージ加速・お出かけ回復）に直結するため、無凸でも固定推奨"
+                }
+              ]
+            }
           ]
         }
       ]
@@ -335,18 +2343,68 @@ window.UMA_META_DATA = {
       "meta_status": "「タップダンスシチー」実装により復権。序盤の先頭争い（地固め・盤石）でハナを取り切れば独走可能。",
       "concept": "序盤の加速スキル「盤石の構え/地固め」「先手必勝」で先頭を奪い、中盤の速度スキルで後続を突き放す構成。",
       "key_skills": [
-        { "name": "盤石の構え / 地固め", "timing": "序盤加速", "from": "SSR ミホノブルボン / 因子", "importance": "最重要（必須）" },
-        { "name": "先手必勝 / 先駆け", "timing": "序盤加速", "from": "SSR タップダンスシチー / SSR カルストンライトオ", "importance": "最重要（必須）" },
-        { "name": "危険回避 + ポジションセンス", "timing": "序盤位置取り", "from": "サポカ各種 / 因子", "importance": "重要（外逃げコンボ）" },
-        { "name": "アングリング×スキーミング", "timing": "終盤加速（継承）", "from": "セイウンスカイ固有継承", "importance": "終盤必須加速" }
+        {
+          "name": "盤石の構え / 地固め",
+          "timing": "序盤加速",
+          "from": "SSR ミホノブルボン / 因子",
+          "importance": "最重要（必須）"
+        },
+        {
+          "name": "先手必勝 / 先駆け",
+          "timing": "序盤加速",
+          "from": "SSR タップダンスシチー / SSR カルストンライトオ",
+          "importance": "最重要（必須）"
+        },
+        {
+          "name": "危険回避 + ポジションセンス",
+          "timing": "序盤位置取り",
+          "from": "サポカ各種 / 因子",
+          "importance": "重要（外逃げコンボ）"
+        },
+        {
+          "name": "アングリング×スキーミング",
+          "timing": "終盤加速（継承）",
+          "from": "セイウンスカイ固有継承",
+          "importance": "終盤必須加速"
+        }
       ],
       "recommended_cards": [
-        { "type": "speed", "name": "SSR タップダンスシチー（刀光散らしてClash！）", "role": "逃げ必須級スピード枠・スキルptボーナス", "key": false },
-        { "type": "speed", "name": "SSR カルストンライトオ", "role": "短距離逃げスピード・先手必勝", "key": false },
-        { "type": "wit", "name": "SSR ミホノブルボン", "role": "盤石の構え確定入手枠", "key": false },
-        { "type": "wit", "name": "SSR スティルインラブ", "role": "最高峰の賢さ練習性能", "key": false },
-        { "type": "guts", "name": "SSR ビコーペガサス", "role": "短距離逃げ追い比べ対策", "key": false },
-        { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人枠", "key": true }
+        {
+          "type": "speed",
+          "name": "SSR タップダンスシチー（刀光散らしてClash！）",
+          "role": "逃げ必須級スピード枠・スキルptボーナス",
+          "key": false
+        },
+        {
+          "type": "speed",
+          "name": "SSR カルストンライトオ",
+          "role": "短距離逃げスピード・先手必勝",
+          "key": false
+        },
+        {
+          "type": "wit",
+          "name": "SSR ミホノブルボン",
+          "role": "盤石の構え確定入手枠",
+          "key": false
+        },
+        {
+          "type": "wit",
+          "name": "SSR スティルインラブ",
+          "role": "最高峰の賢さ練習性能",
+          "key": false
+        },
+        {
+          "type": "guts",
+          "name": "SSR ビコーペガサス",
+          "role": "短距離逃げ追い比べ対策",
+          "key": false
+        },
+        {
+          "type": "friend",
+          "name": "SSR 駿川たづな（新仕様）",
+          "role": "シナリオ必須友人枠",
+          "key": true
+        }
       ],
       "strategy_tips": "逃げは2人以上出走時に「競り合い」が発生して速度が急上昇します。アンスキ等の終盤加速を最速発動させるため、中盤終了時点で必ず先頭（1位）をキープできる中盤速度スキルの厚盛りが肝心です。"
     },
@@ -357,18 +2415,68 @@ window.UMA_META_DATA = {
       "meta_status": "現環境Tierトップ・採用率No.1！「エフフォーリア」「トウカイテイオー」「エアグルーヴ」と最強カードが集中。",
       "concept": "終盤加速「鍔迫り合い」や「ハイボルテージ」を発動させ、安定した位置取りから抜け出す現環境で最も勝率の高い王道脚質。",
       "key_skills": [
-        { "name": "鍔迫り合い / 真っ向勝負", "timing": "終盤加速", "from": "SSR エフフォーリア / SSR ダイタクヘリオス", "importance": "最重要（必須）" },
-        { "name": "ハイボルテージ / 心弾んで", "timing": "終盤加速（短距離/マイル）", "from": "SSR ダイワスカーレット", "importance": "最重要（短距離・マイル）" },
-        { "name": "直滑降", "timing": "下り坂加速", "from": "SSR ニシノフラワー / サポカ各種", "importance": "京都・中山等で強力" },
-        { "name": "アンストッパブル / 攻めの姿勢", "timing": "中盤速度", "from": "SSR エアグルーヴ / SSR トウカイテイオー", "importance": "重要（好位置キープ）" }
+        {
+          "name": "鍔迫り合い / 真っ向勝負",
+          "timing": "終盤加速",
+          "from": "SSR エフフォーリア / SSR ダイタクヘリオス",
+          "importance": "最重要（必須）"
+        },
+        {
+          "name": "ハイボルテージ / 心弾んで",
+          "timing": "終盤加速（短距離/マイル）",
+          "from": "SSR ダイワスカーレット",
+          "importance": "最重要（短距離・マイル）"
+        },
+        {
+          "name": "直滑降",
+          "timing": "下り坂加速",
+          "from": "SSR ニシノフラワー / サポカ各種",
+          "importance": "京都・中山等で強力"
+        },
+        {
+          "name": "アンストッパブル / 攻めの姿勢",
+          "timing": "中盤速度",
+          "from": "SSR エアグルーヴ / SSR トウカイテイオー",
+          "importance": "重要（好位置キープ）"
+        }
       ],
       "recommended_cards": [
-        { "type": "speed", "name": "SSR トウカイテイオー（天才的ユートピア）", "role": "現環境Tier SS+・先行中距離爆発力", "key": false },
-        { "type": "speed", "name": "SSR エアグルーヴ（心覚えし、京の華）", "role": "現環境Tier SS+・先行中距離必須級", "key": false },
-        { "type": "speed", "name": "SSR エフフォーリア", "role": "先行最強格・鍔迫り合い", "key": false },
-        { "type": "stamina", "name": "SSR メイショウドトウ", "role": "中長距離の先行スタミナ確保", "key": false },
-        { "type": "wit", "name": "SSR ダイワスカーレット", "role": "ハイボルテージ・賢さ上限", "key": false },
-        { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人枠", "key": true }
+        {
+          "type": "speed",
+          "name": "SSR トウカイテイオー（天才的ユートピア）",
+          "role": "現環境Tier SS+・先行中距離爆発力",
+          "key": false
+        },
+        {
+          "type": "speed",
+          "name": "SSR エアグルーヴ（心覚えし、京の華）",
+          "role": "現環境Tier SS+・先行中距離必須級",
+          "key": false
+        },
+        {
+          "type": "speed",
+          "name": "SSR エフフォーリア",
+          "role": "先行最強格・鍔迫り合い",
+          "key": false
+        },
+        {
+          "type": "stamina",
+          "name": "SSR メイショウドトウ",
+          "role": "中長距離の先行スタミナ確保",
+          "key": false
+        },
+        {
+          "type": "wit",
+          "name": "SSR ダイワスカーレット",
+          "role": "ハイボルテージ・賢さ上限",
+          "key": false
+        },
+        {
+          "type": "friend",
+          "name": "SSR 駿川たづな（新仕様）",
+          "role": "シナリオ必須友人枠",
+          "key": true
+        }
       ],
       "strategy_tips": "先行は終盤開始時の順位条件（1〜5位、チャンミ時は2〜5位）を満たすことが勝利の絶対条件です。逃げ不在時でも埋もれないよう、中盤速度スキルを2〜3個連続発動させて好位（前目）を死守しましょう。"
     },
@@ -379,18 +2487,68 @@ window.UMA_META_DATA = {
       "meta_status": "中盤の位置取り争いが激化する中、終盤の爆発力と追い比べ適性が極めて高く、競技場・チャンミの決め手として人気。",
       "concept": "中盤に息を潜め、終盤突入と同時に「乗り換え上手」「無我夢中（中長距離）」などの強烈な加速で一気に先行集団を飲み込む構成。",
       "key_skills": [
-        { "name": "無我夢中", "timing": "終盤加速（中長距離）", "from": "SSR シンボリクリスエス / 継承", "importance": "長距離差し必須" },
-        { "name": "乗り換え上手 / 差し切り体勢", "timing": "終盤加速", "from": "SSR ナイスネイチャ / サポカ各種", "importance": "汎用終盤加速" },
-        { "name": "起死回生 / ワンチャンス", "timing": "終盤加速（中距離）", "from": "SSR シリウスシンボリ / サポカ各種", "importance": "中距離差し強力" },
-        { "name": "迅速果断 / 位置取り押し上げ", "timing": "中盤速度", "from": "SSR ミスターシービー / SSR トウカイテイオー", "importance": "終盤突入時の射程圏確保" }
+        {
+          "name": "無我夢中",
+          "timing": "終盤加速（中長距離）",
+          "from": "SSR シンボリクリスエス / 継承",
+          "importance": "長距離差し必須"
+        },
+        {
+          "name": "乗り換え上手 / 差し切り体勢",
+          "timing": "終盤加速",
+          "from": "SSR ナイスネイチャ / サポカ各種",
+          "importance": "汎用終盤加速"
+        },
+        {
+          "name": "起死回生 / ワンチャンス",
+          "timing": "終盤加速（中距離）",
+          "from": "SSR シリウスシンボリ / サポカ各種",
+          "importance": "中距離差し強力"
+        },
+        {
+          "name": "迅速果断 / 位置取り押し上げ",
+          "timing": "中盤速度",
+          "from": "SSR ミスターシービー / SSR トウカイテイオー",
+          "importance": "終盤突入時の射程圏確保"
+        }
       ],
       "recommended_cards": [
-        { "type": "speed", "name": "SSR エアグルーヴ（心覚えし、京の華）", "role": "差しでもSS+・高練習性能", "key": false },
-        { "type": "speed", "name": "SSR ミスターシービー", "role": "中盤位置取り・差し汎用", "key": false },
-        { "type": "stamina", "name": "SSR メイショウドトウ", "role": "スタミナ確保・差しスキル", "key": false },
-        { "type": "power", "name": "SSR ウオッカ", "role": "パワー強化・差し加速", "key": false },
-        { "type": "wit", "name": "SSR スティルインラブ", "role": "最高峰の賢さ練習性能", "key": false },
-        { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人枠", "key": true }
+        {
+          "type": "speed",
+          "name": "SSR エアグルーヴ（心覚えし、京の華）",
+          "role": "差しでもSS+・高練習性能",
+          "key": false
+        },
+        {
+          "type": "speed",
+          "name": "SSR ミスターシービー",
+          "role": "中盤位置取り・差し汎用",
+          "key": false
+        },
+        {
+          "type": "stamina",
+          "name": "SSR メイショウドトウ",
+          "role": "スタミナ確保・差しスキル",
+          "key": false
+        },
+        {
+          "type": "power",
+          "name": "SSR ウオッカ",
+          "role": "パワー強化・差し加速",
+          "key": false
+        },
+        {
+          "type": "wit",
+          "name": "SSR スティルインラブ",
+          "role": "最高峰の賢さ練習性能",
+          "key": false
+        },
+        {
+          "type": "friend",
+          "name": "SSR 駿川たづな（新仕様）",
+          "role": "シナリオ必須友人枠",
+          "key": true
+        }
       ],
       "strategy_tips": "差しは前が詰まる「バ群ブロック事故」を防ぐため、パワー1350以上と賢さ1300以上が極めて重要です。また、下り坂やコーナーで外に膨れすぎないよう、コーナー巧者や差し直線・コーナーを◎まで取得しましょう。"
     },
@@ -401,18 +2559,68 @@ window.UMA_META_DATA = {
       "meta_status": "「ミスターシービー」「アーモンドアイ」を主軸にしたロマンと確実性を兼ね備えた破壊力抜群の脚質。",
       "concept": "最後方から全ウマ娘をごぼう抜きにする豪快な末脚。「迫る影」や「直線一気」の直線最速加速から最高速へ一気に到達。",
       "key_skills": [
-        { "name": "迫る影 / 直線一気", "timing": "終盤直線加速", "from": "SSR ミスターシービー / ナリタタイシン固有等", "importance": "最重要（追込の心臓）" },
-        { "name": "強攻策 / 早仕掛け", "timing": "中盤速度（長距離/中距離）", "from": "SSR ミスターシービー / サポカ各種", "importance": "最重要（中盤押し上げ）" },
-        { "name": "抜群の切れ味 / 切れ味", "timing": "終盤加速", "from": "SSR スイープトウショウ", "importance": "重要加速" },
-        { "name": "烈火の如く / 鬼気迫る", "timing": "終盤速度", "from": "サポカ各種 / 固有継承", "importance": "最高速強化" }
+        {
+          "name": "迫る影 / 直線一気",
+          "timing": "終盤直線加速",
+          "from": "SSR ミスターシービー / ナリタタイシン固有等",
+          "importance": "最重要（追込の心臓）"
+        },
+        {
+          "name": "強攻策 / 早仕掛け",
+          "timing": "中盤速度（長距離/中距離）",
+          "from": "SSR ミスターシービー / サポカ各種",
+          "importance": "最重要（中盤押し上げ）"
+        },
+        {
+          "name": "抜群の切れ味 / 切れ味",
+          "timing": "終盤加速",
+          "from": "SSR スイープトウショウ",
+          "importance": "重要加速"
+        },
+        {
+          "name": "烈火の如く / 鬼気迫る",
+          "timing": "終盤速度",
+          "from": "サポカ各種 / 固有継承",
+          "importance": "最高速強化"
+        }
       ],
       "recommended_cards": [
-        { "type": "speed", "name": "SSR ミスターシービー", "role": "追込育成完全必須級・現環境Tier SS", "key": false },
-        { "type": "speed", "name": "SSR アーモンドアイ", "role": "最新トップスピード・スキルptボーナス", "key": false },
-        { "type": "power", "name": "SSR タマモクロス", "role": "追込スキル・パワー大幅上昇", "key": false },
-        { "type": "stamina", "name": "SSR メイショウドトウ", "role": "長距離追込スタミナ確保", "key": false },
-        { "type": "wit", "name": "SSR スティルインラブ", "role": "賢さ上限・安定した位置取り", "key": false },
-        { "type": "friend", "name": "SSR 駿川たづな（新仕様）", "role": "シナリオ必須友人枠", "key": true }
+        {
+          "type": "speed",
+          "name": "SSR ミスターシービー",
+          "role": "追込育成完全必須級・現環境Tier SS",
+          "key": false
+        },
+        {
+          "type": "speed",
+          "name": "SSR アーモンドアイ",
+          "role": "最新トップスピード・スキルptボーナス",
+          "key": false
+        },
+        {
+          "type": "power",
+          "name": "SSR タマモクロス",
+          "role": "追込スキル・パワー大幅上昇",
+          "key": false
+        },
+        {
+          "type": "stamina",
+          "name": "SSR メイショウドトウ",
+          "role": "長距離追込スタミナ確保",
+          "key": false
+        },
+        {
+          "type": "wit",
+          "name": "SSR スティルインラブ",
+          "role": "賢さ上限・安定した位置取り",
+          "key": false
+        },
+        {
+          "type": "friend",
+          "name": "SSR 駿川たづな（新仕様）",
+          "role": "シナリオ必須友人枠",
+          "key": true
+        }
       ],
       "strategy_tips": "追込は終盤の直線で加速スキル（迫る影・直線一気）が即時発動するコース（菊花賞・有馬記念・天皇賞春など）で無類の強さを誇ります。中盤で離されすぎないよう「強攻策」の取得は必須です。"
     }
@@ -430,13 +2638,48 @@ window.UMA_META_DATA = {
         "key_characteristics": "スタート地点は2コーナー奥ポケット。直線が約525mと非常に長い。終盤開始が『直線』判定となるため、最終コーナー加速（紅焔ギア等）が無効。『終盤』表記の継承加速やランダム加速が勝負の分かれ目。"
       },
       "fast_accel_skills": [
-        { "name": "つぼみ、ほころぶ時", "style": "先行・差し", "from": "ニシノフラワー固有継承 (3〜4位)", "eval": "最速発動・最重要" },
-        { "name": "ヴィクトリーショット！", "style": "先行", "from": "タイキシャトル固有継承 (3〜4位)", "eval": "有効加速" },
-        { "name": "ハイボルテージ / 心弾んで", "style": "先行・逃げ", "from": "SSR ダイワスカーレット (1〜5位)", "eval": "最重要金加速" },
-        { "name": "鍔迫り合い / 真っ向勝負", "style": "先行", "from": "SSR エフフォーリア (1〜5位)", "eval": "強力ランダム加速" },
-        { "name": "アングリング×スキーミング", "style": "逃げ", "from": "セイウンスカイ固有継承 (1位)", "eval": "逃げ必須" },
-        { "name": "電光石火 / 一足飛び", "style": "差し・追込", "from": "SSR ダイイチルビー", "eval": "差し追込最重要" },
-        { "name": "レッツ・アナボリック！", "style": "差し・追込", "from": "メジロライアン固有継承 (6位)", "eval": "後方一発逆転枠" }
+        {
+          "name": "つぼみ、ほころぶ時",
+          "style": "先行・差し",
+          "from": "ニシノフラワー固有継承 (3〜4位)",
+          "eval": "最速発動・最重要"
+        },
+        {
+          "name": "ヴィクトリーショット！",
+          "style": "先行",
+          "from": "タイキシャトル固有継承 (3〜4位)",
+          "eval": "有効加速"
+        },
+        {
+          "name": "ハイボルテージ / 心弾んで",
+          "style": "先行・逃げ",
+          "from": "SSR ダイワスカーレット (1〜5位)",
+          "eval": "最重要金加速"
+        },
+        {
+          "name": "鍔迫り合い / 真っ向勝負",
+          "style": "先行",
+          "from": "SSR エフフォーリア (1〜5位)",
+          "eval": "強力ランダム加速"
+        },
+        {
+          "name": "アングリング×スキーミング",
+          "style": "逃げ",
+          "from": "セイウンスカイ固有継承 (1位)",
+          "eval": "逃げ必須"
+        },
+        {
+          "name": "電光石火 / 一足飛び",
+          "style": "差し・追込",
+          "from": "SSR ダイイチルビー",
+          "eval": "差し追込最重要"
+        },
+        {
+          "name": "レッツ・アナボリック！",
+          "style": "差し・追込",
+          "from": "メジロライアン固有継承 (6位)",
+          "eval": "後方一発逆転枠"
+        }
       ],
       "team_compositions": [
         {
@@ -490,10 +2733,30 @@ window.UMA_META_DATA = {
         "key_characteristics": "スタンド前の直線坂下からスタート。コーナーが4つあり、最終直線は310mと短い。終盤開始が第3〜第4コーナー付近になるため、コーナー加速スキルが即時発動する。"
       },
       "fast_accel_skills": [
-        { "name": "アングリング×スキーミング", "style": "逃げ", "from": "セイウンスカイ固有 (1位)", "eval": "逃げ最速確定加速" },
-        { "name": "あっぱれ大盤振る舞い！", "style": "逃げ・先行", "from": "正月キタサンブラック固有 (1〜3位)", "eval": "極めて有効" },
-        { "name": "鍔迫り合い / 直滑降", "style": "先行", "from": "SSR エフフォーリア / ニシノフラワー", "eval": "先行必須" },
-        { "name": "王手 / 会心の一歩", "style": "先行・差し", "from": "SSR エルコンドルパサー", "eval": "中距離特効終盤加速" }
+        {
+          "name": "アングリング×スキーミング",
+          "style": "逃げ",
+          "from": "セイウンスカイ固有 (1位)",
+          "eval": "逃げ最速確定加速"
+        },
+        {
+          "name": "あっぱれ大盤振る舞い！",
+          "style": "逃げ・先行",
+          "from": "正月キタサンブラック固有 (1〜3位)",
+          "eval": "極めて有効"
+        },
+        {
+          "name": "鍔迫り合い / 直滑降",
+          "style": "先行",
+          "from": "SSR エフフォーリア / ニシノフラワー",
+          "eval": "先行必須"
+        },
+        {
+          "name": "王手 / 会心の一歩",
+          "style": "先行・差し",
+          "from": "SSR エルコンドルパサー",
+          "eval": "中距離特効終盤加速"
+        }
       ],
       "team_compositions": [
         {
@@ -548,27 +2811,47 @@ window.UMA_META_DATA = {
         "focus": "サポカ絆ゲージ溜め & 試食会下地作り",
         "distances": {
           "short": {
-            "recommended": ["函館 (2)", "東京 (3)", "阪神 (5)"],
+            "recommended": [
+              "函館 (2)",
+              "東京 (3)",
+              "阪神 (5)"
+            ],
             "priority_stats": "スピード・賢さ・パワー",
             "action_plan": "絆上げを最優先しつつ、235の土台を作る。東京・函館を早めに選択し、友情練習発生時に阪神へ集中。"
           },
           "mile": {
-            "recommended": ["函館 (2)", "東京 (3)", "阪神 (5)"],
+            "recommended": [
+              "函館 (2)",
+              "東京 (3)",
+              "阪神 (5)"
+            ],
             "priority_stats": "スピード・パワー",
             "action_plan": "序盤のたづなお出かけ解放を最優先。ゲージ獲得が5の阪神を軸に据えて試食会を1年目冬までに1回実施。"
           },
           "medium": {
-            "recommended": ["函館 (2)", "京都 (3)", "阪神 (5)"],
+            "recommended": [
+              "函館 (2)",
+              "京都 (3)",
+              "阪神 (5)"
+            ],
             "priority_stats": "スタミナ・スピード",
             "action_plan": "スタミナ補正のある京都を交えつつ、基礎ゲージ235をキープ。ジュニア期のスタミナ事故を未然に防ぐ。"
           },
           "long": {
-            "recommended": ["函館 (2)", "京都 (3)", "阪神 (5)"],
+            "recommended": [
+              "函館 (2)",
+              "京都 (3)",
+              "阪神 (5)"
+            ],
             "priority_stats": "スタミナ重視",
             "action_plan": "長距離ではクラシック初頭のレースまでにスタミナ350+を目指すため、京都のスタミナ配分を厚めにする。"
           },
           "dirt": {
-            "recommended": ["函館 (2)", "東京 (3)", "阪神 (5)"],
+            "recommended": [
+              "函館 (2)",
+              "東京 (3)",
+              "阪神 (5)"
+            ],
             "priority_stats": "パワー・スピード",
             "action_plan": "短距離・マイルと同様に絆上げ重視。パワーのコツを拾いやすい東京を優先。"
           }
@@ -580,27 +2863,47 @@ window.UMA_META_DATA = {
         "focus": "235調整のフル回転 & 夏合宿でのコツ全消費",
         "distances": {
           "short": {
-            "recommended": ["東京 (3)", "阪神 (5)", "新潟 (2)"],
+            "recommended": [
+              "東京 (3)",
+              "阪神 (5)",
+              "新潟 (2)"
+            ],
             "priority_stats": "スピード・根性・パワー",
             "action_plan": "友情練習が連続して発生するゴールデンタイム。5ゲージの阪神で毎ターンコツをストックし、合宿で一気に試食会を展開。"
           },
           "mile": {
-            "recommended": ["東京 (3)", "阪神 (5)", "函館 (2)"],
+            "recommended": [
+              "東京 (3)",
+              "阪神 (5)",
+              "函館 (2)"
+            ],
             "priority_stats": "スピード・パワー・根性",
             "action_plan": "マイル戦用スキル（マイルの支配者・ハイボルテージ等）のヒント獲得を意識し、賢さ・スピード友情を重ねる。"
           },
           "medium": {
-            "recommended": ["京都 (3)", "阪神 (5)", "東京 (2)"],
+            "recommended": [
+              "京都 (3)",
+              "阪神 (5)",
+              "東京 (2)"
+            ],
             "priority_stats": "スタミナ・スピード",
             "action_plan": "クラシック三冠（皐月・ダービー・菊花）に備えスタミナを650〜700まで押し上げる。阪神の5枠で確実にスタミナボーナスを得る。"
           },
           "long": {
-            "recommended": ["京都 (5)", "阪神 (3)", "函館 (2)"],
+            "recommended": [
+              "京都 (5)",
+              "阪神 (3)",
+              "函館 (2)"
+            ],
             "priority_stats": "スタミナ最優先",
             "action_plan": "菊花賞・有馬記念に向けてスタミナ枠を「5」にスイッチ。スタミナ友情練習が発生した瞬間に大量のコツとステを回収。"
           },
           "dirt": {
-            "recommended": ["東京 (3)", "阪神 (5)", "大井/函館 (2)"],
+            "recommended": [
+              "東京 (3)",
+              "阪神 (5)",
+              "大井/函館 (2)"
+            ],
             "priority_stats": "パワー・根性",
             "action_plan": "JDD等交流重賞の出走タイミングに合わせ、パワー友情と東京・阪神のコツをフル回転。"
           }
@@ -612,27 +2915,47 @@ window.UMA_META_DATA = {
         "focus": "目標ステータスカンスト調整 & 金スキル総回収",
         "distances": {
           "short": {
-            "recommended": ["札幌 (特化)", "東京 (3)", "阪神 (5)"],
+            "recommended": [
+              "札幌 (特化)",
+              "東京 (3)",
+              "阪神 (5)"
+            ],
             "priority_stats": "スピード1800カンスト・パワー1450",
             "action_plan": "スピードが上限（1800）に届いていない場合はシニア級で「札幌」を軸に組み替える。賢さ友情で体力管理。"
           },
           "mile": {
-            "recommended": ["札幌 (特化)", "東京 (3)", "阪神 (5)"],
+            "recommended": [
+              "札幌 (特化)",
+              "東京 (3)",
+              "阪神 (5)"
+            ],
             "priority_stats": "スピード1800・根性1350",
             "action_plan": "シニア夏合宿までに不足しているステータス（根性 or パワー）を補う地域へ微調整。スピードは札幌で仕上げる。"
           },
           "medium": {
-            "recommended": ["阪神 (5)", "京都 (3)", "札幌 (2)"],
+            "recommended": [
+              "阪神 (5)",
+              "京都 (3)",
+              "札幌 (2)"
+            ],
             "priority_stats": "スタミナ1250・スピード1750",
             "action_plan": "スタミナが1200に届いているか確認。不足時は京都・阪神を維持、足りていれば札幌を入れてスピードカンストへ。"
           },
           "long": {
-            "recommended": ["京都 (5)", "阪神 (3)", "札幌 (2)"],
+            "recommended": [
+              "京都 (5)",
+              "阪神 (3)",
+              "札幌 (2)"
+            ],
             "priority_stats": "スタミナ1450カンスト",
             "action_plan": "スタミナ1450のカンストを目指し京都の5配分を徹底。春シニア三冠・有馬を連覇してシナリオ金スキルを完全取得。"
           },
           "dirt": {
-            "recommended": ["東京 (5)", "札幌 (3)", "阪神 (2)"],
+            "recommended": [
+              "東京 (5)",
+              "札幌 (3)",
+              "阪神 (2)"
+            ],
             "priority_stats": "パワー1450・スピード1800",
             "action_plan": "フェブラリーS、チャンピオンズC、東京大賞典を制覇しつつ、東京のパワー補正でパワーカンストを狙う。"
           }

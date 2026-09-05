@@ -1056,10 +1056,35 @@
             `).join('')}
           </div>
           <div class="substitute-box">
-            <strong>🔄 代用・入れ替え候補:</strong>
-            <ul style="padding-left: 18px; margin-top: 4px;">
-              ${tpl.substitutes.map(s => `<li>${s}</li>`).join('')}
-            </ul>
+            <div style="font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 0.88rem;">
+              <span>🔄</span> タイプ別 代用・入れ替え候補
+            </div>
+            ${tpl.substitutes_by_type ? `
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                ${tpl.substitutes_by_type.map(grp => `
+                  <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 8px 10px; border-left: 3px solid var(--type-${grp.type});">
+                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                      <span class="card-type-icon type-${grp.type}" style="width: 20px; height: 20px; font-size: 0.65rem;">${TYPE_CHARS[grp.type] || 'サ'}</span>
+                      <strong style="color: var(--text-main); font-size: 0.82rem;">${grp.name}</strong>
+                      ${grp.irreplaceable ? '<span style="font-size: 0.68rem; background: #ef4444; color: white; padding: 1px 6px; border-radius: 4px; font-weight: 700;">代替不可</span>' : ''}
+                    </div>
+                    ${grp.irreplaceable ? `
+                      <div style="font-size: 0.78rem; color: #fca5a5; padding-left: 26px;">
+                        <strong>${grp.cards[0].name}</strong>: ${grp.cards[0].desc}
+                      </div>
+                    ` : `
+                      <ul style="padding-left: 26px; font-size: 0.78rem; color: var(--text-muted); margin: 0;">
+                        ${grp.cards.map(c => `<li><span style="color: var(--text-main); font-weight: 600;">${c.name}</span> <span style="font-size: 0.74rem;">— ${c.desc}</span></li>`).join('')}
+                      </ul>
+                    `}
+                  </div>
+                `).join('')}
+              </div>
+            ` : `
+              <ul style="padding-left: 18px; margin-top: 4px;">
+                ${tpl.substitutes.map(s => `<li>${s}</li>`).join('')}
+              </ul>
+            `}
           </div>
         `;
         templatesList.appendChild(deckDiv);
