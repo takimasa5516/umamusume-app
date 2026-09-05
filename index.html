@@ -108,9 +108,9 @@
     /* Main Navigation Tabs */
     .main-nav {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 16px;
       background: var(--card-bg);
       padding: 6px;
       border-radius: 12px;
@@ -120,8 +120,8 @@
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 10px 6px;
-      font-size: 0.9rem;
+      padding: 8px 4px;
+      font-size: 0.82rem;
       font-weight: 600;
       border-radius: 8px;
       cursor: pointer;
@@ -138,19 +138,19 @@
       box-shadow: 0 2px 8px rgba(45, 156, 219, 0.35);
     }
 
-    /* Distance Selector Pills */
-    .distance-bar {
+    /* Distance / Style Selector Pills */
+    .selector-bar {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       scrollbar-width: none;
     }
-    .distance-bar::-webkit-scrollbar {
+    .selector-bar::-webkit-scrollbar {
       display: none;
     }
-    .dist-pill {
+    .pill-btn {
       flex: 0 0 auto;
       background: var(--card-bg);
       color: var(--text-muted);
@@ -165,7 +165,7 @@
       gap: 6px;
       transition: all 0.2s;
     }
-    .dist-pill.active {
+    .pill-btn.active {
       background: var(--accent);
       color: white;
       border-color: var(--accent);
@@ -353,6 +353,44 @@
       color: var(--text-main);
     }
 
+    /* Skills Box for Running Styles */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      font-size: 0.82rem;
+    }
+    .skills-table th {
+      background: var(--card-sub);
+      color: var(--text-muted);
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 0.75rem;
+    }
+    .skills-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+    .skill-importance {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .importance-must {
+      background: rgba(235, 87, 87, 0.2);
+      color: #f87171;
+      border: 1px solid #f87171;
+    }
+    .importance-good {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
+    }
+
     /* Region Selection Section */
     .rule-banner {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(235, 87, 87, 0.15));
@@ -493,6 +531,13 @@
 
     /* Responsive Tweaks */
     @media (max-width: 600px) {
+      .main-nav {
+        gap: 4px;
+      }
+      .nav-btn {
+        padding: 6px 2px;
+        font-size: 0.72rem;
+      }
       .stats-container {
         grid-template-columns: repeat(5, 1fr);
         gap: 4px;
@@ -539,21 +584,29 @@
 
   <div class="container">
 
-    <!-- Main Section Tabs -->
+    <!-- Main Navigation Tabs (4 Tabs) -->
     <nav class="main-nav">
       <button class="nav-btn active" onclick="switchSection('builds')">
-        <span>🎴 最適サポカ編成</span>
+        <span>🎴 距離別</span>
+      </button>
+      <button class="nav-btn" onclick="switchSection('styles')">
+        <span>🏃 脚質別</span>
       </button>
       <button class="nav-btn" onclick="switchSection('regions')">
-        <span>🗺️ 時期別 地域選択</span>
+        <span>🗺️ 地域選択</span>
       </button>
       <button class="nav-btn" onclick="switchSection('sources')">
-        <span>📺 動画・攻略集約</span>
+        <span>📺 動画集約</span>
       </button>
     </nav>
 
-    <!-- Distance Selector (Shared across builds and regions) -->
-    <div class="distance-bar" id="dist-bar">
+    <!-- Distance Selector (Used in builds & regions) -->
+    <div class="selector-bar" id="dist-bar">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Running Style Selector (Used in styles) -->
+    <div class="selector-bar" id="style-bar" style="display: none;">
       <!-- Injected by JS -->
     </div>
 
@@ -586,7 +639,65 @@
       </div>
     </section>
 
-    <!-- SECTION 2: Region Selection Guide -->
+    <!-- SECTION 2: Builds by Running Style (NEW!) -->
+    <section id="section-styles" style="display: none;">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span id="current-style-icon">🏃</span>
+            <span id="current-style-title">逃げ (Runner) 攻略構成</span>
+          </div>
+        </div>
+
+        <!-- Meta status badge -->
+        <div style="background: rgba(242, 153, 74, 0.12); border: 1px solid var(--accent); padding: 10px 12px; border-radius: 8px; font-size: 0.82rem; margin-bottom: 14px;">
+          <strong style="color: var(--accent-gold);">🏆 現環境の評価・立ち位置:</strong>
+          <span id="current-style-meta" style="color: var(--text-main); margin-left: 6px;"></span>
+        </div>
+
+        <p id="current-style-concept" style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 16px;"></p>
+
+        <!-- Key Skills Table -->
+        <div style="margin-bottom: 16px;">
+          <h4 style="font-size: 0.9rem; color: var(--highlight); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <span>⚡</span> 必須・最重要加速＆位置取りスキル
+          </h4>
+          <div style="overflow-x: auto;">
+            <table class="skills-table">
+              <thead>
+                <tr>
+                  <th>スキル名</th>
+                  <th>発動タイミング</th>
+                  <th>主な習得サポカ</th>
+                  <th>優先度</th>
+                </tr>
+              </thead>
+              <tbody id="skills-table-body">
+                <!-- Injected by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Running Style Recommended Cards -->
+        <div style="margin-bottom: 16px;">
+          <h4 style="font-size: 0.9rem; color: var(--highlight); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <span>🎴</span> 脚質特化 推奨サポートカード編成例
+          </h4>
+          <div class="card-list" id="style-card-list">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Tactical tips -->
+        <div style="background: var(--card-sub); padding: 12px; border-radius: 8px; border-left: 3px solid var(--primary);">
+          <strong style="color: var(--highlight); font-size: 0.85rem;">💡 立ち回り＆勝率アップのコツ:</strong>
+          <p id="current-style-tips" style="font-size: 0.82rem; color: var(--text-main); margin-top: 4px;"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Region Selection Guide -->
     <section id="section-regions" style="display: none;">
       <!-- Rule explanation Banner -->
       <div class="rule-banner" id="rule-banner">
@@ -615,7 +726,7 @@
       </div>
     </section>
 
-    <!-- SECTION 3: Knowledge & YouTube Sources -->
+    <!-- SECTION 4: Knowledge & YouTube Sources -->
     <section id="section-sources" style="display: none;">
       <div class="section-card">
         <div class="section-header">
@@ -638,19 +749,11 @@
   <script>
     // State
     let currentDistance = 'short';
+    let currentStyle = 'runner';
     let currentGradeFilter = 'all'; // 'all', 0, 1, 2
     let activeSection = 'builds';
 
     // Type display helpers
-    const TYPE_LABELS = {
-      speed: 'スピード',
-      stamina: 'スタミナ',
-      power: 'パワー',
-      guts: '根性',
-      wit: '賢さ',
-      friend: '友人'
-    };
-
     const TYPE_CHARS = {
       speed: '速',
       stamina: '耐',
@@ -670,16 +773,14 @@
       // Scenario Pill
       document.getElementById('scenario-pill').textContent = data.scenario.name;
 
-      // Render Distance Bar
+      // Render Bars
       renderDistanceBar();
+      renderStyleBar();
 
-      // Render Builds for initial distance
+      // Render Views
       renderBuilds();
-
-      // Render Regions
+      renderStyles();
       renderRegions();
-
-      // Render Sources
       renderSources();
     }
 
@@ -700,17 +801,20 @@
       document.querySelectorAll('.nav-btn').forEach((btn, idx) => {
         btn.classList.toggle('active', 
           (sectionId === 'builds' && idx === 0) ||
-          (sectionId === 'regions' && idx === 1) ||
-          (sectionId === 'sources' && idx === 2)
+          (sectionId === 'styles' && idx === 1) ||
+          (sectionId === 'regions' && idx === 2) ||
+          (sectionId === 'sources' && idx === 3)
         );
       });
 
       document.getElementById('section-builds').style.display = sectionId === 'builds' ? 'block' : 'none';
+      document.getElementById('section-styles').style.display = sectionId === 'styles' ? 'block' : 'none';
       document.getElementById('section-regions').style.display = sectionId === 'regions' ? 'block' : 'none';
       document.getElementById('section-sources').style.display = sectionId === 'sources' ? 'block' : 'none';
 
-      // Distance bar visibility
-      document.getElementById('dist-bar').style.display = sectionId === 'sources' ? 'none' : 'flex';
+      // Selector bar visibility
+      document.getElementById('dist-bar').style.display = (sectionId === 'builds' || sectionId === 'regions') ? 'flex' : 'none';
+      document.getElementById('style-bar').style.display = sectionId === 'styles' ? 'flex' : 'none';
     }
 
     function renderDistanceBar() {
@@ -720,13 +824,32 @@
 
       builds.forEach(item => {
         const pill = document.createElement('button');
-        pill.className = `dist-pill ${item.id === currentDistance ? 'active' : ''}`;
+        pill.className = `pill-btn ${item.id === currentDistance ? 'active' : ''}`;
         pill.innerHTML = `<span>${item.icon}</span> <span>${item.name}</span>`;
         pill.onclick = () => {
           currentDistance = item.id;
           renderDistanceBar();
           renderBuilds();
           renderRegions();
+        };
+        bar.appendChild(pill);
+      });
+    }
+
+    function renderStyleBar() {
+      const bar = document.getElementById('style-bar');
+      bar.innerHTML = '';
+      const styles = window.UMA_META_DATA.running_styles;
+      if (!styles) return;
+
+      styles.forEach(item => {
+        const pill = document.createElement('button');
+        pill.className = `pill-btn ${item.id === currentStyle ? 'active' : ''}`;
+        pill.innerHTML = `<span>${item.icon}</span> <span>${item.name.split(' ')[0]}</span>`;
+        pill.onclick = () => {
+          currentStyle = item.id;
+          renderStyleBar();
+          renderStyles();
         };
         bar.appendChild(pill);
       });
@@ -796,6 +919,49 @@
         `;
         templatesList.appendChild(deckDiv);
       });
+    }
+
+    function renderStyles() {
+      const styles = window.UMA_META_DATA.running_styles;
+      if (!styles) return;
+      const data = styles.find(s => s.id === currentStyle);
+      if (!data) return;
+
+      document.getElementById('current-style-icon').textContent = data.icon;
+      document.getElementById('current-style-title').textContent = `${data.name} 攻略構成`;
+      document.getElementById('current-style-meta').textContent = data.meta_status;
+      document.getElementById('current-style-concept').textContent = data.concept;
+      document.getElementById('current-style-tips').textContent = data.strategy_tips;
+
+      // Skills table
+      const tbody = document.getElementById('skills-table-body');
+      tbody.innerHTML = data.key_skills.map(skill => {
+        const isMust = skill.importance.includes('必須') || skill.importance.includes('最重要');
+        const badgeClass = isMust ? 'importance-must' : 'importance-good';
+        return `
+          <tr>
+            <td><strong>${skill.name}</strong></td>
+            <td>${skill.timing}</td>
+            <td>${skill.from}</td>
+            <td><span class="skill-importance ${badgeClass}">${skill.importance}</span></td>
+          </tr>
+        `;
+      }).join('');
+
+      // Cards
+      const cardList = document.getElementById('style-card-list');
+      cardList.innerHTML = data.recommended_cards.map(c => `
+        <div class="support-card ${c.key ? 'is-key' : ''}">
+          <div class="card-type-icon type-${c.type}">${TYPE_CHARS[c.type] || 'サ'}</div>
+          <div class="card-info">
+            <div class="card-name">
+              ${c.name}
+              ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
+            </div>
+            <div class="card-role">${c.role}</div>
+          </div>
+        </div>
+      `).join('');
     }
 
     function renderRegions() {
