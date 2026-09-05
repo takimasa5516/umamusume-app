@@ -981,15 +981,15 @@
         </div>
       </div>
 
-      <!-- Deck-type based 2:3:5 Region Combinations -->
+      <!-- Deck-type based Region Combinations -->
       <div class="section-card">
         <div class="section-header">
           <div class="section-title">
-            <span>🍜 サポカ編成タイプ別 推奨3地域選択プラン（麺2：スープ3：トッピング5）</span>
+            <span>🍜 サポカ編成タイプ別 推奨3地域選択プラン（時期別・ステータス構築）</span>
           </div>
         </div>
         <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
-          トレセン軒では、サポカ編成の得意練習に合わせて各期3つの地域を選択し、習得ゲージを「麺2：スープ3：トッピング5」に調整します。
+          トレセン軒では、ジュニア級（東日本：絆・基盤作り）→クラシック級（西日本：主力練習・合宿強化）→シニア級（全10地域：比率調整＆カンスト仕上げ）と、各期の目的に応じて最適な3地域を選択します。
         </p>
         <div id="deck-strategies-list">
           <!-- Injected by JS -->
@@ -1000,15 +1000,16 @@
       <div class="section-card">
         <div class="section-header">
           <div class="section-title">
-            <span>🗾 全10地域・ラーメン特徴＆効果マスター早見表</span>
+            <span>🗾 全10地域・コツ基礎値＆ラーメン効果マスター早見表</span>
           </div>
         </div>
         <div style="overflow-x: auto;">
           <table class="skills-table">
             <thead>
               <tr>
-                <th style="min-width: 70px;">地域名</th>
-                <th style="min-width: 140px;">選択可能時期</th>
+                <th style="min-width: 60px;">地域名</th>
+                <th style="min-width: 120px;">選択可能時期</th>
+                <th style="min-width: 140px;">コツ基礎値 (麺/ス/ト)</th>
                 <th>ラーメン特徴と効果</th>
                 <th>主な役割・育成適性</th>
               </tr>
@@ -1348,7 +1349,7 @@
         <div class="distance-region-plan">
           <div class="distance-region-plan-header">
             <div class="distance-region-plan-title">
-              <span>🗺️</span> この距離×編成の推奨3地域選択（2:3:5比率）
+              <span>🗺️</span> この距離×編成の推奨3地域選択プラン
             </div>
             <button class="pill-btn" style="padding: 3px 10px; font-size: 0.74rem;" onclick="switchSection('regions')">時期別ガイド詳細を見る →</button>
           </div>
@@ -1359,7 +1360,7 @@
             <div class="distance-region-step">
               <div class="distance-region-step-title">
                 <span>🌱 ジュニア級</span>
-                <span class="distance-region-ratio-badge">${distData.region_plan.junior.ingredient_target || '麺2:スープ3:トッピング5'}</span>
+                <span class="distance-region-ratio-badge">${distData.region_plan.junior.ingredient_target || 'ステ基盤重視'}</span>
               </div>
               <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.junior.selectable_pool || '東日本5地域から選択'}</div>
               <div class="region-tags" style="margin-bottom: 6px;">
@@ -1370,7 +1371,7 @@
             <div class="distance-region-step">
               <div class="distance-region-step-title">
                 <span>⚔️ クラシック級</span>
-                <span class="distance-region-ratio-badge">${distData.region_plan.classic.ingredient_target || '麺2:スープ3:トッピング5'}</span>
+                <span class="distance-region-ratio-badge">${distData.region_plan.classic.ingredient_target || '合宿・主トレ強化'}</span>
               </div>
               <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.classic.selectable_pool || '西日本5地域から選択'}</div>
               <div class="region-tags" style="margin-bottom: 6px;">
@@ -1381,7 +1382,7 @@
             <div class="distance-region-step">
               <div class="distance-region-step-title">
                 <span>👑 シニア級</span>
-                <span class="distance-region-ratio-badge">${distData.region_plan.senior.ingredient_target || '麺2:スープ3:トッピング5'}</span>
+                <span class="distance-region-ratio-badge">${distData.region_plan.senior.ingredient_target || 'ステ完成・試食会回転'}</span>
               </div>
               <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.senior.selectable_pool || '全10地域から選択'}</div>
               <div class="region-tags" style="margin-bottom: 6px;">
@@ -1613,6 +1614,13 @@
           <tr>
             <td><strong>📍 ${reg.name}</strong></td>
             <td><span class="uncap-pill uncap-standard" style="font-size: 0.72rem;">${reg.pool}</span></td>
+            <td>
+              ${reg.ingredients ? `
+                <span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">
+                  🍜 麺:${reg.ingredients.noodle} / 🥣 ス:${reg.ingredients.soup} / 🍥 ト:${reg.ingredients.topping}
+                </span>
+              ` : '-'}
+            </td>
             <td><span style="color: var(--text-main); font-size: 0.8rem;">${reg.effect}</span></td>
             <td><span style="color: var(--highlight); font-size: 0.78rem;">${reg.role}</span></td>
           </tr>
