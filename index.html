@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ウマ娘 育成サポートツール | 最新シナリオ対応</title>
+  <style>
+    :root {
+      --primary: #2d9cdb;
+      --primary-dark: #1b74a8;
+      --accent: #f2994a;
+      --accent-gold: #f2c94c;
+      --success: #27ae60;
+      --uma-pink: #eb5757;
+      --uma-green: #219653;
+      
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-sub: #334155;
+      --card-border: #475569;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --highlight: #38bdf8;
+
+      /* Type colors */
+      --type-speed: #3b82f6;
+      --type-stamina: #ef4444;
+      --type-power: #f59e0b;
+      --type-guts: #ec4899;
+      --type-wit: #10b981;
+      --type-friend: #8b5cf6;
+    }
+
+    [data-theme="light"] {
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --card-sub: #f8fafc;
+      --card-border: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --highlight: #0284c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 70px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #0f766e);
+      color: white;
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .scenario-pill {
+      font-size: 0.72rem;
+      background: rgba(255,255,255,0.2);
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-weight: normal;
+    }
+    .theme-toggle {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Main Navigation Tabs */
+    .main-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: var(--card-bg);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 10px 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 2px 8px rgba(45, 156, 219, 0.35);
+    }
+
+    /* Distance Selector Pills */
+    .distance-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      scrollbar-width: none;
+    }
+    .distance-bar::-webkit-scrollbar {
+      display: none;
+    }
+    .dist-pill {
+      flex: 0 0 auto;
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .dist-pill.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(242, 153, 74, 0.4);
+    }
+
+    /* Cards & Containers */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--highlight);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Stats Grid */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .stat-box {
+      background: var(--card-sub);
+      border-radius: 8px;
+      padding: 8px 4px;
+      text-align: center;
+      border: 1px solid var(--card-border);
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .stat-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .factor-badge {
+      background: rgba(39, 174, 96, 0.15);
+      border: 1px solid var(--success);
+      color: #4ade80;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Deck Template Cards */
+    .deck-item {
+      background: var(--card-sub);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .deck-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .tier-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      color: white;
+    }
+    .tier-s { background: #e11d48; }
+    .tier-a { background: #2563eb; }
+    .tier-b { background: #059669; }
+
+    .deck-composition {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .deck-concept {
+      font-size: 0.82rem;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      background: rgba(0,0,0,0.15);
+      border-left: 3px solid var(--primary);
+      border-radius: 4px;
+    }
+
+    /* Support Card Grid */
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .support-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      position: relative;
+    }
+    .support-card.is-key {
+      border: 1.5px solid var(--accent-gold);
+      background: linear-gradient(90deg, rgba(242, 201, 76, 0.08), transparent);
+    }
+    .card-type-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: white;
+      flex-shrink: 0;
+    }
+    .type-speed { background: var(--type-speed); }
+    .type-stamina { background: var(--type-stamina); }
+    .type-power { background: var(--type-power); }
+    .type-guts { background: var(--type-guts); }
+    .type-wit { background: var(--type-wit); }
+    .type-friend { background: var(--type-friend); }
+
+    .card-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .card-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-role {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .key-badge {
+      font-size: 0.65rem;
+      background: var(--accent-gold);
+      color: #78350f;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      margin-left: 4px;
+    }
+
+    .substitute-box {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: rgba(0,0,0,0.1);
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .substitute-box strong {
+      color: var(--text-main);
+    }
+
+    /* Region Selection Section */
+    .rule-banner {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(235, 87, 87, 0.15));
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+    .rule-banner h3 {
+      font-size: 0.95rem;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rule-banner p {
+      font-size: 0.82rem;
+      margin-bottom: 4px;
+    }
+
+    .grade-selector {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+      background: var(--card-sub);
+      padding: 4px;
+      border-radius: 8px;
+    }
+    .grade-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .grade-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .region-card {
+      background: var(--card-sub);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .region-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .region-grade-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--highlight);
+    }
+    .region-period {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .region-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .region-pill {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--highlight);
+      color: var(--highlight);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .region-meta-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px;
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+    }
+    .region-meta-label {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Knowledge Source Section */
+    .source-card {
+      background: var(--card-sub);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .source-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .source-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: white;
+    }
+    .badge-youtube { background: #ef4444; }
+    .badge-web { background: #3b82f6; }
+    .badge-note { background: #10b981; }
+
+    .source-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .source-author {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .takeaway-list {
+      padding-left: 18px;
+      font-size: 0.82rem;
+      color: var(--text-main);
+    }
+    .takeaway-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Responsive Tweaks */
+    @media (max-width: 600px) {
+      .stats-container {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+      }
+      .stat-box {
+        padding: 6px 2px;
+      }
+      .stat-val {
+        font-size: 0.8rem;
+      }
+      .stat-label {
+        font-size: 0.65rem;
+      }
+      .card-list {
+        grid-template-columns: 1fr;
+      }
+      .section-card {
+        padding: 12px;
+      }
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .theme-toggle {
+        align-self: flex-end;
+        margin-top: -28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="brand-title">
+        <span>🏇 ウマ娘 育成サポート</span>
+        <span class="scenario-pill" id="scenario-pill">最新シナリオ</span>
+      </div>
+      <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌓 テーマ切替</button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Main Section Tabs -->
+    <nav class="main-nav">
+      <button class="nav-btn active" onclick="switchSection('builds')">
+        <span>🎴 最適サポカ編成</span>
+      </button>
+      <button class="nav-btn" onclick="switchSection('regions')">
+        <span>🗺️ 時期別 地域選択</span>
+      </button>
+      <button class="nav-btn" onclick="switchSection('sources')">
+        <span>📺 動画・攻略集約</span>
+      </button>
+    </nav>
+
+    <!-- Distance Selector (Shared across builds and regions) -->
+    <div class="distance-bar" id="dist-bar">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- SECTION 1: Builds by Distance -->
+    <section id="section-builds">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span id="current-dist-icon">⚡</span>
+            <span id="current-dist-title">短距離 育成推奨設定</span>
+          </div>
+        </div>
+
+        <p id="current-dist-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;"></p>
+
+        <!-- Stats Goal -->
+        <div class="stats-container" id="stats-container">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Factor Recommendation -->
+        <div class="factor-badge" id="factor-box">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Templates List -->
+        <div id="deck-templates-list">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Region Selection Guide -->
+    <section id="section-regions" style="display: none;">
+      <!-- Rule explanation Banner -->
+      <div class="rule-banner" id="rule-banner">
+        <!-- Injected by JS -->
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>🗺️ 時期別 地域選択ガイド</span>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="region-current-dist">短距離</span>
+        </div>
+
+        <!-- Grade Filter -->
+        <div class="grade-selector">
+          <button class="grade-btn active" onclick="filterGrade('all')">全期一括</button>
+          <button class="grade-btn" onclick="filterGrade(0)">ジュニア級</button>
+          <button class="grade-btn" onclick="filterGrade(1)">クラシック級</button>
+          <button class="grade-btn" onclick="filterGrade(2)">シニア級</button>
+        </div>
+
+        <div id="region-matrix-list">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Knowledge & YouTube Sources -->
+    <section id="section-sources" style="display: none;">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>📺 YouTube・Web検証情報集約</span>
+          </div>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
+          最新環境における動画検証（検証勢YouTuber、note有志、攻略メディア）から得られた実測データと定石ロジックを整理しています。
+        </p>
+        <div id="sources-list">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    // State
+    let currentDistance = 'short';
+    let currentGradeFilter = 'all'; // 'all', 0, 1, 2
+    let activeSection = 'builds';
+
+    // Type display helpers
+    const TYPE_LABELS = {
+      speed: 'スピード',
+      stamina: 'スタミナ',
+      power: 'パワー',
+      guts: '根性',
+      wit: '賢さ',
+      friend: '友人'
+    };
+
+    const TYPE_CHARS = {
+      speed: '速',
+      stamina: '耐',
+      power: '力',
+      guts: '根',
+      wit: '賢',
+      friend: '友'
+    };
+
+    function init() {
+      const data = window.UMA_META_DATA;
+      if (!data) {
+        console.error('Data not loaded');
+        return;
+      }
+
+      // Scenario Pill
+      document.getElementById('scenario-pill').textContent = data.scenario.name;
+
+      // Render Distance Bar
+      renderDistanceBar();
+
+      // Render Builds for initial distance
+      renderBuilds();
+
+      // Render Regions
+      renderRegions();
+
+      // Render Sources
+      renderSources();
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      const isDark = body.getAttribute('data-theme') !== 'light';
+      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('uma_theme', isDark ? 'light' : 'dark');
+    }
+
+    // Restore theme
+    if (localStorage.getItem('uma_theme') === 'light') {
+      document.body.setAttribute('data-theme', 'light');
+    }
+
+    function switchSection(sectionId) {
+      activeSection = sectionId;
+      document.querySelectorAll('.nav-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', 
+          (sectionId === 'builds' && idx === 0) ||
+          (sectionId === 'regions' && idx === 1) ||
+          (sectionId === 'sources' && idx === 2)
+        );
+      });
+
+      document.getElementById('section-builds').style.display = sectionId === 'builds' ? 'block' : 'none';
+      document.getElementById('section-regions').style.display = sectionId === 'regions' ? 'block' : 'none';
+      document.getElementById('section-sources').style.display = sectionId === 'sources' ? 'block' : 'none';
+
+      // Distance bar visibility
+      document.getElementById('dist-bar').style.display = sectionId === 'sources' ? 'none' : 'flex';
+    }
+
+    function renderDistanceBar() {
+      const bar = document.getElementById('dist-bar');
+      bar.innerHTML = '';
+      const builds = window.UMA_META_DATA.builds_by_distance;
+
+      builds.forEach(item => {
+        const pill = document.createElement('button');
+        pill.className = `dist-pill ${item.id === currentDistance ? 'active' : ''}`;
+        pill.innerHTML = `<span>${item.icon}</span> <span>${item.name}</span>`;
+        pill.onclick = () => {
+          currentDistance = item.id;
+          renderDistanceBar();
+          renderBuilds();
+          renderRegions();
+        };
+        bar.appendChild(pill);
+      });
+    }
+
+    function renderBuilds() {
+      const data = window.UMA_META_DATA.builds_by_distance.find(b => b.id === currentDistance);
+      if (!data) return;
+
+      document.getElementById('current-dist-icon').textContent = data.icon;
+      document.getElementById('current-dist-title').textContent = `${data.name} 育成推奨設定`;
+      document.getElementById('current-dist-desc').textContent = data.description;
+
+      // Stats
+      const statsContainer = document.getElementById('stats-container');
+      statsContainer.innerHTML = `
+        <div class="stat-box"><div class="stat-label">スピード</div><div class="stat-val">${data.target_stats.speed}</div></div>
+        <div class="stat-box"><div class="stat-label">スタミナ</div><div class="stat-val">${data.target_stats.stamina}</div></div>
+        <div class="stat-box"><div class="stat-label">パワー</div><div class="stat-val">${data.target_stats.power}</div></div>
+        <div class="stat-box"><div class="stat-label">根性</div><div class="stat-val">${data.target_stats.guts}</div></div>
+        <div class="stat-box"><div class="stat-label">賢さ</div><div class="stat-val">${data.target_stats.wit}</div></div>
+      `;
+
+      // Factor
+      document.getElementById('factor-box').innerHTML = `
+        <span>🧬</span>
+        <span><strong>推奨継承因子:</strong> ${data.factor_recommend}</span>
+      `;
+
+      // Templates
+      const templatesList = document.getElementById('deck-templates-list');
+      templatesList.innerHTML = '';
+
+      data.templates.forEach(tpl => {
+        let tierClass = 'tier-s';
+        if (tpl.tier.includes('Tier 2')) tierClass = 'tier-a';
+        if (tpl.tier.includes('Budget')) tierClass = 'tier-b';
+
+        const deckDiv = document.createElement('div');
+        deckDiv.className = 'deck-item';
+        deckDiv.innerHTML = `
+          <div class="deck-top">
+            <span class="tier-badge ${tierClass}">${tpl.tier}</span>
+            <span class="deck-composition">${tpl.tag}</span>
+          </div>
+          <div class="deck-concept">${tpl.concept}</div>
+          <div class="card-list">
+            ${tpl.cards.map(c => `
+              <div class="support-card ${c.key ? 'is-key' : ''}">
+                <div class="card-type-icon type-${c.type}">${TYPE_CHARS[c.type] || 'サ'}</div>
+                <div class="card-info">
+                  <div class="card-name">
+                    ${c.name}
+                    ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
+                  </div>
+                  <div class="card-role">${c.role}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="substitute-box">
+            <strong>🔄 代用・入れ替え候補:</strong>
+            <ul style="padding-left: 18px; margin-top: 4px;">
+              ${tpl.substitutes.map(s => `<li>${s}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+        templatesList.appendChild(deckDiv);
+      });
+    }
+
+    function renderRegions() {
+      const data = window.UMA_META_DATA.region_strategies;
+      const currentDistObj = window.UMA_META_DATA.builds_by_distance.find(b => b.id === currentDistance);
+      document.getElementById('region-current-dist').textContent = `現在選択: ${currentDistObj ? currentDistObj.name : ''}`;
+
+      // Rule Banner
+      const rule = data.rule_explanation;
+      document.getElementById('rule-banner').innerHTML = `
+        <h3>✨ ${rule.title}</h3>
+        <p>${rule.summary}</p>
+        <p style="color: var(--text-muted); font-size: 0.78rem; margin-top: 4px;">💡 <strong>メカニズム:</strong> ${rule.mechanism}</p>
+      `;
+
+      // Matrix
+      const matrixList = document.getElementById('region-matrix-list');
+      matrixList.innerHTML = '';
+
+      data.matrix.forEach((gradeItem, idx) => {
+        if (currentGradeFilter !== 'all' && currentGradeFilter !== idx) {
+          return;
+        }
+
+        const distInfo = gradeItem.distances[currentDistance];
+        if (!distInfo) return;
+
+        const card = document.createElement('div');
+        card.className = 'region-card';
+        card.innerHTML = `
+          <div class="region-header">
+            <span class="region-grade-title">${gradeItem.grade}</span>
+            <span class="region-period">${gradeItem.period}</span>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--accent-gold); margin-bottom: 8px;">🎯 重点方針: ${gradeItem.focus}</div>
+          
+          <div class="region-tags">
+            ${distInfo.recommended.map(r => `<span class="region-pill">📍 ${r}</span>`).join('')}
+          </div>
+
+          <div class="region-meta-row">
+            <span class="region-meta-label">優先ステ:</span>
+            <span>${distInfo.priority_stats}</span>
+          </div>
+          <div class="region-meta-row">
+            <span class="region-meta-label">立ち回り:</span>
+            <span>${distInfo.action_plan}</span>
+          </div>
+        `;
+        matrixList.appendChild(card);
+      });
+    }
+
+    function filterGrade(grade) {
+      currentGradeFilter = grade;
+      document.querySelectorAll('.grade-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', 
+          (grade === 'all' && idx === 0) ||
+          (grade === 0 && idx === 1) ||
+          (grade === 1 && idx === 2) ||
+          (grade === 2 && idx === 3)
+        );
+      });
+      renderRegions();
+    }
+
+    function renderSources() {
+      const sources = window.UMA_META_DATA.knowledge_sources;
+      const list = document.getElementById('sources-list');
+      list.innerHTML = '';
+
+      sources.forEach(src => {
+        let badgeClass = 'badge-web';
+        if (src.type.includes('YouTube')) badgeClass = 'badge-youtube';
+        if (src.type.includes('note')) badgeClass = 'badge-note';
+
+        const card = document.createElement('div');
+        card.className = 'source-card';
+        card.innerHTML = `
+          <div class="source-top">
+            <span class="source-badge ${badgeClass}">${src.badge}</span>
+            <span class="source-title">${src.title}</span>
+          </div>
+          <div class="source-author">情報提供 / 引用元: ${src.author}</div>
+          <ul class="takeaway-list">
+            ${src.key_takeaways.map(t => `<li>${t}</li>`).join('')}
+          </ul>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    // Run
+    init();
+  </script>
+</body>
+</html>

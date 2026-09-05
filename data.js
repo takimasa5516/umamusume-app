@@ -1,0 +1,469 @@
+// UMA MUSUME META DATA
+window.UMA_META_DATA = {
+  "scenario": {
+    "name": "らっしゃい！トレセン軒！ ～恩返し、始めました～",
+    "version": "2026年最新シナリオ",
+    "updated_at": "2026-09-05",
+    "features": [
+      "友人サポートカード（SSR駿川たづな・新）がシナリオギミックに直結し最重要枠（無凸でも運用可）",
+      "地域選択（ラーメン地域）によるゲージ獲得量「235調整」が友情練習と連動し最重要テクニック",
+      "得意練習4種以上編成が推奨され、多面的なステータス伸長が可能",
+      "序盤の運要素が緩和され、試食会の回転率向上で安定して高評価・高ステータスを狙える"
+    ]
+  },
+  "builds_by_distance": [
+    {
+      "id": "short",
+      "name": "短距離",
+      "icon": "⚡",
+      "description": "スタミナ要求値が低いため、スピード・パワー・根性を極限まで高めて終盤の最高速と追い比べで勝ち切る編成。",
+      "target_stats": {
+        "speed": "1800+",
+        "stamina": "750",
+        "power": "1450+",
+        "guts": "1350+",
+        "wit": "1300+"
+      },
+      "factor_recommend": "パワー12 / 根性6（スタミナは最低限の因子または合宿・イベントで補填）",
+      "templates": [
+        {
+          "tier": "Tier 1 (最適・競技用)",
+          "tag": "スピ2・根性1・パワー1・賢1・友人1",
+          "concept": "根性を1枚刺すことで終盤の追い比べ発動率と位置取り争いを最大化",
+          "cards": [
+            { "type": "speed", "name": "SSR アグネスタキオン", "role": "スピード上限突破・固有ボーナス", "key": false },
+            { "type": "speed", "name": "SSR エルコンドルパサー", "role": "得意率・連続イベント・金スキル", "key": false },
+            { "type": "guts", "name": "SSR オルフェーヴル", "role": "根性練習の爆発力・汎用スキル", "key": false },
+            { "type": "power", "name": "SSR ウオッカ", "role": "パワー確保・短距離加速スキル", "key": false },
+            { "type": "wit", "name": "SSR ダイワスカーレット", "role": "賢さ上限・先行/汎用スキル", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな", "role": "シナリオ専用友人枠（隠し味の秘訣・コツ短縮）", "key": true }
+          ],
+          "substitutes": [
+            "パワー枠 → SSRヒシアケボノ / SSRニシノフラワー",
+            "根性枠 → SSRケイエスミラクル / SSRサクラバクシンオー",
+            "スピード枠 → SSRキタサンブラック / SSRドゥラメンテ"
+          ]
+        },
+        {
+          "tier": "Tier 2 (スピード特化型)",
+          "tag": "スピ3・パワー1・賢1・友人1",
+          "concept": "スピード3枚で確実にスピード1800カンストを狙い、パワーで加速と位置取りを底上げ",
+          "cards": [
+            { "type": "speed", "name": "SSR アグネスタキオン", "role": "スピード要員", "key": false },
+            { "type": "speed", "name": "SSR エルコンドルパサー", "role": "スピード要員", "key": false },
+            { "type": "speed", "name": "SSR ドゥラメンテ", "role": "練習性能・金スキル", "key": false },
+            { "type": "power", "name": "SSR ウオッカ", "role": "パワー強化", "key": false },
+            { "type": "wit", "name": "SSR メジロラモーヌ", "role": "賢さ要員・速度スキル", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな", "role": "シナリオ必須友人", "key": true }
+          ],
+          "substitutes": [
+            "SSRドゥラメンテ → SRスティルインラブ / SRスイープトウショウ",
+            "SSRウオッカ → SSRダイタクヘリオス"
+          ]
+        },
+        {
+          "tier": "Budget (無課金・微課金向け)",
+          "tag": "スピ2・根性1・パワ1・賢1・友人1(レンタル)",
+          "concept": "SSRたづなをフレンドからレンタルし、配布・SRサポカで枠を埋める高コスパ構成",
+          "cards": [
+            { "type": "speed", "name": "SR スイープトウショウ", "role": "優秀なSRスピード枠", "key": false },
+            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "イベント配布スピード", "key": false },
+            { "type": "guts", "name": "SR オグリキャップ", "role": "高コスパ根性枠", "key": false },
+            { "type": "power", "name": "SR ヒシアケボノ", "role": "短距離向けSRパワー", "key": false },
+            { "type": "wit", "name": "SR マーベラスサンデー", "role": "練習効率・得意率", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな [レンタル]", "role": "フレンド枠固定", "key": true }
+          ],
+          "substitutes": [
+            "SRマーベラスサンデー → 配布SSRミホノブルボン",
+            "SRオグリキャップ → 配布SSRウララ"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mile",
+      "name": "マイル",
+      "icon": "🔥",
+      "description": "スピードと賢さをベースに、スタミナ900前後を確保しつつ追い比べ用の根性を両立する最もバランスが問われる距離。",
+      "target_stats": {
+        "speed": "1800+",
+        "stamina": "900",
+        "power": "1400+",
+        "guts": "1350+",
+        "wit": "1300+"
+      },
+      "factor_recommend": "スタミナ9 / パワー9（スタミナサポカを抜くため因子でのスタミナ底上げが必須）",
+      "templates": [
+        {
+          "tier": "Tier 1 (最適・王道バランス)",
+          "tag": "スピ2・根性1・パワー1・賢1・友人1",
+          "concept": "マイル特有の激しい追い比べに耐えうる根性1350+と終盤加速を両立",
+          "cards": [
+            { "type": "speed", "name": "SSR エルコンドルパサー", "role": "スピード上限・汎用加速", "key": false },
+            { "type": "speed", "name": "SSR スティルインラブ", "role": "スピード・強力な金スキル", "key": false },
+            { "type": "guts", "name": "SSR オルフェーヴル", "role": "神速・根性超爆発", "key": false },
+            { "type": "power", "name": "SSR ニシノフラワー", "role": "マイル加速・愛嬌○", "key": false },
+            { "type": "wit", "name": "SSR ダイワスカーレット", "role": "賢さ上限・ハイボルテージ", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな", "role": "シナリオ必須友人枠", "key": true }
+          ],
+          "substitutes": [
+            "パワー枠 → SSRダイイチルビー / SSRウオッカ",
+            "根性枠 → SSRゴールドシチー / SSRケイエスミラクル",
+            "スピード枠 → SSRキタサンブラック"
+          ]
+        },
+        {
+          "tier": "Tier 2 (スタミナ安心型)",
+          "tag": "スピ2・スタ1・根性1・賢1・友人1",
+          "concept": "スタミナ因子が不足している場合や稍重・重バ場対策でスタミナ1枚を直接編成",
+          "cards": [
+            { "type": "speed", "name": "SSR エルコンドルパサー", "role": "スピード要員", "key": false },
+            { "type": "speed", "name": "SSR スティルインラブ", "role": "スピード要員", "key": false },
+            { "type": "stamina", "name": "SSR サウンズオブアース", "role": "練習性能・金回復", "key": false },
+            { "type": "guts", "name": "SSR オルフェーヴル", "role": "根性爆発", "key": false },
+            { "type": "wit", "name": "SSR メジロラモーヌ", "role": "賢さ枠", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな", "role": "シナリオ必須友人", "key": true }
+          ],
+          "substitutes": [
+            "SSRサウンズオブアース → SSRスーパークリーク"
+          ]
+        },
+        {
+          "tier": "Budget (無課金・微課金向け)",
+          "tag": "スピ2・根性1・パワ1・賢1・友人1(レンタル)",
+          "concept": "SRと配布を主軸にし、レンタルSSRたづなでシナリオギミックを安定完走",
+          "cards": [
+            { "type": "speed", "name": "SR スイープトウショウ", "role": "スピードSR枠", "key": false },
+            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "配布スピード", "key": false },
+            { "type": "guts", "name": "SR オグリキャップ", "role": "マイルスキル所持SR根性", "key": false },
+            { "type": "power", "name": "SR ダイタクヘリオス", "role": "マイル向けSRパワー", "key": false },
+            { "type": "wit", "name": "SR アグネスタキオン", "role": "高練習効率SR賢さ", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな [レンタル]", "role": "フレンド枠固定", "key": true }
+          ],
+          "substitutes": [
+            "SRダイタクヘリオス → 配布SSRミホノブルボン"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "medium",
+      "name": "中距離",
+      "icon": "🌟",
+      "description": "スピード1750+に加え、スタミナ1200+（金回復込み）が要求される花形カテゴリー。スタミナサポカ1〜2枚が軸。",
+      "target_stats": {
+        "speed": "1750+",
+        "stamina": "1250+",
+        "power": "1350+",
+        "guts": "1100+",
+        "wit": "1250+"
+      },
+      "factor_recommend": "スタミナ12 / パワー6（スタ1枚編成時はスタミナ15以上推奨）",
+      "templates": [
+        {
+          "tier": "Tier 1 (スタ1・パワー1型)",
+          "tag": "スピ2・スタ1・パワー1・賢1・友人1",
+          "concept": "強力なスタミナ1枚（サウンズオブアース等）と因子でスタミナ1250を確保しパワーを高める",
+          "cards": [
+            { "type": "speed", "name": "SSR ドゥラメンテ", "role": "スピード上限・迫る影等", "key": false },
+            { "type": "speed", "name": "SSR エルコンドルパサー", "role": "スピード要員", "key": false },
+            { "type": "stamina", "name": "SSR サウンズオブアース", "role": "好転一息・圧倒的練習性能", "key": false },
+            { "type": "power", "name": "SSR ウオッカ", "role": "パワー底上げ", "key": false },
+            { "type": "wit", "name": "SSR ダイワスカーレット", "role": "賢さ上限", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな", "role": "シナリオ必須友人枠", "key": true }
+          ],
+          "substitutes": [
+            "スタミナ枠 → SSRスーパークリーク / SSRメジロマックイーン",
+            "パワー枠 → SSRゴールドシップ / SSRアグネスデジタル"
+          ]
+        },
+        {
+          "tier": "Tier 2 (スタミナ2枚ド安定型)",
+          "tag": "スピ2・スタ2・賢1・友人1",
+          "concept": "初心者〜中級者でも確実にスタミナ1250〜1300超えを達成できる安定育成テンプレ",
+          "cards": [
+            { "type": "speed", "name": "SSR エルコンドルパサー", "role": "スピード要員", "key": false },
+            { "type": "speed", "name": "SSR アグネスタキオン", "role": "スピード要員", "key": false },
+            { "type": "stamina", "name": "SSR サウンズオブアース", "role": "スタミナ要員1", "key": false },
+            { "type": "stamina", "name": "SSR スーパークリーク", "role": "円弧のマエストロ・スタミナ要員2", "key": false },
+            { "type": "wit", "name": "SSR メジロラモーヌ", "role": "賢さ要員", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな", "role": "シナリオ必須友人", "key": true }
+          ],
+          "substitutes": [
+            "SSRスーパークリーク → SSRタマモクロス / SSRマンハッタンカフェ"
+          ]
+        },
+        {
+          "tier": "Budget (無課金・微課金向け)",
+          "tag": "スピ2・スタ2・賢1・友人1(レンタル)",
+          "concept": "配布クリークやSRスタミナを活用し、スタミナ事故を完全に防止する安全構築",
+          "cards": [
+            { "type": "speed", "name": "SR スイープトウショウ", "role": "スピードSR", "key": false },
+            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "配布スピード", "key": false },
+            { "type": "stamina", "name": "配布SSR メジロマックイーン", "role": "配布スタミナ", "key": false },
+            { "type": "stamina", "name": "SR マンハッタンカフェ", "role": "SRスタミナ最高峰", "key": false },
+            { "type": "wit", "name": "SR アグネスタキオン", "role": "高得意率SR賢さ", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな [レンタル]", "role": "フレンド枠固定", "key": true }
+          ],
+          "substitutes": [
+            "SRカフェ → SRゼンノロブロイ"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long",
+      "name": "長距離",
+      "icon": "🛡️",
+      "description": "3000m超のレースに耐えるスタミナ1400+と金回復2個が必須。スタミナ2枚編成が現在の鉄板構成。",
+      "target_stats": {
+        "speed": "1750+",
+        "stamina": "1450+",
+        "power": "1300+",
+        "guts": "1100+",
+        "wit": "1200+"
+      },
+      "factor_recommend": "スタミナ18極振り、またはスタミナ12 / パワー6",
+      "templates": [
+        {
+          "tier": "Tier 1 (最適・スタ2確定型)",
+          "tag": "スピ2・スタ2・賢1・友人1",
+          "concept": "金回復を2種確保しつつ、スタミナ1450カンストとスピード1750を両立",
+          "cards": [
+            { "type": "speed", "name": "SSR ドゥラメンテ", "role": "長距離追込/先行向けスピード", "key": false },
+            { "type": "speed", "name": "SSR エルコンドルパサー", "role": "スピード要員", "key": false },
+            { "type": "stamina", "name": "SSR サウンズオブアース", "role": "好転一息・超練習性能", "key": false },
+            { "type": "stamina", "name": "SSR スーパークリーク", "role": "円弧のマエストロ（必須金回復）", "key": false },
+            { "type": "wit", "name": "SSR ダイワスカーレット", "role": "賢さ上限", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな", "role": "シナリオ必須友人枠", "key": true }
+          ],
+          "substitutes": [
+            "スタミナ枠 → SSRメジロマックイーン / SSRサクラローレル",
+            "スピード枠 → SSRジャングルポケット / SSRキタサンブラック"
+          ]
+        },
+        {
+          "tier": "Tier 2 (スピ3・スタ1・賢1・友人1)",
+          "tag": "スピ3・スタ1・賢1・友人1",
+          "concept": "スタミナ因子18＋自前金回復持ちウマ娘専用の超高スピード特化編成",
+          "cards": [
+            { "type": "speed", "name": "SSR ドゥラメンテ", "role": "スピード要員1", "key": false },
+            { "type": "speed", "name": "SSR エルコンドルパサー", "role": "スピード要員2", "key": false },
+            { "type": "speed", "name": "SSR アグネスタキオン", "role": "スピード要員3", "key": false },
+            { "type": "stamina", "name": "SSR スーパークリーク", "role": "円弧のマエストロ枠", "key": false },
+            { "type": "wit", "name": "SSR メジロラモーヌ", "role": "賢さ枠", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな", "role": "シナリオ必須友人", "key": true }
+          ],
+          "substitutes": [
+            "SSRクリーク → SSRサウンズオブアース"
+          ]
+        },
+        {
+          "tier": "Budget (無課金・微課金向け)",
+          "tag": "スピ2・スタ2・賢1・友人1(レンタル)",
+          "concept": "レンタルSSRクリークでマエストロを確保し、配布・SRでスタミナを死守",
+          "cards": [
+            { "type": "speed", "name": "SR スイープトウショウ", "role": "スピードSR", "key": false },
+            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "配布スピード", "key": false },
+            { "type": "stamina", "name": "SSR スーパークリーク [レンタル]", "role": "金回復マエストロ確保枠", "key": false },
+            { "type": "stamina", "name": "SR マンハッタンカフェ", "role": "スタミナSR", "key": false },
+            { "type": "wit", "name": "SR アグネスタキオン", "role": "賢さSR", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな [自前所持前提/または逆レンタル]", "role": "シナリオ友人枠", "key": true }
+          ],
+          "substitutes": [
+            "たづなを持っていない場合はたづなレンタル、クリーク枠をSSRサウンズオブアース等に切替"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dirt",
+      "name": "ダート",
+      "icon": "🏜️",
+      "description": "ダートコースの抵抗に負けない高パワー＆根性が勝負の分かれ目。マイル〜中距離仕様の調整がベース。",
+      "target_stats": {
+        "speed": "1800+",
+        "stamina": "950+",
+        "power": "1450+",
+        "guts": "1300+",
+        "wit": "1250+"
+      },
+      "factor_recommend": "パワー12 / スタミナ6（ダート適性A化因子も必須）",
+      "templates": [
+        {
+          "tier": "Tier 1 (最適・パワー根性両立型)",
+          "tag": "スピ2・パワー1・根性1・賢1・友人1",
+          "concept": "ダート特有のパワー要求に応えつつ、終盤の前線押し上げ力を最大化",
+          "cards": [
+            { "type": "speed", "name": "SSR エルコンドルパサー", "role": "スピード上限・ダート適性スキル", "key": false },
+            { "type": "speed", "name": "SSR スティルインラブ", "role": "スピード要員", "key": false },
+            { "type": "power", "name": "SSR アグネスデジタル", "role": "ダート専用金スキル「狙うは最前列」", "key": false },
+            { "type": "guts", "name": "SSR オルフェーヴル", "role": "根性爆発", "key": false },
+            { "type": "wit", "name": "SSR ダイワスカーレット", "role": "賢さ上限", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな", "role": "シナリオ必須友人枠", "key": true }
+          ],
+          "substitutes": [
+            "パワー枠 → SSRスマートファルコン / SSRコパノリッキー",
+            "根性枠 → SSRゴールドシチー"
+          ]
+        },
+        {
+          "tier": "Budget (無課金・微課金向け)",
+          "tag": "スピ2・根性1・パワ1・賢1・友人1(レンタル)",
+          "concept": "SR枠でダートスキルとステータスを補い、SSRたづなで育成を安定化",
+          "cards": [
+            { "type": "speed", "name": "SR スイープトウショウ", "role": "スピードSR", "key": false },
+            { "type": "speed", "name": "配布SSR スペシャルウィーク", "role": "配布スピード", "key": false },
+            { "type": "power", "name": "SR ダイタクヘリオス", "role": "パワーSR", "key": false },
+            { "type": "guts", "name": "SR オグリキャップ", "role": "根性SR", "key": false },
+            { "type": "wit", "name": "SR アグネスタキオン", "role": "賢さSR", "key": false },
+            { "type": "friend", "name": "SSR 駿川たづな [レンタル]", "role": "フレンド枠固定", "key": true }
+          ],
+          "substitutes": [
+            "SRダイタクヘリオス → 配布SSRミホノブルボン"
+          ]
+        }
+      ]
+    }
+  ],
+  "region_strategies": {
+    "rule_explanation": {
+      "title": "「235調整」とは？（最重要セオリー）",
+      "summary": "トレセン軒シナリオでは、各地域で得られる習得ゲージの基礎獲得量が「2・3・5」の比率になるように地域を選択する手法です。",
+      "mechanism": "友情練習発生時にゲージ獲得ボーナス「+2」が加算されます。これにより基礎値「5」の地域では【5 + 2 = 7】または端数なしで毎ターン確実に1個の「トッピングのコツ」が確定ストックされ、試食会の開催頻度が劇的に向上します。",
+      "benefit": "試食会を多く開催できる＝シナリオ特別ボーナスステータス＆ヒント大量獲得に直結します。"
+    },
+    "matrix": [
+      {
+        "grade": "ジュニア級 (Junior)",
+        "period": "メイクデビュー前 〜 ジュニア級12月後半",
+        "focus": "サポカ絆ゲージ溜め & 試食会下地作り",
+        "distances": {
+          "short": {
+            "recommended": ["函館 (2)", "東京 (3)", "阪神 (5)"],
+            "priority_stats": "スピード・賢さ・パワー",
+            "action_plan": "絆上げを最優先しつつ、235の土台を作る。東京・函館を早めに選択し、友情練習発生時に阪神へ集中。"
+          },
+          "mile": {
+            "recommended": ["函館 (2)", "東京 (3)", "阪神 (5)"],
+            "priority_stats": "スピード・パワー",
+            "action_plan": "序盤のたづなお出かけ解放を最優先。ゲージ獲得が5の阪神を軸に据えて試食会を1年目冬までに1回実施。"
+          },
+          "medium": {
+            "recommended": ["函館 (2)", "京都 (3)", "阪神 (5)"],
+            "priority_stats": "スタミナ・スピード",
+            "action_plan": "スタミナ補正のある京都を交えつつ、基礎ゲージ235をキープ。ジュニア期のスタミナ事故を未然に防ぐ。"
+          },
+          "long": {
+            "recommended": ["函館 (2)", "京都 (3)", "阪神 (5)"],
+            "priority_stats": "スタミナ重視",
+            "action_plan": "長距離ではクラシック初頭のレースまでにスタミナ350+を目指すため、京都のスタミナ配分を厚めにする。"
+          },
+          "dirt": {
+            "recommended": ["函館 (2)", "東京 (3)", "阪神 (5)"],
+            "priority_stats": "パワー・スピード",
+            "action_plan": "短距離・マイルと同様に絆上げ重視。パワーのコツを拾いやすい東京を優先。"
+          }
+        }
+      },
+      {
+        "grade": "クラシック級 (Classic)",
+        "period": "1月前半 〜 12月後半（夏合宿含む）",
+        "focus": "235調整のフル回転 & 夏合宿でのコツ全消費",
+        "distances": {
+          "short": {
+            "recommended": ["東京 (3)", "阪神 (5)", "新潟 (2)"],
+            "priority_stats": "スピード・根性・パワー",
+            "action_plan": "友情練習が連続して発生するゴールデンタイム。5ゲージの阪神で毎ターンコツをストックし、合宿で一気に試食会を展開。"
+          },
+          "mile": {
+            "recommended": ["東京 (3)", "阪神 (5)", "函館 (2)"],
+            "priority_stats": "スピード・パワー・根性",
+            "action_plan": "マイル戦用スキル（マイルの支配者・ハイボルテージ等）のヒント獲得を意識し、賢さ・スピード友情を重ねる。"
+          },
+          "medium": {
+            "recommended": ["京都 (3)", "阪神 (5)", "東京 (2)"],
+            "priority_stats": "スタミナ・スピード",
+            "action_plan": "クラシック三冠（皐月・ダービー・菊花）に備えスタミナを650〜700まで押し上げる。阪神の5枠で確実にスタミナボーナスを得る。"
+          },
+          "long": {
+            "recommended": ["京都 (5)", "阪神 (3)", "函館 (2)"],
+            "priority_stats": "スタミナ最優先",
+            "action_plan": "菊花賞・有馬記念に向けてスタミナ枠を「5」にスイッチ。スタミナ友情練習が発生した瞬間に大量のコツとステを回収。"
+          },
+          "dirt": {
+            "recommended": ["東京 (3)", "阪神 (5)", "大井/函館 (2)"],
+            "priority_stats": "パワー・根性",
+            "action_plan": "JDD等交流重賞の出走タイミングに合わせ、パワー友情と東京・阪神のコツをフル回転。"
+          }
+        }
+      },
+      {
+        "grade": "シニア級 (Senior)",
+        "period": "1月前半 〜 URAファイナルズ",
+        "focus": "目標ステータスカンスト調整 & 金スキル総回収",
+        "distances": {
+          "short": {
+            "recommended": ["札幌 (特化)", "東京 (3)", "阪神 (5)"],
+            "priority_stats": "スピード1800カンスト・パワー1450",
+            "action_plan": "スピードが上限（1800）に届いていない場合はシニア級で「札幌」を軸に組み替える。賢さ友情で体力管理。"
+          },
+          "mile": {
+            "recommended": ["札幌 (特化)", "東京 (3)", "阪神 (5)"],
+            "priority_stats": "スピード1800・根性1350",
+            "action_plan": "シニア夏合宿までに不足しているステータス（根性 or パワー）を補う地域へ微調整。スピードは札幌で仕上げる。"
+          },
+          "medium": {
+            "recommended": ["阪神 (5)", "京都 (3)", "札幌 (2)"],
+            "priority_stats": "スタミナ1250・スピード1750",
+            "action_plan": "スタミナが1200に届いているか確認。不足時は京都・阪神を維持、足りていれば札幌を入れてスピードカンストへ。"
+          },
+          "long": {
+            "recommended": ["京都 (5)", "阪神 (3)", "札幌 (2)"],
+            "priority_stats": "スタミナ1450カンスト",
+            "action_plan": "スタミナ1450のカンストを目指し京都の5配分を徹底。春シニア三冠・有馬を連覇してシナリオ金スキルを完全取得。"
+          },
+          "dirt": {
+            "recommended": ["東京 (5)", "札幌 (3)", "阪神 (2)"],
+            "priority_stats": "パワー1450・スピード1800",
+            "action_plan": "フェブラリーS、チャンピオンズC、東京大賞典を制覇しつつ、東京のパワー補正でパワーカンストを狙う。"
+          }
+        }
+      }
+    ]
+  },
+  "knowledge_sources": [
+    {
+      "title": "【ウマ娘】最新シナリオ「トレセン軒」完全攻略！235調整の全貌と立ち回り",
+      "author": "大手検証系YouTuber",
+      "type": "YouTube動画",
+      "badge": "YouTube",
+      "key_takeaways": [
+        "友情練習発生時「+2」の補正が乗るため、基礎値5の地域が【5+2=7】となり、毎ターン1個のコツを確定回収可能。",
+        "SSR駿川たづな（新）はお出かけ回復・体力消費軽減・コツ獲得加速の3重ブーストにより必須枠。無凸でも採用価値は他完凸SSRを凌駕する。",
+        "試食会はストックせず、発生可能になったら即時または友情が重ならないターンに打つのが最善手。"
+      ]
+    },
+    {
+      "title": "新シナリオ距離別サポカ編成ティア表＆代用解説（短距離〜長距離）",
+      "author": "ウマ娘攻略班 / Webメディアまとめ",
+      "type": "Web攻略記事",
+      "badge": "Web記事",
+      "key_takeaways": [
+        "得意練習4種以上をバラけさせる編成がシナリオギミックと噛み合いやすく、ステータスの上振れ上限が過去最高に。",
+        "中長距離はスタミナサポカ1〜2枚必須だが、短距離・マイルは因子でスタミナを担保してスピ・パワ・根性に全振りするのが主流。",
+        "配布SSRスペ・SRスイープ等の優秀な低レアカードでもUS〜UCランク到達が現実的。"
+      ]
+    },
+    {
+      "title": "note検証勢による地域選択の統計的最適解（函館・東京・阪神 vs 札幌軸）",
+      "author": "有志研究note",
+      "type": "note検証",
+      "badge": "note",
+      "key_takeaways": [
+        "ジュニア・クラシックを通して『函館・東京・阪神（235）』を維持したプレイヤーの平均試食会回数は12.4回（従来比+2.8回）。",
+        "シニア級で札幌（スピード重視）に切り替える『変則235』が現在のチャンミ上位育成者の標準構成となっている。"
+      ]
+    }
+  ]
+};
