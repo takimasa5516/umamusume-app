@@ -1,4 +1,6 @@
-const UMA_META_DATA = {
+// Uma Musume Support Tool - Meta & Strategy Data
+// Synced with uma_meta_data.json
+var UMA_META_DATA = {
   "scenario": {
     "name": "らっしゃい！トレセン軒！ ～恩返し、始めました～",
     "version": "2026年最新シナリオ（現行環境）",
@@ -1424,7 +1426,8 @@ const UMA_META_DATA = {
               "key": true,
               "desc": "【マイル逃げ・先行特化Tier S・Game8 評価S】マイル最重要金加速『ハイボルテージ』＋金速度『ギアチェンジ』の金スキル2個取り・優秀な練習性能",
               "uncap": "完凸推奨 (3凸〜完凸)",
-              "uncap_detail": "マイルの逃げ・先行必須級金加速『ハイボルテージ』と金速度『ギアチェンジ』の2種取りが可能。スピード練習性能も高水準。3凸から得意率が本格化し、完凸で最大化。"
+              "uncap_detail": "マイルの逃げ・先行必須級金加速『ハイボルテージ』と金速度『ギアチェンジ』の2種取りが可能。スピード練習性能も高水準。3凸から得意率が本格化し、完凸で最大化。",
+              "role": "マイル金加速『ハイボルテージ』・金速度『ギアチェンジ』"
             },
             {
               "name": "SSR メイショウドトウ",
@@ -3222,7 +3225,8 @@ const UMA_META_DATA = {
               "key": false,
               "desc": "【中距離先行特化】中盤金速度『アンストッパブル』・中距離先行でのみ最上位性能を発揮（※中距離限定・他距離不発）",
               "uncap": "完凸推奨 (3凸〜完凸)",
-              "uncap_detail": "中距離先行育成特化の賢さサポカ。『アンストッパブル』は中距離限定。汎用ステ盛りではフォーエバーヤングが優位。"
+              "uncap_detail": "中距離先行育成特化の賢さサポカ。『アンストッパブル』は中距離限定。汎用ステ盛りではフォーエバーヤングが優位。",
+              "role": "中距離先行金速度『アンストッパブル』特化"
             },
             {
               "type": "friend",
@@ -4845,7 +4849,8 @@ const UMA_META_DATA = {
               "key": true,
               "desc": "【汎用Tier SS+・GameWith 10.0点】全脚質汎用金速度『尻尾の滝登り』＋『前人未到』・得意率100・長距離先行でも最高峰のステ盛り＆スキルPt供給",
               "uncap": "完凸推奨 (無凸〜完凸)",
-              "uncap_detail": "現環境の結論賢さサポカ。無凸から得意率100と金2種が完成。長距離でも最優先編成。"
+              "uncap_detail": "現環境の結論賢さサポカ。無凸から得意率100と金2種が完成。長距離でも最優先編成。",
+              "role": "全脚質汎用金速度『前人未到』＋『尻尾の滝登り』・得意率100"
             },
             {
               "type": "friend",
@@ -9091,6 +9096,12 @@ const UMA_META_DATA = {
   }
 };
 
+if (typeof window !== "undefined") {
+  window.UMA_META_DATA = UMA_META_DATA;
+}
+if (typeof globalThis !== "undefined") {
+  globalThis.UMA_META_DATA = UMA_META_DATA;
+}
 if (typeof module !== "undefined" && module.exports) {
   module.exports = UMA_META_DATA;
 }

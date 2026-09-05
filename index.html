@@ -1083,9 +1083,15 @@
 
   <script src="data.js"></script>
   <script>
+    function getMetaData() {
+      if (typeof window !== 'undefined' && window['UMA_META_DATA']) return window['UMA_META_DATA'];
+      if (typeof UMA_META_DATA !== 'undefined') return UMA_META_DATA;
+      return null;
+    }
     
     function getUncapBadgeHtml(cardName) {
-      const guide = window.UMA_META_DATA.card_uncap_guide || {};
+      const meta = getMetaData();
+      const guide = (meta && meta.card_uncap_guide) || {};
       let u = guide[cardName];
       if (!u) {
         const stripped = cardName.replace(/［.*?］|（.*?）/g, '').trim();
@@ -1131,9 +1137,13 @@
     };
 
     function init() {
-      const data = window.UMA_META_DATA;
+      const data = getMetaData();
       if (!data) {
         console.error('Data not loaded');
+        const errEl = document.getElementById('deck-templates-list');
+        if (errEl) {
+          errEl.innerHTML = '<div style="color: #f87171; padding: 24px; text-align: center; font-weight: bold; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid #ef4444;">⚠️ データファイルの読み込みに失敗しました。<br>ブラウザのキャッシュをクリアして再読み込み（Ctrl + Shift + R または スーパーリロード）してください。</div>';
+        }
         return;
       }
 
@@ -1195,7 +1205,7 @@
     function renderDistanceBar() {
       const bar = document.getElementById('dist-bar');
       if (bar) bar.innerHTML = '';
-      const builds = window.UMA_META_DATA.distance_style_builds;
+      const builds = getMetaData().distance_style_builds;
       if (!builds) return;
 
       Object.keys(builds).forEach(key => {
@@ -1262,7 +1272,7 @@
     }
 
     function renderBuilds() {
-      const distData = window.UMA_META_DATA.distance_style_builds[currentDistance];
+      const distData = getMetaData().distance_style_builds[currentDistance];
       if (!distData) return;
       const styleData = distData.styles[currentBuildStyle] || distData.styles.leader;
 
@@ -1317,7 +1327,7 @@
                     ${getUncapBadgeHtml(c.name)}
                   </div>
                 </div>
-                <div class="card-role">${c.role}</div>
+                <div class="card-role">${c.role || c.desc || ""}</div>
               </div>
             </div>
           `).join('')}
@@ -1412,7 +1422,7 @@
     }
 
     function renderStyles() {
-      const styles = window.UMA_META_DATA.running_styles;
+      const styles = getMetaData().running_styles;
       if (!styles) return;
       const data = styles.find(s => s.id === currentStyle);
       if (!data) return;
@@ -1461,7 +1471,7 @@
       const bar = document.getElementById('event-bar');
       if (!bar) return;
       bar.innerHTML = '';
-      const events = window.UMA_META_DATA.events;
+      const events = getMetaData().events;
       if (!events) return;
 
       events.forEach(ev => {
@@ -1479,7 +1489,7 @@
     }
 
     function renderEvents() {
-      const events = window.UMA_META_DATA.events;
+      const events = getMetaData().events;
       if (!events) return;
       const ev = events.find(e => e.id === currentEventId);
       if (!ev) return;
@@ -1533,7 +1543,7 @@
     }
 
     function renderRegions() {
-      const data = window.UMA_META_DATA.region_strategies;
+      const data = getMetaData().region_strategies;
       if (!data) return;
 
       // Rule Banner
@@ -1646,7 +1656,7 @@
     let currentUncapFilter = 'all';
 
     function renderUncapTable() {
-      const guide = window.UMA_META_DATA.card_uncap_guide || {};
+      const guide = getMetaData().card_uncap_guide || {};
       const tbody = document.getElementById('uncap-table-body');
       if (!tbody) return;
       tbody.innerHTML = '';
@@ -1685,7 +1695,7 @@
     }
 
     function renderSources() {
-      const sources = window.UMA_META_DATA.knowledge_sources;
+      const sources = getMetaData().knowledge_sources;
       const list = document.getElementById('sources-list');
       list.innerHTML = '';
 
