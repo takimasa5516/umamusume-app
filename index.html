@@ -277,28 +277,47 @@
     /* Support Card Grid */
     .card-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 8px;
-      margin-bottom: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
     }
     .support-card {
       display: flex;
-      align-items: center;
-      gap: 10px;
+      flex-direction: column;
       background: var(--card-bg);
-      padding: 8px 10px;
-      border-radius: 8px;
+      padding: 12px 14px;
+      border-radius: 10px;
       border: 1px solid var(--card-border);
       position: relative;
+      transition: all 0.2s ease;
+    }
+    .support-card:hover {
+      border-color: rgba(242, 153, 74, 0.4);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
     }
     .support-card.is-key {
       border: 1.5px solid var(--accent-gold);
-      background: linear-gradient(90deg, rgba(242, 201, 76, 0.08), transparent);
+      background: linear-gradient(180deg, rgba(242, 201, 76, 0.08) 0%, var(--card-bg) 45%);
+      box-shadow: 0 0 12px rgba(242, 201, 76, 0.08);
+    }
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .card-type-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .card-type-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -314,32 +333,104 @@
     .type-wit { background: var(--type-wit); }
     .type-friend { background: var(--type-friend); }
 
+    .card-type-name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .card-badges {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .key-badge {
+      font-size: 0.68rem;
+      background: var(--accent-gold);
+      color: #78350f;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .card-title-row {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 5px;
+      line-height: 1.35;
+    }
+    .badge-free {
+      font-size: 0.68rem;
+      background: #3b82f6;
+      color: #ffffff;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+    .rarity-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 3px;
+      letter-spacing: 0.5px;
+    }
+    .rarity-ssr {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #ffffff;
+    }
+    .rarity-sr {
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      color: #ffffff;
+    }
+    .rarity-r {
+      background: #64748b;
+      color: #ffffff;
+    }
+    .card-char-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.3px;
+    }
+    .card-epithet {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    .card-role-full {
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      line-height: 1.45;
+      background: rgba(0, 0, 0, 0.18);
+      padding: 6px 9px;
+      border-radius: 6px;
+      border-left: 2px solid var(--accent);
+      word-break: break-word;
+      white-space: normal;
+    }
     .card-info {
       flex: 1;
       min-width: 0;
     }
     .card-name {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: break-word;
     }
     .card-role {
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .key-badge {
-      font-size: 0.65rem;
-      background: var(--accent-gold);
-      color: #78350f;
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-weight: 700;
-      margin-left: 4px;
+      white-space: normal;
+      word-break: break-word;
+      line-height: 1.4;
     }
 
     .substitute-box {
@@ -1136,6 +1227,78 @@
       friend: '友'
     };
 
+    const TYPE_NAMES = {
+      speed: 'スピード',
+      stamina: 'スタミナ',
+      power: 'パワー',
+      guts: '根性',
+      wit: '賢さ',
+      friend: '友人'
+    };
+
+    function parseCardName(fullName) {
+      if (!fullName) return { isFree: false, rarity: '', epithet: '', charName: '' };
+      let s = String(fullName).trim();
+      let isFree = false;
+      if (s.startsWith('配布')) {
+        isFree = true;
+        s = s.slice(2).trim();
+      }
+      const rarityMatch = s.match(/^(SSR|SR|R)\s*/);
+      const rarity = rarityMatch ? rarityMatch[1] : '';
+      let rest = rarityMatch ? s.slice(rarityMatch[0].length) : s;
+      
+      const epithetMatch = rest.match(/^[［\[](.*?)[］\]]\s*/);
+      let epithet = '';
+      let charName = rest;
+      if (epithetMatch) {
+        epithet = epithetMatch[1];
+        charName = rest.slice(epithetMatch[0].length).trim();
+      }
+      return { isFree, rarity, epithet, charName };
+    }
+
+    function formatCardTitleHtml(fullName) {
+      const p = parseCardName(fullName);
+      const rarityCls = p.rarity ? `rarity-${p.rarity.toLowerCase()}` : '';
+      let html = '<div class="card-title-row">';
+      if (p.isFree) {
+        html += '<span class="badge-free">配布</span> ';
+      }
+      if (p.rarity) {
+        html += `<span class="rarity-tag ${rarityCls}">${p.rarity}</span> `;
+      }
+      html += `<span class="card-char-name">${p.charName}</span>`;
+      if (p.epithet) {
+        html += ` <span class="card-epithet">［${p.epithet}］</span>`;
+      }
+      html += '</div>';
+      return html;
+    }
+
+    function renderSupportCardHtml(c) {
+      const typeChar = TYPE_CHARS[c.type] || 'サ';
+      const typeName = TYPE_NAMES[c.type] || '';
+      return `
+        <div class="support-card ${c.key ? 'is-key' : ''}">
+          <div class="card-top-row">
+            <div class="card-type-group">
+              <span class="card-type-icon type-${c.type}">${typeChar}</span>
+              <span class="card-type-name">${typeName}</span>
+            </div>
+            <div class="card-badges">
+              ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
+              ${getUncapBadgeHtml(c.name)}
+            </div>
+          </div>
+          <div class="card-body">
+            ${formatCardTitleHtml(c.name)}
+            <div class="card-role-full">${c.role || c.desc || ''}</div>
+          </div>
+        </div>
+      `;
+    }
+
     function init() {
       const data = getMetaData();
       if (!data) {
@@ -1316,21 +1479,7 @@
         </div>
         <div class="deck-concept">脚質特化の金スキル・最速加速を確保し、最新シナリオの練習性能とスキルPtボーナスを極大化する現環境の結論編成</div>
         <div class="card-list">
-          ${styleData.cards.map(c => `
-            <div class="support-card ${c.key ? 'is-key' : ''}">
-              <div class="card-type-icon type-${c.type}">${TYPE_CHARS[c.type] || 'サ'}</div>
-              <div class="card-info">
-                <div class="card-name" style="display: flex; align-items: center; justify-content: space-between; gap: 4px;">
-                  <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${c.name}</span>
-                  <div style="display: flex; gap: 4px; flex-shrink: 0; align-items: center;">
-                    ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
-                    ${getUncapBadgeHtml(c.name)}
-                  </div>
-                </div>
-                <div class="card-role">${c.role || c.desc || ""}</div>
-              </div>
-            </div>
-          `).join('')}
+          ${styleData.cards.map(renderSupportCardHtml).join('')}
         </div>
         <div class="substitute-box">
           <div style="font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 0.88rem;">
@@ -1347,20 +1496,20 @@
                 ${grp.irreplaceable ? `
                   <div style="font-size: 0.78rem; color: #fca5a5; padding-left: 26px;">
                     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; margin-bottom: 2px;">
-                      <strong>${grp.cards[0].name}</strong>
+                      <div>${formatCardTitleHtml(grp.cards[0].name)}</div>
                       ${getUncapBadgeHtml(grp.cards[0].name)}
                     </div>
-                    <div>${grp.cards[0].desc}</div>
+                    <div style="margin-top: 2px; color: #fca5a5;">${grp.cards[0].desc}</div>
                   </div>
                 ` : `
-                  <ul style="padding-left: 26px; font-size: 0.78rem; color: var(--text-muted); margin: 0;">
+                  <ul style="padding-left: 26px; font-size: 0.78rem; color: var(--text-muted); margin: 0; list-style: none;">
                     ${grp.cards.map(c => `
-                    <li style="margin-bottom: 5px;">
+                    <li style="margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed rgba(255,255,255,0.06);">
                       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px;">
-                        <span style="color: var(--text-main); font-weight: 600;">${c.name}</span>
+                        <div>${formatCardTitleHtml(c.name)}</div>
                         ${getUncapBadgeHtml(c.name)}
                       </div>
-                      <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 1px;">${c.desc}</div>
+                      <div style="font-size: 0.74rem; color: #94a3b8; margin-top: 3px; line-height: 1.4;">${c.desc}</div>
                     </li>
                   `).join('')}
                   </ul>
@@ -1450,21 +1599,7 @@
 
       // Cards
       const cardList = document.getElementById('style-card-list');
-      cardList.innerHTML = data.recommended_cards.map(c => `
-        <div class="support-card ${c.key ? 'is-key' : ''}">
-          <div class="card-type-icon type-${c.type}">${TYPE_CHARS[c.type] || 'サ'}</div>
-          <div class="card-info">
-            <div class="card-name" style="display: flex; align-items: center; justify-content: space-between; gap: 4px;">
-              <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${c.name}</span>
-              <div style="display: flex; gap: 4px; flex-shrink: 0; align-items: center;">
-                ${c.key ? '<span class="key-badge">必須枠</span>' : ''}
-                ${getUncapBadgeHtml(c.name)}
-              </div>
-            </div>
-            <div class="card-role">${c.role}</div>
-          </div>
-        </div>
-      `).join('');
+      cardList.innerHTML = data.recommended_cards.map(renderSupportCardHtml).join('');
     }
 
     function renderEventBar() {
