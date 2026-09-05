@@ -1310,10 +1310,10 @@
         </div>
         <div class="substitute-box">
           <div style="font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 0.88rem;">
-            <span>🔄</span> タイプ別 代用・入れ替え候補
+            <span>🔄</span> ${styleData.style_name}向け 代用・入れ替え候補
           </div>
           <div style="display: flex; flex-direction: column; gap: 8px;">
-            ${distData.substitutes_by_type.map(grp => `
+            ${(styleData.substitutes_by_type || distData.substitutes_by_type).map(grp => `
               <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 8px 10px; border-left: 3px solid var(--type-${grp.type});">
                 <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
                   <span class="card-type-icon type-${grp.type}" style="width: 20px; height: 20px; font-size: 0.65rem;">${TYPE_CHARS[grp.type] || 'サ'}</span>
