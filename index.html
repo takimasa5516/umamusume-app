@@ -647,6 +647,61 @@
       margin-bottom: 6px;
     }
 
+    /* Distance Region Plan Box */
+    .distance-region-plan {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(56, 189, 248, 0.08));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 14px;
+    }
+    .distance-region-plan-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .distance-region-plan-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .distance-region-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .distance-region-step {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .distance-region-step-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--highlight);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .distance-region-ratio-badge {
+      font-size: 0.7rem;
+      background: rgba(245, 158, 11, 0.2);
+      color: #fde047;
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      font-weight: 700;
+    }
+
   </style>
 </head>
 <body>
@@ -917,17 +972,27 @@
       <div class="section-card">
         <div class="section-header">
           <div class="section-title">
-            <span>🗺️ 時期別 地域選択ガイド</span>
+            <span>🗺️ 時期別 地域選択ガイド（2:3:5比率・特化配分）</span>
           </div>
-          <span style="font-size: 0.8rem; color: var(--text-muted);" id="region-current-dist">短距離</span>
+          <span style="font-size: 0.8rem; color: var(--accent-gold); font-weight: 700;" id="region-current-dist">短距離</span>
+        </div>
+
+        <!-- Dedicated Distance Selector within Region Tab for seamless switching -->
+        <div style="margin-bottom: 14px; background: rgba(0,0,0,0.18); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--card-border);">
+          <div style="font-size: 0.8rem; color: var(--highlight); margin-bottom: 8px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+            <span>📍</span> 育成距離を選択（距離ごとの2:3:5配分・適正地域が即座に切り替わります）:
+          </div>
+          <div style="display: flex; gap: 8px; overflow-x: auto;" id="region-dist-bar">
+            <!-- Injected by JS -->
+          </div>
         </div>
 
         <!-- Grade Filter -->
-        <div class="grade-selector">
-          <button class="grade-btn active" onclick="filterGrade('all')">全期一括</button>
-          <button class="grade-btn" onclick="filterGrade(0)">ジュニア級</button>
-          <button class="grade-btn" onclick="filterGrade(1)">クラシック級</button>
-          <button class="grade-btn" onclick="filterGrade(2)">シニア級</button>
+        <div class="grade-selector" style="margin-bottom: 16px;">
+          <button class="grade-btn active" data-grade="all" onclick="filterGrade('all')">全期一括</button>
+          <button class="grade-btn" data-grade="0" onclick="filterGrade(0)">ジュニア級 (序盤)</button>
+          <button class="grade-btn" data-grade="1" onclick="filterGrade(1)">クラシック級 (中盤・合宿)</button>
+          <button class="grade-btn" data-grade="2" onclick="filterGrade(2)">シニア級 (終盤・カンスト)</button>
         </div>
 
         <div id="region-matrix-list">
@@ -1094,22 +1159,44 @@
 
     function renderDistanceBar() {
       const bar = document.getElementById('dist-bar');
-      bar.innerHTML = '';
+      const regBar = document.getElementById('region-dist-bar');
+      if (bar) bar.innerHTML = '';
+      if (regBar) regBar.innerHTML = '';
       const builds = window.UMA_META_DATA.distance_style_builds;
       if (!builds) return;
 
       Object.keys(builds).forEach(key => {
         const item = builds[key];
-        const pill = document.createElement('button');
-        pill.className = `pill-btn ${key === currentDistance ? 'active' : ''}`;
-        pill.innerHTML = `<span>${item.icon}</span> <span>${item.name}</span>`;
-        pill.onclick = () => {
-          currentDistance = key;
-          renderDistanceBar();
-          renderBuilds();
-          renderRegions();
-        };
-        bar.appendChild(pill);
+        
+        // Top Dist Bar
+        if (bar) {
+          const pill = document.createElement('button');
+          pill.className = `pill-btn ${key === currentDistance ? 'active' : ''}`;
+          pill.innerHTML = `<span>${item.icon}</span> <span>${item.name}</span>`;
+          pill.onclick = () => {
+            currentDistance = key;
+            renderDistanceBar();
+            renderBuilds();
+            renderRegions();
+          };
+          bar.appendChild(pill);
+        }
+
+        // Region Tab Embedded Dist Bar
+        if (regBar) {
+          const pill2 = document.createElement('button');
+          pill2.className = `pill-btn ${key === currentDistance ? 'active' : ''}`;
+          pill2.style.padding = '6px 14px';
+          pill2.style.fontSize = '0.8rem';
+          pill2.innerHTML = `<span>${item.icon}</span> <span>${item.name}</span>`;
+          pill2.onclick = () => {
+            currentDistance = key;
+            renderDistanceBar();
+            renderBuilds();
+            renderRegions();
+          };
+          regBar.appendChild(pill2);
+        }
       });
     }
 
@@ -1238,6 +1325,51 @@
             `).join('')}
           </div>
         </div>
+        ${distData.region_plan ? `
+        <div class="distance-region-plan">
+          <div class="distance-region-plan-header">
+            <div class="distance-region-plan-title">
+              <span>🗺️</span> この距離×編成の推奨地域選択（2:3:5比率）
+            </div>
+            <button class="pill-btn" style="padding: 3px 10px; font-size: 0.74rem;" onclick="switchSection('regions')">時期別ガイド詳細を見る →</button>
+          </div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px;">
+            ${distData.region_plan.summary}
+          </div>
+          <div class="distance-region-grid">
+            <div class="distance-region-step">
+              <div class="distance-region-step-title">
+                <span>🌱 ジュニア級</span>
+                <span class="distance-region-ratio-badge">比率 ${distData.region_plan.junior.ratio}</span>
+              </div>
+              <div class="region-tags" style="margin-bottom: 6px;">
+                ${distData.region_plan.junior.regions.map(r => `<span class="region-pill" style="font-size: 0.72rem; padding: 2px 7px;">📍 ${r}</span>`).join('')}
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${distData.region_plan.junior.focus}</div>
+            </div>
+            <div class="distance-region-step">
+              <div class="distance-region-step-title">
+                <span>⚔️ クラシック級</span>
+                <span class="distance-region-ratio-badge">比率 ${distData.region_plan.classic.ratio}</span>
+              </div>
+              <div class="region-tags" style="margin-bottom: 6px;">
+                ${distData.region_plan.classic.regions.map(r => `<span class="region-pill" style="font-size: 0.72rem; padding: 2px 7px;">📍 ${r}</span>`).join('')}
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${distData.region_plan.classic.focus}</div>
+            </div>
+            <div class="distance-region-step">
+              <div class="distance-region-step-title">
+                <span>👑 シニア級</span>
+                <span class="distance-region-ratio-badge">比率 ${distData.region_plan.senior.ratio}</span>
+              </div>
+              <div class="region-tags" style="margin-bottom: 6px;">
+                ${distData.region_plan.senior.regions.map(r => `<span class="region-pill" style="font-size: 0.72rem; padding: 2px 7px;">📍 ${r}</span>`).join('')}
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${distData.region_plan.senior.focus}</div>
+            </div>
+          </div>
+        </div>
+        ` : ''}
       `;
       templatesList.appendChild(deckDiv);
     }
@@ -1395,13 +1527,9 @@
 
     function filterGrade(grade) {
       currentGradeFilter = grade;
-      document.querySelectorAll('.grade-btn').forEach((btn, idx) => {
-        btn.classList.toggle('active', 
-          (grade === 'all' && idx === 0) ||
-          (grade === 0 && idx === 1) ||
-          (grade === 1 && idx === 2) ||
-          (grade === 2 && idx === 3)
-        );
+      document.querySelectorAll('.grade-btn').forEach(btn => {
+        const bg = btn.getAttribute('data-grade');
+        btn.classList.toggle('active', String(bg) === String(grade));
       });
       renderRegions();
     }
