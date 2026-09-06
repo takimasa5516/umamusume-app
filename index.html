@@ -106,9 +106,11 @@
     }
 
     /* Main Navigation Tabs (5 Tabs) */
+    
+    /* Navigation responsive update for 7 items */
     .main-nav {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(7, 1fr);
       gap: 4px;
       margin-bottom: 16px;
       background: var(--card-bg);
@@ -116,6 +118,326 @@
       border-radius: 12px;
       border: 1px solid var(--card-border);
     }
+    @media (max-width: 720px) {
+      .main-nav {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* Deck Builder Styles */
+    .builder-select {
+      background: var(--card-sub);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      width: 100%;
+      cursor: pointer;
+      outline: none;
+    }
+    .builder-select:focus {
+      border-color: var(--highlight);
+    }
+    .builder-overview-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: var(--card-sub);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+    .builder-overview-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--highlight);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .builder-score-badge {
+      background: rgba(39, 174, 96, 0.15);
+      border: 1px solid var(--success);
+      color: #4ade80;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    [data-theme="light"] .builder-score-badge {
+      background: #dcfce7;
+      color: #15803d;
+      border-color: #86efac;
+    }
+    .builder-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .builder-deck-card {
+      background: var(--card-sub);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.2s;
+    }
+    .builder-deck-card.is-rental {
+      border: 1.8px solid #f59e0b;
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, var(--card-sub) 45%);
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.18);
+    }
+    .builder-rental-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .builder-uncap-indicator {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .uncap-tag-max {
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+    .uncap-tag-high {
+      background: rgba(168, 85, 247, 0.2);
+      color: #d8b4fe;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+    .uncap-tag-mid {
+      background: rgba(56, 189, 248, 0.2);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+    .uncap-tag-zero {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fde047;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .uncap-tag-missing {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+    [data-theme="light"] .uncap-tag-max {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #86efac;
+    }
+    [data-theme="light"] .uncap-tag-high {
+      background: #f3e8ff;
+      color: #6b21a8;
+      border-color: #d8b4fe;
+    }
+    [data-theme="light"] .uncap-tag-mid {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-color: #7dd3fc;
+    }
+    [data-theme="light"] .uncap-tag-zero {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde047;
+    }
+    [data-theme="light"] .uncap-tag-missing {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #fca5a5;
+    }
+
+    /* Diagnosis Box */
+    .rental-diagnosis-box {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(56, 189, 248, 0.08));
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    .rental-diagnosis-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .rental-diagnosis-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+    .rental-diagnosis-body {
+      font-size: 0.83rem;
+      color: var(--text-main);
+      line-height: 1.65;
+    }
+    .rental-diagnosis-reason {
+      margin-top: 6px;
+      padding: 8px 12px;
+      background: rgba(0,0,0,0.15);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+    [data-theme="light"] .rental-diagnosis-box {
+      border-color: #f59e0b;
+      background: #fffdf5;
+    }
+    [data-theme="light"] .rental-diagnosis-title {
+      color: #b45309;
+    }
+    [data-theme="light"] .rental-diagnosis-reason {
+      background: #fef3c7;
+      border-left-color: #d97706;
+      color: #92400e;
+    }
+    [data-theme="light"] .builder-deck-card.is-rental {
+      border-color: #f59e0b;
+      background: linear-gradient(180deg, #fffbeb 0%, #ffffff 50%);
+      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.15);
+    }
+    [data-theme="light"] .builder-bench-item {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    /* Bench Box */
+    .builder-bench-box {
+      background: var(--card-sub);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    .builder-bench-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--highlight);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .builder-bench-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .builder-bench-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* My Box Grid & Uncap Controls */
+    .mybox-presets-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .mybox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+      gap: 10px;
+    }
+    .mybox-card {
+      background: var(--card-sub);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .mybox-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .mybox-card-title {
+      margin-bottom: 8px;
+    }
+    .uncap-btn-group {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 3px;
+      background: var(--card-bg);
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+    .uncap-stage-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .uncap-stage-btn:hover {
+      color: var(--text-main);
+      background: rgba(255,255,255,0.05);
+    }
+    .uncap-stage-btn.active.lvl-neg {
+      background: #475569;
+      color: #f8fafc;
+      border-color: #64748b;
+    }
+    .uncap-stage-btn.active.lvl-0 {
+      background: #d97706;
+      color: white;
+      border-color: #f59e0b;
+    }
+    .uncap-stage-btn.active.lvl-1,
+    .uncap-stage-btn.active.lvl-2 {
+      background: #0284c7;
+      color: white;
+      border-color: #38bdf8;
+    }
+    .uncap-stage-btn.active.lvl-3 {
+      background: #7c3aed;
+      color: white;
+      border-color: #a855f7;
+    }
+    .uncap-stage-btn.active.lvl-4 {
+      background: #16a34a;
+      color: white;
+      border-color: #22c55e;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+    }
+    [data-theme="light"] .uncap-stage-btn.active.lvl-neg {
+      background: #cbd5e1;
+      color: #334155;
+      border-color: #94a3b8;
+    }
+
     .nav-btn {
       background: transparent;
       border: none;
@@ -898,6 +1220,9 @@
       <button class="nav-btn" onclick="switchSection('uncaps')">
         <span>⭐ 凸数一覧</span>
       </button>
+      <button class="nav-btn" onclick="switchSection('builder')">
+        <span>🛠️ 手持ちビルダー</span>
+      </button>
     </nav>
 
     <!-- Distance Selector (Used in builds & regions) -->
@@ -1238,6 +1563,103 @@
       </div>
     </section>
 
+    <!-- SECTION 7: My Box Deck Builder -->
+    <section id="section-builder" style="display: none;">
+      <!-- Condition & Assemble Control Card -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>🛠️</span>
+            <span>手持ちサポカ逆引き・現実的デッキビルダー</span>
+          </div>
+          <span class="scenario-pill" style="background: rgba(45, 156, 219, 0.2); color: var(--highlight); border-color: var(--highlight);">手持ち5枠 ＋ 最適レンタル1枠</span>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.6;">
+          あなたの手持ちカード凸数状況に合わせて、全20パターン（5距離 × 4脚質）の<strong>「自前5枠＋レンタル1枠」の現実的最高戦力デッキ</strong>を自動算出します。<br>
+          ※同名キャラ重複禁止ルール（例：ミホノブルボンやメジロマックイーンの複数編成不可）や脚質専用スキル適性を完全精査し、不足枠を補う戦略的レンタル推薦理由も診断します。
+        </p>
+
+        <!-- Condition Selectors -->
+        <div style="background: rgba(0,0,0,0.18); padding: 12px; border-radius: 10px; border: 1px solid var(--card-border); margin-bottom: 14px;">
+          <!-- Distance Selector -->
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 0.78rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span>🎴</span> 対象距離を選択:
+            </div>
+            <div class="selector-bar" style="margin-bottom: 0; padding-bottom: 4px;" id="builder-dist-pills">
+              <!-- JS rendered -->
+            </div>
+          </div>
+
+          <!-- Style Selector -->
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 0.78rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span>🏃</span> 対象脚質を選択:
+            </div>
+            <div class="selector-bar" style="margin-bottom: 0; padding-bottom: 4px;" id="builder-style-pills">
+              <!-- JS rendered -->
+            </div>
+          </div>
+
+          <!-- Rental Strategy Selector -->
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="flex: 1; min-width: 260px;">
+              <label for="builder-rental-select" style="font-size: 0.78rem; color: var(--highlight); font-weight: 700; display: block; margin-bottom: 4px;">
+                ⭐ レンタル枠の指定・条件:
+              </label>
+              <select id="builder-rental-select" class="builder-select" onchange="executeBuildDeck()">
+                <option value="auto">✨ AI自動選定（手持ち不足を補う最適完凸カード）</option>
+                <!-- Grouped options populated by JS -->
+              </select>
+            </div>
+            <div style="padding-top: 18px;">
+              <button class="pill-btn active" style="background: linear-gradient(135deg, #2d9cdb, #0f766e); border: none; padding: 9px 20px; font-size: 0.88rem; box-shadow: 0 2px 10px rgba(45, 156, 219, 0.4);" onclick="executeBuildDeck()">
+                <span>⚡ 最適デッキを再計算</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Container -->
+        <div id="builder-result-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- My Box Management Card -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>📦</span>
+            <span>My Box（手持ちサポートカード所持・凸数管理）</span>
+          </div>
+          <span id="mybox-stats-counter" style="font-size: 0.75rem; color: var(--accent-gold); font-weight: 700;"></span>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
+          お持ちのカードの凸数をタップして登録してください。設定内容は端末のブラウザに即時自動保存（localStorage）され、上記のデッキ算出に即座に反映されます。
+        </p>
+
+        <!-- Quick Presets -->
+        <div class="mybox-presets-bar">
+          <span style="font-size: 0.76rem; color: var(--text-muted); align-self: center; margin-right: 4px;">クイック設定:</span>
+          <button class="pill-btn" style="padding: 5px 12px; font-size: 0.75rem;" onclick="applyBoxPreset('f2p')">🎁 配布・SR完凸（無課金基準）</button>
+          <button class="pill-btn" style="padding: 5px 12px; font-size: 0.75rem;" onclick="applyBoxPreset('meta_low')">⭐ たづな無凸＋主要SSR低凸＋SR完凸</button>
+          <button class="pill-btn" style="padding: 5px 12px; font-size: 0.75rem;" onclick="applyBoxPreset('all_max')">👑 全カード完凸（理想編成チェック）</button>
+          <button class="pill-btn" style="padding: 5px 12px; font-size: 0.75rem; color: #f87171; border-color: rgba(239,68,68,0.4);" onclick="applyBoxPreset('reset')">🗑️ 全て未所持にリセット</button>
+        </div>
+
+        <!-- Type Filter Tabs for My Box -->
+        <div class="selector-bar" style="margin-bottom: 14px;" id="mybox-type-filters">
+          <!-- JS rendered -->
+        </div>
+
+        <!-- Cards Uncap Grid -->
+        <div class="mybox-grid" id="mybox-cards-grid">
+          <!-- JS rendered -->
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <script src="data.js"></script>
@@ -1393,6 +1815,7 @@
       renderRegions();
       renderSources();
       renderUncapTable();
+      initMyBox();
     }
 
     function toggleTheme() {
@@ -1416,7 +1839,8 @@
           (sectionId === 'events' && idx === 2) ||
           (sectionId === 'regions' && idx === 3) ||
           (sectionId === 'sources' && idx === 4) ||
-          (sectionId === 'uncaps' && idx === 5)
+          (sectionId === 'uncaps' && idx === 5) ||
+          (sectionId === 'builder' && idx === 6)
         );
       });
 
@@ -1426,6 +1850,8 @@
       document.getElementById('section-regions').style.display = sectionId === 'regions' ? 'block' : 'none';
       document.getElementById('section-sources').style.display = sectionId === 'sources' ? 'block' : 'none';
       document.getElementById('section-uncaps').style.display = sectionId === 'uncaps' ? 'block' : 'none';
+      const secBuilder = document.getElementById('section-builder');
+      if (secBuilder) secBuilder.style.display = sectionId === 'builder' ? 'block' : 'none';
 
       // Selector bar visibility
       document.getElementById('dist-bar').style.display = sectionId === 'builds' ? 'flex' : 'none';
@@ -1926,8 +2352,660 @@
       });
     }
 
-    // Run
+    // Run init at end of script
+  
+    // ==========================================
+    // Feature 1: My Box & Realistic Deck Builder
+    // ==========================================
+    var builderCurrentDist = 'short';
+    var builderCurrentStyle = 'runner';
+    var myBoxCurrentType = 'all';
+    var myBoxData = {}; // cardName -> uncapLevel (-1 to 4)
+
+    function getBaseCharName(fullName) {
+      if (!fullName) return '';
+      let s = fullName.replace(/^(?:配布)?\s*(?:SSR|SR|R)\s*/, '');
+      s = s.replace(/^[［\[](.*?)[］\]]\s*/, '');
+      s = s.replace(/（.*?）/g, '').trim();
+      return s;
+    }
+
+    function getUncapMultiplier(cardName, uncapLevel) {
+      if (uncapLevel < 0) return 0;
+      const meta = getMetaData();
+      const guide = (meta && meta.card_uncap_guide) || {};
+      let u = guide[cardName];
+      if (!u) {
+        const stripped = cardName.replace(/［.*?］|（.*?）/g, '').trim();
+        u = guide[stripped];
+      }
+      const tag = (u && u.tag) || 'rainbow';
+      if (tag === 'friend') {
+        const map = [0.80, 0.85, 0.90, 0.95, 1.0];
+        return map[uncapLevel] ?? 0.80;
+      }
+      if (tag === 'gold_skill') {
+        const map = [0.35, 0.75, 0.82, 0.90, 1.0];
+        return map[uncapLevel] ?? 0.35;
+      }
+      if (tag === 'sr_card') {
+        const map = [0.15, 0.25, 0.40, 0.65, 1.0];
+        return map[uncapLevel] ?? 0.15;
+      }
+      if (tag === 'free_card') {
+        const map = [0.20, 0.30, 0.45, 0.65, 1.0];
+        return map[uncapLevel] ?? 0.20;
+      }
+      const map = [0.30, 0.45, 0.60, 0.85, 1.0];
+      return map[uncapLevel] ?? 0.30;
+    }
+
+    function getAllMasterCards() {
+      const meta = getMetaData();
+      if (!meta) return [];
+      const cardsMap = new Map();
+      const guide = meta.card_uncap_guide || {};
+
+      for (const [distKey, dist] of Object.entries(meta.distance_style_builds || {})) {
+        for (const [styleKey, style] of Object.entries(dist.styles || {})) {
+          (style.cards || []).forEach(c => {
+            if (!cardsMap.has(c.name)) {
+              const parsed = parseCardName(c.name);
+              const u = guide[c.name] || {};
+              cardsMap.set(c.name, {
+                name: c.name,
+                type: c.type,
+                charName: parsed.charName,
+                epithet: parsed.epithet,
+                rarity: parsed.isFree ? '配布SSR' : (parsed.rarity || 'SSR'),
+                tag: u.tag || 'rainbow',
+                badge: u.badge || '',
+                desc: c.desc || c.role || u.detail || ''
+              });
+            }
+          });
+          if (style.substitutes_by_type) {
+            style.substitutes_by_type.forEach(grp => {
+              (grp.cards || []).forEach(c => {
+                if (!cardsMap.has(c.name)) {
+                  const parsed = parseCardName(c.name);
+                  const u = guide[c.name] || {};
+                  cardsMap.set(c.name, {
+                    name: c.name,
+                    type: c.type || grp.type,
+                    charName: parsed.charName,
+                    epithet: parsed.epithet,
+                    rarity: parsed.isFree ? '配布SSR' : (parsed.rarity || 'SSR'),
+                    tag: u.tag || 'rainbow',
+                    badge: u.badge || '',
+                    desc: c.desc || c.role || u.detail || ''
+                  });
+                }
+              });
+            });
+          }
+        }
+      }
+      return Array.from(cardsMap.values());
+    }
+
+    function isCardAllowedForStyle(cardName, styleKey, distKey) {
+      if (cardName.includes('タップダンスシチー') && styleKey !== 'runner') return false;
+      if (cardName.includes('デュランダル') && (styleKey !== 'chaser' || (distKey !== 'short' && distKey !== 'mile'))) return false;
+      if (cardName.includes('ミスターシービー') && styleKey !== 'chaser') return false;
+      if (cardName.includes('エイシンフラッシュ') && styleKey !== 'betweener') return false;
+      if (cardName.includes('ダイワスカーレット') && styleKey !== 'runner') return false;
+      if (cardName.includes('マルシュロレーヌ') && distKey !== 'dirt') return false;
+      if (cardName.includes('ハルウララ') && distKey !== 'dirt') return false;
+      return true;
+    }
+
+    function scoreCard(card, distKey, styleKey, uncapLevel) {
+      if (uncapLevel < 0) return 0;
+      if (!isCardAllowedForStyle(card.name, styleKey, distKey)) return 0;
+
+      const mult = getUncapMultiplier(card.name, uncapLevel);
+      if (mult === 0) return 0;
+
+      const meta = getMetaData();
+      const build = meta.distance_style_builds[distKey].styles[styleKey];
+      const isKey = card.key || false;
+      const isInIdeal = (build.cards || []).some(c => c.name === card.name);
+
+      let isInSubs = false;
+      if (build.substitutes_by_type) {
+        build.substitutes_by_type.forEach(g => {
+          if ((g.cards || []).some(c => c.name === card.name)) isInSubs = true;
+        });
+      }
+
+      let basePts = 70;
+      const guide = (meta.card_uncap_guide || {})[card.name];
+      const badge = (guide && guide.badge) || '';
+      if (badge.includes('SS+') || badge.includes('10.0') || badge.includes('シナリオ特効')) {
+        basePts = 100;
+      } else if (badge.includes('SS')) {
+        basePts = 85;
+      } else if (badge.includes('SR')) {
+        basePts = 52;
+      } else if (badge.includes('配布')) {
+        basePts = 48;
+      }
+
+      let bonus = 0;
+      if (isKey) bonus += 15;
+      if (isInIdeal) bonus += 12;
+      else if (isInSubs) bonus += 6;
+
+      return (basePts + bonus) * mult;
+    }
+
+    function buildOptimalDeck(distKey, styleKey, userBox, lockedRentalName = null) {
+      const box = userBox || myBoxData || {};
+      const meta = getMetaData();
+      const masterCards = getAllMasterCards();
+      const build = meta.distance_style_builds[distKey].styles[styleKey];
+      const idealCards = build.cards;
+      const targetTypes = idealCards.map(c => c.type);
+
+      const allowedCards = masterCards.filter(c => isCardAllowedForStyle(c.name, styleKey, distKey));
+
+      const rentalCandidates = (lockedRentalName && lockedRentalName !== 'auto')
+        ? allowedCards.filter(c => c.name === lockedRentalName)
+        : allowedCards.filter(c => (box[c.name] ?? -1) < 4);
+
+      let bestResult = null;
+      const rentalsToEvaluate = rentalCandidates.length > 0 ? rentalCandidates : idealCards;
+
+      for (const rental of rentalsToEvaluate) {
+        const rentalScore = scoreCard(rental, distKey, styleKey, 4);
+        if (rentalScore === 0) continue;
+        const rentalChar = getBaseCharName(rental.name);
+
+        const rentalTypeIdx = targetTypes.findIndex(t => t === rental.type);
+        if (rentalTypeIdx === -1) continue;
+
+        const remainingTypes = [...targetTypes];
+        remainingTypes.splice(rentalTypeIdx, 1);
+
+        const availableOwned = allowedCards
+          .filter(c => getBaseCharName(c.name) !== rentalChar && (box[c.name] ?? -1) >= 0)
+          .map(c => ({
+            ...c,
+            uncap: box[c.name],
+            score: scoreCard(c, distKey, styleKey, box[c.name]),
+            charName: getBaseCharName(c.name)
+          }))
+          .filter(c => c.score > 0)
+          .sort((a, b) => b.score - a.score);
+
+        const chosenOwned = [];
+        const usedChars = new Set([rentalChar]);
+        const missingTypes = [];
+
+        for (const reqType of remainingTypes) {
+          const match = availableOwned.find(c => 
+            c.type === reqType && 
+            !usedChars.has(c.charName) && 
+            !chosenOwned.some(o => o.name === c.name)
+          );
+          if (match) {
+            chosenOwned.push(match);
+            usedChars.add(match.charName);
+          } else {
+            const idealPlaceholder = idealCards.find(c => c.type === reqType && !usedChars.has(getBaseCharName(c.name))) 
+              || { name: `未所持 (${reqType})`, type: reqType };
+            chosenOwned.push({
+              ...idealPlaceholder,
+              uncap: -1,
+              score: 0,
+              isPlaceholder: true,
+              charName: getBaseCharName(idealPlaceholder.name)
+            });
+            missingTypes.push(reqType);
+          }
+        }
+
+        const totalScore = rentalScore + chosenOwned.reduce((sum, c) => sum + c.score, 0);
+        if (!bestResult || totalScore > bestResult.totalScore) {
+          bestResult = {
+            rental: { ...rental, uncap: 4, score: rentalScore, isRental: true },
+            owned: chosenOwned,
+            missingTypes,
+            totalScore,
+            idealMatches: chosenOwned.filter(c => !c.isPlaceholder && idealCards.some(i => i.name === c.name)).length + (idealCards.some(i => i.name === rental.name) ? 1 : 0)
+          };
+        }
+      }
+
+      return bestResult;
+    }
+
+    function initMyBox() {
+      // Load from localStorage or initialize with meta_low
+      const stored = localStorage.getItem('UMA_MYBOX_DATA');
+      if (stored) {
+        try {
+          myBoxData = JSON.parse(stored);
+        } catch(e) {
+          myBoxData = {};
+        }
+      } else {
+        applyBoxPreset('meta_low', false);
+      }
+
+      renderBuilderDistancePills();
+      renderBuilderStylePills();
+      renderBuilderRentalSelect();
+      renderMyBoxTypeFilters();
+      renderMyBoxGrid();
+      executeBuildDeck();
+    }
+
+    function saveMyBox() {
+      localStorage.setItem('UMA_MYBOX_DATA', JSON.stringify(myBoxData));
+      updateMyBoxStats();
+    }
+
+    function updateMyBoxStats() {
+      const el = document.getElementById('mybox-stats-counter');
+      if (!el) return;
+      const masterCards = getAllMasterCards();
+      const owned = masterCards.filter(c => (myBoxData[c.name] ?? -1) >= 0).length;
+      const maxed = masterCards.filter(c => myBoxData[c.name] === 4).length;
+      el.textContent = `登録所持: ${owned} / ${masterCards.length}枚 (完凸: ${maxed}枚)`;
+    }
+
+    function applyBoxPreset(presetKey, execute = true) {
+      const masterCards = getAllMasterCards();
+      myBoxData = {};
+
+      if (presetKey === 'f2p') {
+        masterCards.forEach(c => {
+          if (c.rarity.includes('SR') || c.rarity.includes('配布')) {
+            myBoxData[c.name] = 4;
+          } else {
+            myBoxData[c.name] = -1;
+          }
+        });
+      } else if (presetKey === 'meta_low') {
+        masterCards.forEach(c => {
+          if (c.rarity.includes('SR') || c.rarity.includes('配布')) {
+            myBoxData[c.name] = 4;
+          } else if (c.name.includes('駿川たづな')) {
+            myBoxData[c.name] = 0; // 0凸でシナリオギミック実用
+          } else if (c.name.includes('ミホノブルボン（賢さ）') || c.name.includes('フォーエバーヤング')) {
+            myBoxData[c.name] = 1; // 1凸で実用
+          } else {
+            myBoxData[c.name] = -1;
+          }
+        });
+      } else if (presetKey === 'all_max') {
+        masterCards.forEach(c => {
+          myBoxData[c.name] = 4;
+        });
+      } else if (presetKey === 'reset') {
+        masterCards.forEach(c => {
+          myBoxData[c.name] = -1;
+        });
+      }
+
+      saveMyBox();
+      renderMyBoxGrid();
+      if (execute) executeBuildDeck();
+    }
+
+    function setCardUncap(cardName, lvl) {
+      myBoxData[cardName] = lvl;
+      saveMyBox();
+      renderMyBoxGrid();
+      executeBuildDeck();
+    }
+
+    function renderBuilderDistancePills() {
+      const container = document.getElementById('builder-dist-pills');
+      if (!container) return;
+      const meta = getMetaData();
+      const builds = meta.distance_style_builds || {};
+      container.innerHTML = '';
+
+      Object.keys(builds).forEach(key => {
+        const item = builds[key];
+        const btn = document.createElement('button');
+        btn.className = `pill-btn ${key === builderCurrentDist ? 'active' : ''}`;
+        btn.innerHTML = `<span>${item.icon}</span> <span>${item.name}</span>`;
+        btn.onclick = () => {
+          builderCurrentDist = key;
+          renderBuilderDistancePills();
+          renderBuilderRentalSelect();
+          executeBuildDeck();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderBuilderStylePills() {
+      const container = document.getElementById('builder-style-pills');
+      if (!container) return;
+      const styles = [
+        { id: 'runner', name: '逃げ', icon: '💨' },
+        { id: 'leader', name: '先行', icon: '🎯' },
+        { id: 'betweener', name: '差し', icon: '⚔️' },
+        { id: 'chaser', name: '追込', icon: '⚡' }
+      ];
+      container.innerHTML = '';
+
+      styles.forEach(s => {
+        const btn = document.createElement('button');
+        btn.className = `pill-btn ${s.id === builderCurrentStyle ? 'active' : ''}`;
+        btn.innerHTML = `<span>${s.icon}</span> <span>${s.name}</span>`;
+        btn.onclick = () => {
+          builderCurrentStyle = s.id;
+          renderBuilderStylePills();
+          renderBuilderRentalSelect();
+          executeBuildDeck();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderBuilderRentalSelect() {
+      const select = document.getElementById('builder-rental-select');
+      if (!select) return;
+      const meta = getMetaData();
+      const build = meta.distance_style_builds[builderCurrentDist].styles[builderCurrentStyle];
+      const masterCards = getAllMasterCards();
+      const currentVal = select.value || 'auto';
+
+      let html = '<option value="auto">✨ AI自動選定（手持ち不足を補う最適完凸カード）</option>';
+
+      // High priority candidates
+      const keyRentals = masterCards.filter(c => 
+        isCardAllowedForStyle(c.name, builderCurrentStyle, builderCurrentDist) &&
+        (c.name.includes('駿川たづな') || c.name.includes('フォーエバーヤング') || build.cards.some(i => i.name === c.name))
+      );
+
+      html += '<optgroup label="🌟 推奨有力レンタル候補">';
+      keyRentals.forEach(c => {
+        const p = parseCardName(c.name);
+        html += `<option value="${c.name}">完凸 ${c.name}</option>`;
+      });
+      html += '</optgroup>';
+
+      select.innerHTML = html;
+      select.value = currentVal;
+    }
+
+    function renderMyBoxTypeFilters() {
+      const container = document.getElementById('mybox-type-filters');
+      if (!container) return;
+      const masterCards = getAllMasterCards();
+      const types = [
+        { key: 'all', name: 'すべて', count: masterCards.length },
+        { key: 'speed', name: 'スピード', count: masterCards.filter(c => c.type === 'speed').length },
+        { key: 'stamina', name: 'スタミナ', count: masterCards.filter(c => c.type === 'stamina').length },
+        { key: 'power', name: 'パワー', count: masterCards.filter(c => c.type === 'power').length },
+        { key: 'guts', name: '根性', count: masterCards.filter(c => c.type === 'guts').length },
+        { key: 'wit', name: '賢さ', count: masterCards.filter(c => c.type === 'wit').length },
+        { key: 'friend', name: '友人', count: masterCards.filter(c => c.type === 'friend').length }
+      ];
+
+      container.innerHTML = '';
+      types.forEach(t => {
+        const btn = document.createElement('button');
+        btn.className = `pill-btn ${t.key === myBoxCurrentType ? 'active' : ''}`;
+        btn.style.padding = '5px 12px';
+        btn.style.fontSize = '0.78rem';
+        btn.innerHTML = `${t.name} (${t.count})`;
+        btn.onclick = () => {
+          myBoxCurrentType = t.key;
+          renderMyBoxTypeFilters();
+          renderMyBoxGrid();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderMyBoxGrid() {
+      const container = document.getElementById('mybox-cards-grid');
+      if (!container) return;
+      updateMyBoxStats();
+
+      const masterCards = getAllMasterCards();
+      const filtered = myBoxCurrentType === 'all' 
+        ? masterCards 
+        : masterCards.filter(c => c.type === myBoxCurrentType);
+
+      container.innerHTML = filtered.map(c => {
+        const typeChar = TYPE_CHARS[c.type] || 'サ';
+        const typeName = TYPE_NAMES[c.type] || '';
+        const curLvl = myBoxData[c.name] ?? -1;
+        const uncapBadge = getUncapBadgeHtml(c.name);
+
+        const uncapButtons = [-1, 0, 1, 2, 3, 4].map(lvl => {
+          const label = lvl === -1 ? '未所持' : (lvl === 0 ? '無凸' : (lvl === 4 ? '完凸' : `${lvl}凸`));
+          const isActive = curLvl === lvl;
+          const cls = lvl === -1 ? 'lvl-neg' : `lvl-${lvl}`;
+          return `<button class="uncap-stage-btn ${isActive ? 'active ' + cls : ''}" onclick="setCardUncap('${c.name.replace(/'/g, "\\'")}', ${lvl})">${label}</button>`;
+        }).join('');
+
+        return `
+          <div class="mybox-card">
+            <div>
+              <div class="mybox-card-top">
+                <div class="card-type-group">
+                  <span class="card-type-icon type-${c.type}">${typeChar}</span>
+                  <span class="card-type-name">${typeName}</span>
+                </div>
+                <div class="card-badges">
+                  ${uncapBadge}
+                </div>
+              </div>
+              <div class="mybox-card-title">
+                ${formatCardTitleHtml(c.name)}
+              </div>
+            </div>
+            <div style="margin-top: 8px;">
+              <div class="uncap-btn-group">
+                ${uncapButtons}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getRentalDiagnosis(result, distKey, styleKey, userBox, idealCards) {
+      const rental = result.rental;
+      const ownedTazunaUncap = userBox['SSR［一杯のノスタルジア］駿川たづな'] ?? -1;
+      const rentalName = rental.name;
+
+      if (rentalName.includes('駿川たづな')) {
+        return {
+          title: '🎯 シナリオ特効・友人完凸レンタル推奨',
+          reason: '手持ちに駿川たづなが未所持または未育成のため、最新シナリオのギミック成立・体力消費軽減・お出かけ回復を最大化できる「駿川たづな完凸」のレンタルを最優先選定しました。'
+        };
+      }
+
+      if (rentalName.includes('フォーエバーヤング')) {
+        return {
+          title: '🚀 汎用最高峰スピード練習・上限突破レンタル推奨',
+          reason: `手持ちの駿川たづな（${ownedTazunaUncap >= 0 ? ownedTazunaUncap + '凸' : '無凸'}）を自前で運用し、練習性能・スピード上限ボーナスが環境最強のフォーエバーヤング完凸をレンタルしてステータス天井を大きく引き上げます。	`
+        };
+      }
+
+      if (rentalName.includes('ミホノブルボン（賢さ）')) {
+        return {
+          title: '⚡ 逃げ必須級金スキル「盤石の構え」確保レンタル推奨',
+          reason: '逃げ脚質で勝敗を分ける最重要序盤加速「地固め」および上位金スキル「盤石の構え」を確実に高水準で取得するため、ミホノブルボン完凸をレンタル指定しています。'
+        };
+      }
+
+      if (rentalName.includes('ダイワスカーレット')) {
+        return {
+          title: '🔥 逃げ中盤支配金スキル「万里一空」確保レンタル推奨',
+          reason: '逃げの中盤競り合いを圧倒する「万里一空」を習得するため、SSRダイワスカーレット（賢さ）完凸をレンタル枠に採用しています。'
+        };
+      }
+
+      return {
+        title: `⭐ 戦力最大化レンタル（${rental.charName}完凸）`,
+        reason: `自前編成（5枠）の総合評価を底上げし、この距離・脚質における理想編成のキースキル・練習ボーナスを最も補完できる「${rental.name}完凸」を選定しました。`
+      };
+    }
+
+    function executeBuildDeck() {
+      const container = document.getElementById('builder-result-container');
+      if (!container) return;
+
+      const lockedRental = document.getElementById('builder-rental-select')?.value || 'auto';
+      const meta = getMetaData();
+      const distInfo = meta.distance_style_builds[builderCurrentDist];
+      const build = distInfo.styles[builderCurrentStyle];
+      const idealCards = build.cards;
+
+      const result = buildOptimalDeck(builderCurrentDist, builderCurrentStyle, myBoxData, lockedRental);
+
+      if (!result) {
+        container.innerHTML = '<div style="padding: 20px; color: #f87171; text-align: center;">デッキ算出に失敗しました。条件を見直してください。</div>';
+        return;
+      }
+
+      const diagnosis = getRentalDiagnosis(result, builderCurrentDist, builderCurrentStyle, myBoxData, idealCards);
+
+      // Archetype type counts
+      const typeCounts = {};
+      [result.rental, ...result.owned].forEach(c => {
+        typeCounts[c.type] = (typeCounts[c.type] || 0) + 1;
+      });
+      const ratioStr = Object.entries(typeCounts)
+        .map(([t, cnt]) => `${TYPE_NAMES[t] || t} ${cnt}`)
+        .join(' / ');
+
+      // Render Cards (1 Rental + 5 Owned)
+      const renderSingleDeckCard = (c, isRental = false) => {
+        const typeChar = TYPE_CHARS[c.type] || 'サ';
+        const typeName = TYPE_NAMES[c.type] || '';
+        const uncapTagHtml = isRental
+          ? '<span class="builder-rental-tag">⭐ レンタル枠 (完凸)</span>'
+          : (c.uncap === 4
+            ? '<span class="builder-uncap-indicator uncap-tag-max">自前 完凸</span>'
+            : (c.uncap === 3
+              ? '<span class="builder-uncap-indicator uncap-tag-high">自前 3凸</span>'
+              : (c.uncap >= 1
+                ? `<span class="builder-uncap-indicator uncap-tag-mid">自前 ${c.uncap}凸</span>`
+                : (c.uncap === 0
+                  ? '<span class="builder-uncap-indicator uncap-tag-zero">自前 無凸</span>'
+                  : '<span class="builder-uncap-indicator uncap-tag-missing">⚠️ 未所持枠</span>'))));
+
+        return `
+          <div class="builder-deck-card ${isRental ? 'is-rental' : ''}">
+            <div class="card-top-row">
+              <div class="card-type-group">
+                <span class="card-type-icon type-${c.type}">${typeChar}</span>
+                <span class="card-type-name">${typeName}</span>
+              </div>
+              <div class="card-badges">
+                ${uncapTagHtml}
+              </div>
+            </div>
+            <div class="card-body">
+              ${formatCardTitleHtml(c.name)}
+              <div class="card-role-full">${c.desc || c.role || ''}</div>
+            </div>
+          </div>
+        `;
+      };
+
+      // Bench runner-up cards
+      const usedNames = new Set([result.rental.name, ...result.owned.map(c => c.name)]);
+      const usedChars = new Set([getBaseCharName(result.rental.name), ...result.owned.map(c => getBaseCharName(c.name))]);
+      const targetTypes = new Set(idealCards.map(c => c.type));
+
+      const benchCards = getAllMasterCards()
+        .filter(c => 
+          !usedNames.has(c.name) && 
+          !usedChars.has(getBaseCharName(c.name)) &&
+          targetTypes.has(c.type) &&
+          (myBoxData[c.name] ?? -1) >= 0 &&
+          isCardAllowedForStyle(c.name, builderCurrentStyle, builderCurrentDist)
+        )
+        .map(c => ({
+          ...c,
+          uncap: myBoxData[c.name],
+          score: scoreCard(c, builderCurrentDist, builderCurrentStyle, myBoxData[c.name])
+        }))
+        .filter(c => c.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 4);
+
+      let benchHtml = '';
+      if (benchCards.length > 0) {
+        benchHtml = `
+          <div class="builder-bench-box">
+            <div class="builder-bench-title">
+              <span>🔄</span> 手持ちの有力サブ・ベンチ候補（入れ替え検討用）:
+            </div>
+            <div class="builder-bench-list">
+              ${benchCards.map(c => `
+                <div class="builder-bench-item">
+                  <span class="card-type-icon type-${c.type}" style="width: 18px; height: 18px; font-size: 0.65rem;">${TYPE_CHARS[c.type]}</span>
+                  <strong>${c.name}</strong>
+                  <span style="color: var(--highlight);">(${c.uncap === 4 ? '完凸' : c.uncap + '凸'})</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = `
+        <!-- Overview Bar -->
+        <div class="builder-overview-bar">
+          <div>
+            <div class="builder-overview-title">
+              <span>${distInfo.icon}</span>
+              <span>${distInfo.name} × ${builderCurrentStyle === 'runner' ? '逃げ' : (builderCurrentStyle === 'leader' ? '先行' : (builderCurrentStyle === 'betweener' ? '差し' : '追込'))} 手持ち最適編成</span>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+              編成タイプ構成: <strong>${ratioStr}</strong>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <div class="builder-score-badge">
+              理想枠一致: ${result.idealMatches} / 6
+            </div>
+            <div class="builder-score-badge" style="background: rgba(56, 189, 248, 0.15); border-color: var(--highlight); color: var(--highlight);">
+              総合指数: ${Math.round(result.totalScore)}pt
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 Cards Grid -->
+        <div class="builder-card-grid">
+          ${renderSingleDeckCard(result.rental, true)}
+          ${result.owned.map(c => renderSingleDeckCard(c, false)).join('')}
+        </div>
+
+        <!-- Strategic Diagnosis Box -->
+        <div class="rental-diagnosis-box">
+          <div class="rental-diagnosis-header">
+            <span style="font-size: 1.1rem;">💡</span>
+            <div class="rental-diagnosis-title">${diagnosis.title}</div>
+          </div>
+          <div class="rental-diagnosis-body">
+            ${diagnosis.reason}
+          </div>
+        </div>
+
+        <!-- Bench Cards -->
+        ${benchHtml}
+      `;
+    }
+
+    // Run Initialization
     init();
+
   </script>
 </body>
 </html>
