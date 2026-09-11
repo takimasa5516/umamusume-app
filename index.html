@@ -1183,6 +1183,62 @@
       font-weight: 700;
     }
 
+  
+    /* Recent Update Alert Box */
+    .update-alert-box {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(56, 189, 248, 0.1));
+      border: 1.5px solid var(--highlight);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .update-alert-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .update-badge-pill {
+      background: linear-gradient(135deg, #ef4444, #f59e0b);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+    .update-sub-pill {
+      font-size: 0.72rem;
+      color: var(--highlight);
+      font-weight: 600;
+    }
+    .update-row {
+      font-size: 0.81rem;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+    .update-topic-title {
+      color: var(--accent-gold);
+      margin-right: 4px;
+    }
+    [data-theme="light"] .update-alert-box {
+      background: #f0f9ff;
+      border-color: #0284c7;
+    }
+    [data-theme="light"] .update-alert-top {
+      border-bottom-color: #e2e8f0;
+    }
+    [data-theme="light"] .update-sub-pill {
+      color: #0369a1;
+    }
+    [data-theme="light"] .update-topic-title {
+      color: #b45309;
+    }
+
   </style>
 </head>
 <body>
@@ -1199,6 +1255,30 @@
   </header>
 
   <div class="container">
+
+        <!-- Recent Update Announcement Banner (2026/09/11) -->
+    <div class="update-alert-box">
+      <div class="update-alert-top">
+        <span class="update-badge-pill">🚀 2026/09/11 直近アプデ速報</span>
+        <span class="update-sub-pill">新機能＆新サポカ反映完了</span>
+      </div>
+      <div class="update-alert-body">
+        <div class="update-row">
+          <strong class="update-topic-title">🎴 新規サポカ実装:</strong>
+          <span>
+            <strong>SSR［行き先はあたたかな場所］マチカネタンホイザ</strong>（スピード/差しSS+・金2種『突撃魂』＋『励声一番』＆スキルPtボーナス2）／
+            <strong>SR［清く、やわらかな夜］ゼンノロブロイ</strong>（根性・高得意率60・末脚）／
+            5.5周年<strong>SSRエフフォーリア</strong>（先行SS+）／<strong>SSRミスターシービー</strong>（追込SS+）を全編成・上限解放・手持ちビルダーに完全配備！
+          </span>
+        </div>
+        <div class="update-row" style="margin-top: 6px;">
+          <strong class="update-topic-title">⚙️ 育成革命システム:</strong>
+          <span>
+            希望スキルを事前登録し一括取得できる<strong>「スキルセット」機能</strong> ＆ 本育成・継承ウマ娘を一元管理する<strong>「育成プランシート」機能</strong>、および「アグネスタキオンの究極因子研究」イベントに対応！
+          </span>
+        </div>
+      </div>
+    </div>
 
     <!-- Main Navigation Tabs (5 Tabs) -->
     <nav class="main-nav">
@@ -2455,6 +2535,8 @@
       if (cardName.includes('ミスターシービー') && styleKey !== 'chaser') return false;
       if (cardName.includes('エイシンフラッシュ') && styleKey !== 'betweener') return false;
       if (cardName.includes('ダイワスカーレット') && styleKey !== 'runner') return false;
+      if (cardName.includes('マチカネタンホイザ') && styleKey !== 'betweener') return false;
+      if (cardName.includes('エフフォーリア') && styleKey !== 'leader') return false;
       if (cardName.includes('マルシュロレーヌ') && distKey !== 'dirt') return false;
       if (cardName.includes('ハルウララ') && distKey !== 'dirt') return false;
       return true;
@@ -2845,6 +2927,27 @@
         return {
           title: '🔥 逃げ中盤支配金スキル「万里一空」確保レンタル推奨',
           reason: '逃げの中盤競り合いを圧倒する「万里一空」を習得するため、SSRダイワスカーレット（賢さ）完凸をレンタル枠に採用しています。'
+        };
+      }
+
+      if (rentalName.includes('マチカネタンホイザ')) {
+        return {
+          title: '⚡ 差し専用金スキル2種＆スキルPt特化（9/11新実装）レンタル推奨',
+          reason: '9/11新登場のSSRマチカネタンホイザ完凸をレンタル。差しの中盤後半を支配する『突撃魂』＋『励声一番』を同時に確保し、スキルPtボーナス2と最高峰の練習性能で差しウマ娘の育成戦力を極大化します。'
+        };
+      }
+
+      if (rentalName.includes('エフフォーリア')) {
+        return {
+          title: '🏆 先行圧倒的練習性能＆金スキル確保レンタル推奨',
+          reason: '先行育成で圧倒的な練習火力（友情40%・トレ効果20%・得意率120）と金スキル『素質の証明』を確保するため、SSRエフフォーリア完凸をレンタル枠に選定しました。'
+        };
+      }
+
+      if (rentalName.includes('ミスターシービー')) {
+        return {
+          title: '🌪️ 追込最高峰スピード＆中盤支配金スキルレンタル推奨',
+          reason: '追込育成で中盤金速度『当機立断』や金加速『君臨』を習得し、スピード練習性能を極限まで高めるため、SSRミスターシービー完凸をレンタル枠に選定しました。'
         };
       }
 
