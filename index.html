@@ -2263,12 +2263,28 @@
 
       // Rule Banner
       const rule = data.rule_explanation;
-      document.getElementById('rule-banner').innerHTML = `
-        <h3>✨ ${rule.title}</h3>
-        <p><strong>【結論】</strong> ${rule.summary}</p>
-        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 6px; line-height: 1.5;">💡 <strong>メカニズム:</strong> ${rule.mechanism}</p>
-        <p style="color: var(--accent-gold); font-size: 0.8rem; margin-top: 4px;">🏆 <strong>効果:</strong> ${rule.benefit}</p>
-      `;
+      if (rule) {
+        let mechanicsHtml = '';
+        if (rule.key_mechanics && Array.isArray(rule.key_mechanics)) {
+          mechanicsHtml = `
+            <div style="margin-top: 10px; display: grid; gap: 8px;">
+              ${rule.key_mechanics.map(m => `
+                <div style="background: rgba(0,0,0,0.22); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; line-height: 1.45;">
+                  ${m}
+                </div>
+              `).join('')}
+            </div>
+          `;
+        } else {
+          if (rule.mechanism) mechanicsHtml += `<p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 6px; line-height: 1.5;">💡 <strong>メカニズム:</strong> ${rule.mechanism}</p>`;
+          if (rule.benefit) mechanicsHtml += `<p style="color: var(--accent-gold); font-size: 0.8rem; margin-top: 4px;">🏆 <strong>効果:</strong> ${rule.benefit}</p>`;
+        }
+        document.getElementById('rule-banner').innerHTML = `
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: #fde047; margin-bottom: 6px;">✨ ${rule.title}</h3>
+          <p style="font-size: 0.85rem; line-height: 1.5;"><strong>【結論】</strong> ${rule.summary}</p>
+          ${mechanicsHtml}
+        `;
+      }
 
       // 1. Regional Rules Container
       const poolsContainer = document.getElementById('region-pools-container');
@@ -2308,11 +2324,12 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
               <!-- Junior -->
               <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #10b981;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
                   <strong style="font-size: 0.85rem; color: #6ee7b7;">🌱 ジュニア級 (東日本限定)</strong>
                   <span class="distance-region-ratio-badge">${deck.junior.ingredient_ratio}</span>
                 </div>
-                <div style="display: flex; gap: 4px; margin-bottom: 6px;">
+                ${deck.junior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.junior.raw_ingredients_total}</div>` : ''}
+                <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
                   ${deck.junior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
                 </div>
                 <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.junior.purpose}</div>
@@ -2320,11 +2337,12 @@
 
               <!-- Classic -->
               <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #3b82f6;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
                   <strong style="font-size: 0.85rem; color: #93c5fd;">⚔️ クラシック級 (西日本限定)</strong>
                   <span class="distance-region-ratio-badge">${deck.classic.ingredient_ratio}</span>
                 </div>
-                <div style="display: flex; gap: 4px; margin-bottom: 6px;">
+                ${deck.classic.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.classic.raw_ingredients_total}</div>` : ''}
+                <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
                   ${deck.classic.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
                 </div>
                 <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.classic.purpose}</div>
@@ -2332,11 +2350,12 @@
 
               <!-- Senior -->
               <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #f59e0b;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
                   <strong style="font-size: 0.85rem; color: #fde047;">👑 シニア級 (全10地域解禁)</strong>
                   <span class="distance-region-ratio-badge">${deck.senior.ingredient_ratio}</span>
                 </div>
-                <div style="display: flex; gap: 4px; margin-bottom: 6px;">
+                ${deck.senior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.senior.raw_ingredients_total}</div>` : ''}
+                <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
                   ${deck.senior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
                 </div>
                 <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.senior.purpose}</div>
