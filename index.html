@@ -1250,17 +1250,20 @@
         <span>🏇 ウマ娘 育成サポート</span>
         <span class="scenario-pill" id="scenario-pill">最新シナリオ</span>
       </div>
-      <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌓 テーマ切替</button>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button class="theme-toggle" id="sync-meta-btn" onclick="syncOnlineMeta()" style="background: rgba(16, 185, 129, 0.25); border: 1px solid #10b981; color: #a7f3d0;" title="最新サポカ・PvPメタデータをGitHubからオンライン同期します">🔄 オンライン同期</button>
+        <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌓 テーマ切替</button>
+      </div>
     </div>
   </header>
 
   <div class="container">
 
-        <!-- Recent Update Announcement Banner (2026/09/11) -->
-    <div class="update-alert-box">
+        <!-- Recent Update Announcement Banner -->
+    <div class="update-alert-box" id="update-alert-box">
       <div class="update-alert-top">
-        <span class="update-badge-pill" style="background: linear-gradient(135deg, #e11d48, #d97706);">🚨 9/29 凱旋門賞チャンミ 突発特別開催 ＆ 直近アプデ速報</span>
-        <span class="update-sub-pill" style="color: #f59e0b; font-weight: 700;">凱旋門賞（ロンシャン2400m不良・デバフ無効）対応完了</span>
+        <span class="update-badge-pill" style="background: linear-gradient(135deg, #e11d48, #d97706);">🚨 最新環境アップデート速報</span>
+        <span class="update-sub-pill" style="color: #f59e0b; font-weight: 700;">自動同期対応</span>
       </div>
       <div class="update-alert-body">
         <div class="update-row">
@@ -1752,8 +1755,72 @@
   <script>
     function getMetaData() {
       if (typeof window !== 'undefined' && window['UMA_META_DATA']) return window['UMA_META_DATA'];
+      try {
+        if (typeof localStorage !== 'undefined') {
+          const cached = localStorage.getItem('UMA_ONLINE_META_OVERRIDE');
+          if (cached) {
+            const parsed = JSON.parse(cached);
+            if (parsed && parsed.scenario) return parsed;
+          }
+        }
+      } catch(e){}
       if (typeof UMA_META_DATA !== 'undefined') return UMA_META_DATA;
       return null;
+    }
+
+    async function syncOnlineMeta() {
+      const btn = document.getElementById('sync-meta-btn');
+      const originalText = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.innerHTML = '⏳ 同期中...';
+        btn.disabled = true;
+      }
+      try {
+        const rawUrl = 'https://raw.githubusercontent.com/takimasa5516/umamusume-app/main/uma_meta_data.json?t=' + Date.now();
+        const res = await fetch(rawUrl);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const remoteData = await res.json();
+        if (remoteData && remoteData.scenario) {
+          window.UMA_META_DATA = remoteData;
+          globalThis.UMA_META_DATA = remoteData;
+          try {
+            if (typeof localStorage !== 'undefined') {
+              localStorage.setItem('UMA_ONLINE_META_OVERRIDE', JSON.stringify(remoteData));
+            }
+          } catch(e){}
+          init();
+          if (typeof initBuilder === 'function') initBuilder();
+          alert('✅ 最新メタデータのオンライン同期が完了しました！\n（最新サポカ・PvPイベント情報を即時反映しました）');
+        }
+      } catch (err) {
+        console.warn('Online sync fallback:', err);
+        alert('ℹ️ リモート最新データへの接続がタイムアウトまたはオフラインのため、組み込み最新データで動作しています。');
+      } finally {
+        if (btn) {
+          btn.innerHTML = originalText || '🔄 オンライン同期';
+          btn.disabled = false;
+        }
+      }
+    }
+
+    function renderRecentUpdateBanner() {
+      const data = getMetaData();
+      const alertBox = document.getElementById('update-alert-box');
+      if (!alertBox || !data || !data.scenario || !data.scenario.recent_update) return;
+      const u = data.scenario.recent_update;
+      alertBox.innerHTML = `
+        <div class="update-alert-top">
+          <span class="update-badge-pill" style="background: linear-gradient(135deg, #e11d48, #d97706);">🚨 ${u.date} 最新環境アップデート速報</span>
+          <span class="update-sub-pill" style="color: #f59e0b; font-weight: 700;">${u.title}</span>
+        </div>
+        <div class="update-alert-body">
+          ${u.highlights.map(h => `
+            <div class="update-row" style="margin-bottom: 6px; line-height: 1.5;">
+              <span>${h}</span>
+            </div>
+          `).join('')}
+        </div>
+      `;
     }
     
     function getUncapBadgeHtml(cardName) {
@@ -1886,8 +1953,9 @@
         return;
       }
 
-      // Scenario Pill
+      // Scenario Pill & Recent Update Banner
       document.getElementById('scenario-pill').textContent = data.scenario.name;
+      renderRecentUpdateBanner();
 
       // Render Bars
       renderDistanceBar();

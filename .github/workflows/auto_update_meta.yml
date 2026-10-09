@@ -1,0 +1,56 @@
+name: Auto Sync Uma Meta & PvP Strategy
+
+on:
+  schedule:
+    # 毎日 03:30 UTC (日本時間 12:30 JST - ガチャ更新後30分)
+    - cron: '30 3 * * *'
+    # 毎日 12:30 UTC (日本時間 21:30 JST - 夜間定期チェック)
+    - cron: '30 12 * * *'
+  workflow_dispatch:
+    inputs:
+      force_sync:
+        description: '強制同期を実行するか'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-meta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリのチェックアウト
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Node.js 環境のセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: 'package.json'
+
+      - name: メタ同期パイプラインの実行
+        run: |
+          node scripts/sync_meta_pipeline.js
+
+      - name: 総合自動テストの実行
+        run: |
+          npm test
+
+      - name: 変更差分の検知と自動コミット＆プッシュ
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "差分を検知しました。自動コミットを実行します。"
+            git add uma_meta_data.json data.js
+            git commit -m "chore(meta): 定期自動更新 - 最新サポカ・PvPイベント反映 [skip ci]"
+            git push origin main
+          else
+            echo "最新データと差分はありませんでした。"
+          fi

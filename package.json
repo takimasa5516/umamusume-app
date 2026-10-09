@@ -1,0 +1,23 @@
+{
+  "name": "umamusume-app",
+  "version": "1.2.0",
+  "description": "ウマ娘 育成サポートツール - 最新シナリオ・PvPイベント・手持ちデッキビルダー",
+  "main": "data.js",
+  "scripts": {
+    "test": "node scripts/test_all.js",
+    "sync-meta": "node scripts/sync_meta_pipeline.js",
+    "build": "node scripts/test_all.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takimasa5516/umamusume-app.git"
+  },
+  "keywords": [
+    "umamusume",
+    "deck-builder",
+    "champions-meeting",
+    "strategy"
+  ],
+  "author": "takimasa5516",
+  "license": "MIT"
+}
