@@ -1289,27 +1289,27 @@
       </div>
     </div>
 
-    <!-- Main Navigation Tabs (5 Tabs) -->
+    <!-- Main Navigation Tabs -->
     <nav class="main-nav">
-      <button class="nav-btn active" onclick="switchSection('builds')">
+      <button class="nav-btn active" data-section="builds" onclick="switchSection('builds')">
         <span>🎴 距離別</span>
       </button>
-      <button class="nav-btn" onclick="switchSection('styles')">
+      <button class="nav-btn" data-section="styles" onclick="switchSection('styles')">
         <span>🏃 脚質別</span>
       </button>
-      <button class="nav-btn" onclick="switchSection('events')">
+      <button class="nav-btn" data-section="events" onclick="switchSection('events')">
         <span>🏆 イベント</span>
       </button>
-      <button class="nav-btn" onclick="switchSection('regions')">
+      <button class="nav-btn" data-section="regions" onclick="switchSection('regions')">
         <span>⛩️ 演目・教え戦略</span>
       </button>
-      <button class="nav-btn" onclick="switchSection('sources')">
+      <button class="nav-btn" data-section="sources" onclick="switchSection('sources')">
         <span>📺 動画集約</span>
       </button>
-      <button class="nav-btn" onclick="switchSection('uncaps')">
+      <button class="nav-btn" data-section="uncaps" onclick="switchSection('uncaps')">
         <span>⭐ 凸数一覧</span>
       </button>
-      <button class="nav-btn" onclick="switchSection('builder')">
+      <button class="nav-btn" data-section="builder" onclick="switchSection('builder')">
         <span>🛠️ 手持ちビルダー</span>
       </button>
     </nav>
@@ -1589,6 +1589,14 @@
         <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
           駿大祭シナリオでは、ジュニア級（基礎演目伝受・吾妻絆上げ）→クラシック級（合宿演目稽古連打・神駒教え転成）→シニア級（全演目Lv10カンスト・ステータス上限2500到達）と、各期の目的に応じて演目Lvと教えを最適化します。
         </p>
+
+        <!-- Deck Strategy Filter Buttons -->
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+          <button type="button" class="pill-btn active" id="deck-filter-all" onclick="filterDeckStrategies('all')">全プラン表示</button>
+          <button type="button" class="pill-btn" id="deck-filter-medium-long" onclick="filterDeckStrategies('medium-long')">🌟 中距離・長距離（スタミナ採用・根性抜き）</button>
+          <button type="button" class="pill-btn" id="deck-filter-short-mile-dirt" onclick="filterDeckStrategies('short-mile-dirt')">⚡ 短距離・マイル・ダート（根性採用・スタミナ抜き）</button>
+        </div>
+
         <div id="deck-strategies-list">
           <!-- Injected by JS -->
         </div>
@@ -1776,21 +1784,31 @@
 
   </div>
 
-  <script src="data.js"></script>
+  <script src="data.js?v=20261027_2000"></script>
   <script>
     function getMetaData() {
-      if (typeof window !== 'undefined' && window['UMA_META_DATA']) return window['UMA_META_DATA'];
+      // 1. Embedded data loaded from data.js
+      const embedded = (typeof window !== 'undefined' && window['UMA_META_DATA']) 
+        ? window['UMA_META_DATA'] 
+        : (typeof UMA_META_DATA !== 'undefined' ? UMA_META_DATA : null);
+
+      // 2. Check localStorage override, but safely validate it has the latest teachings structure
       try {
         if (typeof localStorage !== 'undefined') {
           const cached = localStorage.getItem('UMA_ONLINE_META_OVERRIDE');
           if (cached) {
             const parsed = JSON.parse(cached);
-            if (parsed && parsed.scenario) return parsed;
+            if (parsed && parsed.scenario && parsed.region_strategies && parsed.region_strategies.teachings_strategy) {
+              return parsed;
+            } else {
+              // Outdated cache detected, purge it to prevent silent breaking of tabs
+              localStorage.removeItem('UMA_ONLINE_META_OVERRIDE');
+            }
           }
         }
       } catch(e){}
-      if (typeof UMA_META_DATA !== 'undefined') return UMA_META_DATA;
-      return null;
+
+      return embedded;
     }
 
     async function syncOnlineMeta() {
@@ -2012,7 +2030,8 @@
     function switchSection(sectionId) {
       activeSection = sectionId;
       document.querySelectorAll('.nav-btn').forEach((btn, idx) => {
-        btn.classList.toggle('active', 
+        const sec = btn.getAttribute('data-section');
+        const isActive = sec ? (sec === sectionId) : (
           (sectionId === 'builds' && idx === 0) ||
           (sectionId === 'styles' && idx === 1) ||
           (sectionId === 'events' && idx === 2) ||
@@ -2021,6 +2040,7 @@
           (sectionId === 'uncaps' && idx === 5) ||
           (sectionId === 'builder' && idx === 6)
         );
+        btn.classList.toggle('active', isActive);
       });
 
       document.getElementById('section-builds').style.display = sectionId === 'builds' ? 'block' : 'none';
@@ -2037,6 +2057,7 @@
       document.getElementById('style-bar').style.display = sectionId === 'styles' ? 'flex' : 'none';
       document.getElementById('event-bar').style.display = sectionId === 'events' ? 'flex' : 'none';
     }
+    window.switchSection = switchSection;
 
     function renderDistanceBar() {
       const bar = document.getElementById('dist-bar');
@@ -2405,58 +2426,7 @@
       }
 
       // 2. Deck-type based 2:3:5 region recommendations
-      const deckList = document.getElementById('deck-strategies-list');
-      if (deckList && data.deck_recommendations) {
-        deckList.innerHTML = data.deck_recommendations.map(deck => `
-          <div style="background: var(--card-sub); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; margin-bottom: 14px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; border-bottom: 1px solid var(--card-border); padding-bottom: 6px;">
-              <strong style="color: var(--highlight); font-size: 0.95rem;">🎴 ${deck.deck_type}</strong>
-              <span class="tier-badge tier-s" style="font-size: 0.72rem;">適応: ${deck.target_distances}</span>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
-              <!-- Junior -->
-              <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #10b981;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
-                  <strong style="font-size: 0.85rem; color: #6ee7b7;">🌱 ジュニア級（基礎演目伝受期）</strong>
-                  <span class="distance-region-ratio-badge">${deck.junior.ingredient_ratio}</span>
-                </div>
-                ${deck.junior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.junior.raw_ingredients_total}</div>` : ''}
-                <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
-                  ${deck.junior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
-                </div>
-                <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.junior.purpose}</div>
-              </div>
-
-              <!-- Classic -->
-              <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #3b82f6;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
-                  <strong style="font-size: 0.85rem; color: #93c5fd;">⚔️ クラシック級（演目稽古急伸期）</strong>
-                  <span class="distance-region-ratio-badge">${deck.classic.ingredient_ratio}</span>
-                </div>
-                ${deck.classic.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.classic.raw_ingredients_total}</div>` : ''}
-                <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
-                  ${deck.classic.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
-                </div>
-                <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.classic.purpose}</div>
-              </div>
-
-              <!-- Senior -->
-              <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #f59e0b;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
-                  <strong style="font-size: 0.85rem; color: #fde047;">👑 シニア級（午式駿大祭本番・カンスト仕上げ）</strong>
-                  <span class="distance-region-ratio-badge">${deck.senior.ingredient_ratio}</span>
-                </div>
-                ${deck.senior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.senior.raw_ingredients_total}</div>` : ''}
-                <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
-                  ${deck.senior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
-                </div>
-                <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.senior.purpose}</div>
-              </div>
-            </div>
-          </div>
-        `).join('');
-      }
+      renderDeckStrategies();
 
       // 3. Region Master Table
       const masterTbody = document.getElementById('region-master-tbody');
@@ -2480,16 +2450,104 @@
       renderTeachingsStrategy(currentTeachingPeriod);
     }
 
+    let currentDeckFilter = 'all';
+
+    function filterDeckStrategies(filter) {
+      currentDeckFilter = filter;
+      const filters = ['all', 'medium-long', 'short-mile-dirt'];
+      filters.forEach(f => {
+        const btn = document.getElementById(`deck-filter-${f}`);
+        if (btn) btn.classList.toggle('active', f === filter);
+      });
+      renderDeckStrategies();
+    }
+    window.filterDeckStrategies = filterDeckStrategies;
+
+    function renderDeckStrategies() {
+      const deckList = document.getElementById('deck-strategies-list');
+      const data = getMetaData().region_strategies;
+      if (!deckList || !data || !data.deck_recommendations) return;
+
+      const filteredDecks = data.deck_recommendations.filter(deck => {
+        if (currentDeckFilter === 'all') return true;
+        if (currentDeckFilter === 'medium-long') {
+          return deck.deck_type.includes('中距離') || deck.deck_type.includes('長距離');
+        }
+        if (currentDeckFilter === 'short-mile-dirt') {
+          return deck.deck_type.includes('短距離') || deck.deck_type.includes('マイル') || deck.deck_type.includes('ダート');
+        }
+        return true;
+      });
+
+      deckList.innerHTML = filteredDecks.map(deck => `
+        <div style="background: var(--card-sub); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; margin-bottom: 14px; transition: all 0.2s;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; border-bottom: 1px solid var(--card-border); padding-bottom: 6px;">
+            <strong style="color: var(--highlight); font-size: 0.95rem;">🎴 ${deck.deck_type}</strong>
+            <span class="tier-badge tier-s" style="font-size: 0.72rem;">適応: ${deck.target_distances}</span>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
+            <!-- Junior -->
+            <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #10b981;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
+                <strong style="font-size: 0.85rem; color: #6ee7b7;">🌱 ジュニア級（基礎演目伝受期）</strong>
+                <span class="distance-region-ratio-badge">${deck.junior.ingredient_ratio}</span>
+              </div>
+              ${deck.junior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.junior.raw_ingredients_total}</div>` : ''}
+              <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
+                ${deck.junior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.junior.purpose}</div>
+            </div>
+
+            <!-- Classic -->
+            <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #3b82f6;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
+                <strong style="font-size: 0.85rem; color: #93c5fd;">⚔️ クラシック級（演目稽古急伸期）</strong>
+                <span class="distance-region-ratio-badge">${deck.classic.ingredient_ratio}</span>
+              </div>
+              ${deck.classic.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.classic.raw_ingredients_total}</div>` : ''}
+              <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
+                ${deck.classic.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.classic.purpose}</div>
+            </div>
+
+            <!-- Senior -->
+            <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #f59e0b;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
+                <strong style="font-size: 0.85rem; color: #fde047;">👑 シニア級（午式駿大祭本番・カンスト仕上げ）</strong>
+                <span class="distance-region-ratio-badge">${deck.senior.ingredient_ratio}</span>
+              </div>
+              ${deck.senior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.senior.raw_ingredients_total}</div>` : ''}
+              <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
+                ${deck.senior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.senior.purpose}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
     let currentTeachingPeriod = 'junior';
 
     function switchTeachingPeriod(periodKey) {
       currentTeachingPeriod = periodKey;
       ['junior', 'classic', 'senior', 'tree'].forEach(k => {
         const btn = document.getElementById(`teach-tab-${k}`);
-        if (btn) btn.classList.toggle('active', k === periodKey);
+        if (btn) {
+          btn.classList.toggle('active', k === periodKey);
+          if (k === periodKey) {
+            btn.style.boxShadow = '0 0 12px var(--accent)';
+          } else {
+            btn.style.boxShadow = 'none';
+          }
+        }
       });
       renderTeachingsStrategy(periodKey);
     }
+    window.switchTeachingPeriod = switchTeachingPeriod;
 
     function renderTeachingsStrategy(periodKey = 'junior') {
       const container = document.getElementById('teachings-dynamic-content');
@@ -2504,12 +2562,15 @@
       if (periodKey === 'tree') {
         const tree = strategy.evolution_tree || [];
         container.innerHTML = `
-          <div style="background: rgba(0,0,0,0.2); border-radius: 10px; padding: 14px; border: 1px solid var(--card-border);">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
-              <h4 style="font-size: 0.95rem; color: var(--accent-gold); font-weight: 700;">🔄 駿大祭 「教え」転成（進化）系統樹 ＆ Tier早見表</h4>
-              <span class="tier-badge tier-s" style="font-size: 0.72rem;">クラシック1月・シニア1月 進捗発表会後に転成可能</span>
+          <div style="background: rgba(0,0,0,0.22); border-radius: 12px; padding: 16px; border: 2px solid var(--accent-gold); box-shadow: 0 4px 15px rgba(0,0,0,0.25);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; border-bottom: 1px solid var(--card-border); padding-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="tier-badge tier-s" style="font-size: 0.8rem; background: linear-gradient(135deg, #8b5cf6, #ec4899);">選択中: 🔄 系統樹</span>
+                <h4 style="font-size: 1rem; color: var(--accent-gold); font-weight: 700; margin: 0;">駿大祭 「教え」転成（進化）系統樹 ＆ Tier早見表</h4>
+              </div>
+              <span class="region-pill" style="font-size: 0.72rem;">クラシック1月・シニア1月 進捗発表会後に転成可能</span>
             </div>
-            <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.45;">
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">
               育成中の進捗発表会（クラシック1月・シニア1月）を経て、初期教えを上位教えへパワーアップ転成できます。<strong>一度転成した教えは元に戻せない</strong>ため、育成目標に応じた計画的進化が勝敗を分けます。
             </p>
             <div style="overflow-x: auto;">
@@ -2517,8 +2578,8 @@
                 <thead>
                   <tr>
                     <th style="min-width: 100px;">初期教え (ジュニア)</th>
-                    <th style="min-width: 150px;">上位転成先 (クラシック/シニア)</th>
-                    <th style="min-width: 120px;">推奨配置スロット</th>
+                    <th style="min-width: 160px;">上位転成先 (クラシック/シニア)</th>
+                    <th style="min-width: 130px;">推奨配置スロット</th>
                     <th>転成時期・立ち回り評価</th>
                   </tr>
                 </thead>
@@ -2526,23 +2587,23 @@
                   ${tree.map(t => `
                     <tr>
                       <td>
-                        <strong style="color: #6ee7b7; font-size: 0.85rem;">🌱 ${t.base}</strong>
-                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 3px;">${t.base_effect}</div>
+                        <strong style="color: #6ee7b7; font-size: 0.88rem;">🌱 ${t.base}</strong>
+                        <div style="font-size: 0.73rem; color: var(--text-muted); margin-top: 3px;">${t.base_effect}</div>
                       </td>
                       <td>
-                        <div style="display: flex; align-items: center; gap: 5px;">
-                          <span style="font-size: 0.85rem; color: var(--highlight);">➔</span>
-                          <strong style="color: #fde047; font-size: 0.88rem;">✨ ${t.evolves_to}</strong>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <span style="font-size: 0.9rem; color: var(--highlight);">➔</span>
+                          <strong style="color: #fde047; font-size: 0.9rem;">✨ ${t.evolves_to}</strong>
                         </div>
-                        <div style="font-size: 0.74rem; color: var(--text-main); margin-top: 3px; line-height: 1.4;">${t.evolved_effect}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-main); margin-top: 4px; line-height: 1.45;">${t.evolved_effect}</div>
                       </td>
                       <td>
-                        <span class="region-pill" style="font-size: 0.74rem; padding: 2px 7px;">${t.target_slot}</span>
+                        <span class="region-pill" style="font-size: 0.75rem; padding: 3px 8px;">${t.target_slot}</span>
                       </td>
                       <td>
                         <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
                           <span class="tier-badge ${t.eval_tier.includes('SSS') ? 'tier-s' : 'tier-a'}" style="font-size: 0.72rem;">${t.eval_tier}</span>
-                          <span style="font-size: 0.75rem; color: var(--highlight); font-weight: 700;">⏳ ${t.timing}</span>
+                          <span style="font-size: 0.76rem; color: var(--highlight); font-weight: 700;">⏳ ${t.timing}</span>
                         </div>
                       </td>
                     </tr>
@@ -2560,26 +2621,30 @@
 
       const borderColor = periodKey === 'junior' ? '#10b981' : periodKey === 'classic' ? '#3b82f6' : '#f59e0b';
       const textColor = periodKey === 'junior' ? '#6ee7b7' : periodKey === 'classic' ? '#93c5fd' : '#fde047';
+      const periodLabel = periodKey === 'junior' ? '🌱 ジュニア級' : periodKey === 'classic' ? '⚔️ クラシック級' : '👑 シニア級';
 
       container.innerHTML = `
-        <div style="background: rgba(0,0,0,0.18); border-radius: 12px; padding: 14px; border-left: 4px solid ${borderColor}; border: 1px solid var(--card-border); margin-bottom: 8px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
-            <h4 style="font-size: 1rem; color: ${textColor}; font-weight: 700;">${period.period_name}</h4>
+        <div style="background: rgba(0,0,0,0.22); border-radius: 12px; padding: 16px; border: 2px solid ${borderColor}; box-shadow: 0 4px 15px rgba(0,0,0,0.25); margin-bottom: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; border-bottom: 1px solid var(--card-border); padding-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="tier-badge tier-s" style="font-size: 0.8rem; background: ${borderColor}; color: #fff;">選択中: ${periodLabel}</span>
+              <h4 style="font-size: 1.05rem; color: ${textColor}; font-weight: 700; margin: 0;">${period.period_name}</h4>
+            </div>
             <span class="tier-badge tier-s" style="font-size: 0.75rem;">🎯 ${period.primary_goal}</span>
           </div>
-          <p style="font-size: 0.8rem; color: var(--text-main); line-height: 1.5; margin-bottom: 12px; background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 6px;">
+          <p style="font-size: 0.82rem; color: var(--text-main); line-height: 1.55; margin-bottom: 14px; background: rgba(0,0,0,0.28); padding: 10px 14px; border-radius: 8px; border-left: 3px solid ${borderColor};">
             💡 <strong>立ち回り指針:</strong> ${period.core_concept}
           </p>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-bottom: 12px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 14px;">
             ${period.slot_allocations.map(slot => `
-              <div style="background: var(--card-sub); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                  <strong style="color: var(--highlight); font-size: 0.85rem;">⚡ ${slot.slot}</strong>
-                  <span class="region-pill" style="font-size: 0.74rem; font-weight: 700; color: #fde047; padding: 2px 7px;">${slot.recommended_teaching}</span>
+              <div style="background: var(--card-sub); border: 1px solid var(--card-border); border-radius: 10px; padding: 12px; transition: transform 0.15s ease;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <strong style="color: var(--highlight); font-size: 0.88rem;">⚡ ${slot.slot}</strong>
+                  <span class="region-pill" style="font-size: 0.76rem; font-weight: 700; color: #fde047; padding: 3px 8px; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3);">${slot.recommended_teaching}</span>
                 </div>
-                ${slot.transmutation_from ? `<div style="font-size: 0.72rem; color: #6ee7b7; margin-bottom: 4px;">🔄 転成: ${slot.transmutation_from}</div>` : ''}
-                <div style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.45;">
+                ${slot.transmutation_from ? `<div style="font-size: 0.74rem; color: #6ee7b7; margin-bottom: 5px; font-weight: 600;">🔄 転成: ${slot.transmutation_from}</div>` : ''}
+                <div style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
                   ${slot.reason}
                 </div>
               </div>
@@ -2587,7 +2652,7 @@
           </div>
 
           ${period.camp_advice ? `
-            <div style="background: rgba(245, 158, 11, 0.12); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: 6px; font-size: 0.78rem; color: #fde047; line-height: 1.45;">
+            <div style="background: rgba(245, 158, 11, 0.14); border-left: 4px solid var(--accent-gold); padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; color: #fde047; line-height: 1.5;">
               ${period.camp_advice}
             </div>
           ` : ''}
