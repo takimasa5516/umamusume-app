@@ -1301,7 +1301,7 @@
         <span>🏆 イベント</span>
       </button>
       <button class="nav-btn" onclick="switchSection('regions')">
-        <span>🗺️ 地域選択</span>
+        <span>⛩️ 演目・教え戦略</span>
       </button>
       <button class="nav-btn" onclick="switchSection('sources')">
         <span>📺 動画集約</span>
@@ -1362,7 +1362,7 @@
           </div>
           <div style="color: var(--text-main); font-size: 0.78rem; line-height: 1.6;">
             各カード名右側に実用ライン（推奨凸数）を明記しています。<br>
-            ・<span class="uncap-pill uncap-friend" style="margin: 0 2px;">無凸運用可 / 完凸推奨</span> <strong>友人枠（駿川たづな）:</strong> ギミック・コツ加速は無凸から100%機能。完凸で体力回復とお出かけ安定度が極大化。<br>
+            ・<span class="uncap-pill uncap-friend" style="margin: 0 2px;">無凸運用可 / 完凸推奨</span> <strong>友人枠（吾妻）:</strong> 演目Lv上限10解放ギミックは無凸から100%機能。完凸でお出かけ体力回復・消費体力軽減が極大化。<br>
             ・<span class="uncap-pill uncap-gold" style="margin: 0 2px;">1凸〜実用</span> <strong>加速・金スキル枠（ミホノブルボン/ダイイチルビー等）:</strong> スキル目的なら1凸から即戦力として編成可能。<br>
             ・<span class="uncap-pill uncap-rainbow" style="margin: 0 2px;">完凸推奨</span> <strong>練習主力（トウカイテイオー/エアグルーヴ/デアリングタクト等）:</strong> 得意率とトレ効果の観点から3凸〜完凸が必須ライン。
           </div>
@@ -1546,7 +1546,7 @@
       <div class="section-card">
         <div class="section-header">
           <div class="section-title">
-            <span>📅 時期別の選択ルールと選択可能地域プール</span>
+            <span>📅 駿大祭 時期別の演目進行ルールと目標演目Lv</span>
           </div>
         </div>
         <div id="region-pools-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 14px;">
@@ -1558,11 +1558,11 @@
       <div class="section-card">
         <div class="section-header">
           <div class="section-title">
-            <span>🍜 サポカ編成タイプ別 推奨3地域選択プラン（時期別・ステータス構築）</span>
+            <span>⛩️ サポカ編成タイプ別 演目稽古・教え育成プラン（時期別・ステータス構築）</span>
           </div>
         </div>
         <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
-          トレセン軒では、ジュニア級（東日本：絆・基盤作り）→クラシック級（西日本：主力練習・合宿強化）→シニア級（全10地域：比率調整＆カンスト仕上げ）と、各期の目的に応じて最適な3地域を選択します。
+          駿大祭シナリオでは、ジュニア級（基礎演目伝受・吾妻絆上げ）→クラシック級（合宿演目稽古連打・神駒教え転成）→シニア級（全演目Lv10カンスト・ステータス上限2500到達）と、各期の目的に応じて演目Lvと教えを最適化します。
         </p>
         <div id="deck-strategies-list">
           <!-- Injected by JS -->
@@ -1573,18 +1573,18 @@
       <div class="section-card">
         <div class="section-header">
           <div class="section-title">
-            <span>🗾 全10地域・コツ基礎値＆ラーメン効果マスター早見表</span>
+            <span>⛩️ 吾妻 ＆ 神駒5人（シナリオリンク）演目・教えマスター早見表</span>
           </div>
         </div>
         <div style="overflow-x: auto;">
           <table class="skills-table">
             <thead>
               <tr>
-                <th style="min-width: 60px;">地域名</th>
-                <th style="min-width: 120px;">選択可能時期</th>
-                <th style="min-width: 140px;">コツ基礎値 (麺/ス/ト)</th>
-                <th>ラーメン特徴と効果</th>
-                <th>主な役割・育成適性</th>
+                <th style="min-width: 90px;">キャラクター名</th>
+                <th style="min-width: 120px;">シナリオ役割</th>
+                <th style="min-width: 140px;">演目適性 (演目Lv10特効)</th>
+                <th>演目稽古・固有・金スキルの特徴</th>
+                <th>教えの伝受効果・推奨脚質</th>
               </tr>
             </thead>
             <tbody id="region-master-tbody">
@@ -2170,9 +2170,9 @@
         <div class="distance-region-plan">
           <div class="distance-region-plan-header">
             <div class="distance-region-plan-title">
-              <span>🗺️</span> この距離×編成の推奨3地域選択プラン
+              <span>⛩️</span> この距離×編成の演目・教え進行計画
             </div>
-            <button class="pill-btn" style="padding: 3px 10px; font-size: 0.74rem;" onclick="switchSection('regions')">時期別ガイド詳細を見る →</button>
+            <button class="pill-btn" style="padding: 3px 10px; font-size: 0.74rem;" onclick="switchSection('regions')">演目・教えガイド詳細を見る →</button>
           </div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px;">
             ${distData.region_plan.summary}
@@ -2183,7 +2183,7 @@
                 <span>🌱 ジュニア級</span>
                 <span class="distance-region-ratio-badge">${distData.region_plan.junior.ingredient_target || 'ステ基盤重視'}</span>
               </div>
-              <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.junior.selectable_pool || '東日本5地域から選択'}</div>
+              <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.junior.selectable_pool || '基礎演目伝受・吾妻絆上げ'}</div>
               <div class="region-tags" style="margin-bottom: 6px;">
                 ${distData.region_plan.junior.regions.map(r => `<span class="region-pill" style="font-size: 0.72rem; padding: 2px 7px;">📍 ${r}</span>`).join('')}
               </div>
@@ -2194,7 +2194,7 @@
                 <span>⚔️ クラシック級</span>
                 <span class="distance-region-ratio-badge">${distData.region_plan.classic.ingredient_target || '合宿・主トレ強化'}</span>
               </div>
-              <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.classic.selectable_pool || '西日本5地域から選択'}</div>
+              <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.classic.selectable_pool || '教え転成・合宿演目稽古連打'}</div>
               <div class="region-tags" style="margin-bottom: 6px;">
                 ${distData.region_plan.classic.regions.map(r => `<span class="region-pill" style="font-size: 0.72rem; padding: 2px 7px;">📍 ${r}</span>`).join('')}
               </div>
@@ -2205,7 +2205,7 @@
                 <span>👑 シニア級</span>
                 <span class="distance-region-ratio-badge">${distData.region_plan.senior.ingredient_target || 'ステ完成・試食会回転'}</span>
               </div>
-              <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.senior.selectable_pool || '全10地域から選択'}</div>
+              <div style="font-size: 0.7rem; color: var(--accent-gold); margin-bottom: 4px;">📍 ${distData.region_plan.senior.selectable_pool || '午式駿大祭本番・ステ天井2500'}</div>
               <div class="region-tags" style="margin-bottom: 6px;">
                 ${distData.region_plan.senior.regions.map(r => `<span class="region-pill" style="font-size: 0.72rem; padding: 2px 7px;">📍 ${r}</span>`).join('')}
               </div>
@@ -2393,7 +2393,7 @@
               <!-- Junior -->
               <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #10b981;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
-                  <strong style="font-size: 0.85rem; color: #6ee7b7;">🌱 ジュニア級 (東日本限定)</strong>
+                  <strong style="font-size: 0.85rem; color: #6ee7b7;">🌱 ジュニア級（基礎演目伝受期）</strong>
                   <span class="distance-region-ratio-badge">${deck.junior.ingredient_ratio}</span>
                 </div>
                 ${deck.junior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.junior.raw_ingredients_total}</div>` : ''}
@@ -2406,7 +2406,7 @@
               <!-- Classic -->
               <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #3b82f6;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
-                  <strong style="font-size: 0.85rem; color: #93c5fd;">⚔️ クラシック級 (西日本限定)</strong>
+                  <strong style="font-size: 0.85rem; color: #93c5fd;">⚔️ クラシック級（演目稽古急伸期）</strong>
                   <span class="distance-region-ratio-badge">${deck.classic.ingredient_ratio}</span>
                 </div>
                 ${deck.classic.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.classic.raw_ingredients_total}</div>` : ''}
@@ -2419,7 +2419,7 @@
               <!-- Senior -->
               <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #f59e0b;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
-                  <strong style="font-size: 0.85rem; color: #fde047;">👑 シニア級 (全10地域解禁)</strong>
+                  <strong style="font-size: 0.85rem; color: #fde047;">👑 シニア級（午式駿大祭本番・カンスト仕上げ）</strong>
                   <span class="distance-region-ratio-badge">${deck.senior.ingredient_ratio}</span>
                 </div>
                 ${deck.senior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.senior.raw_ingredients_total}</div>` : ''}
@@ -2441,11 +2441,9 @@
             <td><strong>📍 ${reg.name}</strong></td>
             <td><span class="uncap-pill uncap-standard" style="font-size: 0.72rem;">${reg.pool}</span></td>
             <td>
-              ${reg.ingredients ? `
-                <span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">
-                  🍜 麺:${reg.ingredients.noodle} / 🥣 ス:${reg.ingredients.soup} / 🍥 ト:${reg.ingredients.topping}
-                </span>
-              ` : '-'}
+              <span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">
+                ${reg.ingredients ? `演目適性: 麺${reg.ingredients.noodle}/ス${reg.ingredients.soup}/ト${reg.ingredients.topping}` : '演目Lv10特効'}
+              </span>
             </td>
             <td><span style="color: var(--text-main); font-size: 0.8rem;">${reg.effect}</span></td>
             <td><span style="color: var(--highlight); font-size: 0.78rem;">${reg.role}</span></td>
@@ -2807,9 +2805,9 @@
         masterCards.forEach(c => {
           if (c.rarity.includes('SR') || c.rarity.includes('配布')) {
             myBoxData[c.name] = 4;
-          } else if (c.name.includes('駿川たづな')) {
-            myBoxData[c.name] = 0; // 0凸でシナリオギミック実用
-          } else if (c.name.includes('ミホノブルボン（賢さ）') || c.name.includes('フォーエバーヤング')) {
+          } else if (c.name.includes('吾妻') || c.name.includes('駿川たづな')) {
+            myBoxData[c.name] = 0; // 0凸でシナリオギミック実用（演目Lv上限10解放）
+          } else if (c.name.includes('マヤノトップガン') || c.name.includes('ミホノブルボン（賢さ）') || c.name.includes('フォーエバーヤング')) {
             myBoxData[c.name] = 1; // 1凸で実用
           } else {
             myBoxData[c.name] = -1;
@@ -2897,7 +2895,7 @@
       // High priority candidates
       const keyRentals = masterCards.filter(c => 
         isCardAllowedForStyle(c.name, builderCurrentStyle, builderCurrentDist) &&
-        (c.name.includes('駿川たづな') || c.name.includes('フォーエバーヤング') || build.cards.some(i => i.name === c.name))
+        (c.name.includes('吾妻') || c.name.includes('マヤノトップガン') || c.name.includes('フォーエバーヤング') || c.name.includes('駿川たづな') || build.cards.some(i => i.name === c.name))
       );
 
       html += '<optgroup label="🌟 推奨有力レンタル候補">';
@@ -2992,20 +2990,34 @@
 
     function getRentalDiagnosis(result, distKey, styleKey, userBox, idealCards) {
       const rental = result.rental;
-      const ownedTazunaUncap = userBox['SSR［一杯のノスタルジア］駿川たづな'] ?? -1;
+      const ownedAzumaUncap = userBox['SSR［いとどめでたき、まつりかな］吾妻'] ?? (userBox['SSR 吾妻'] ?? -1);
       const rentalName = rental.name;
+
+      if (rentalName.includes('吾妻')) {
+        return {
+          title: '⛩️ 新シナリオ特効・友人「吾妻」完凸レンタル推奨',
+          reason: '手持ちに吾妻が未所持のため、駿大祭シナリオの核心である「演目Lv上限を6から10へ解放」し、お出かけでの最低演目Lv底上げ・「疲労回復」コンディション付与を最大化できる「吾妻完凸」のレンタルを最優先選定しました。'
+        };
+      }
+
+      if (rentalName.includes('マヤノトップガン')) {
+        return {
+          title: '🔥 駿大祭シナリオリンク神駒「マヤノトップガン」完凸レンタル推奨',
+          reason: '駿大祭シナリオリンク神駒である新SSRマヤノトップガン（パワー）完凸をレンタル。金スキル「英俊豪傑」およびシナリオ金スキル「順風満帆」を確実に確保し、ヒントLv4と強力なパワー練習で新シナリオの育成性能を極大化します。'
+        };
+      }
 
       if (rentalName.includes('駿川たづな')) {
         return {
-          title: '🎯 シナリオ特効・友人完凸レンタル推奨',
-          reason: '手持ちに駿川たづなが未所持または未育成のため、最新シナリオのギミック成立・体力消費軽減・お出かけ回復を最大化できる「駿川たづな完凸」のレンタルを最優先選定しました。'
+          title: '🎯 友人完凸レンタル推奨',
+          reason: '友人サポカが手持ちに未所持のため、体力消費軽減・お出かけ回復を安定化できる友人完凸のレンタルを選定しました。'
         };
       }
 
       if (rentalName.includes('フォーエバーヤング')) {
         return {
           title: '🚀 汎用最高峰スピード練習・上限突破レンタル推奨',
-          reason: `手持ちの駿川たづな（${ownedTazunaUncap >= 0 ? ownedTazunaUncap + '凸' : '無凸'}）を自前で運用し、練習性能・スピード上限ボーナスが環境最強のフォーエバーヤング完凸をレンタルしてステータス天井を大きく引き上げます。	`
+          reason: `手持ちの吾妻（${ownedAzumaUncap >= 0 ? ownedAzumaUncap + '凸' : '無凸'}）を自前で運用し、練習性能・スピード上限ボーナスが環境最強のフォーエバーヤング完凸をレンタルしてステータス天井（最大2500）を大きく引き上げます。`
         };
       }
 
