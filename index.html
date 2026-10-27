@@ -2728,12 +2728,14 @@
           } else {
             const idealPlaceholder = idealCards.find(c => c.type === reqType && !usedChars.has(getBaseCharName(c.name))) 
               || { name: `未所持 (${reqType})`, type: reqType };
+            const pCharName = getBaseCharName(idealPlaceholder.name);
+            usedChars.add(pCharName);
             chosenOwned.push({
               ...idealPlaceholder,
               uncap: -1,
               score: 0,
               isPlaceholder: true,
-              charName: getBaseCharName(idealPlaceholder.name)
+              charName: pCharName
             });
             missingTypes.push(reqType);
           }
