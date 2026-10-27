@@ -37,8 +37,10 @@
       --card-sub: #f8fafc;
       --card-border: #cbd5e1;
       --text-main: #0f172a;
-      --text-muted: #64748b;
+      --text-muted: #475569;
       --highlight: #0284c7;
+      --accent: #d97706;
+      --accent-gold: #b45309; /* Deep amber gold - prevents text whiteout on light backgrounds */
     }
 
     * {
@@ -1377,6 +1379,72 @@
       border-left-color: #d97706 !important;
     }
 
+    /* Deck Period Box (サポカ編成タイプ別 演目稽古・教え育成プラン) */
+    .deck-period-box {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid var(--card-border);
+      transition: all 0.2s;
+    }
+    [data-theme="light"] .deck-period-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+
+    .deck-period-title-junior {
+      font-size: 0.88rem;
+      color: #34d399;
+      font-weight: 700;
+    }
+    [data-theme="light"] .deck-period-title-junior {
+      color: #059669;
+    }
+
+    .deck-period-title-classic {
+      font-size: 0.88rem;
+      color: #60a5fa;
+      font-weight: 700;
+    }
+    [data-theme="light"] .deck-period-title-classic {
+      color: #1d4ed8;
+    }
+
+    .deck-period-title-senior {
+      font-size: 0.88rem;
+      color: #fde047;
+      font-weight: 700;
+    }
+    [data-theme="light"] .deck-period-title-senior {
+      color: #b45309;
+    }
+
+    /* Distance Region Ratio Badge - Light Theme Fix */
+    [data-theme="light"] .distance-region-ratio-badge {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    /* Region Pill in Light Theme */
+    [data-theme="light"] .region-pill {
+      background: #f0f9ff;
+      border-color: #0284c7;
+      color: #0369a1;
+      font-weight: 700;
+    }
+
+    /* Distance Region Step in Builds tab */
+    [data-theme="light"] .distance-region-step {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+    }
+    [data-theme="light"] .distance-region-step-title {
+      color: #0f172a;
+    }
+
   </style>
 </head>
 <body>
@@ -2626,42 +2694,42 @@
           
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
             <!-- Junior -->
-            <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #10b981;">
+            <div class="deck-period-box" style="border-left: 4px solid #10b981;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
-                <strong style="font-size: 0.85rem; color: #6ee7b7;">🌱 ジュニア級（基礎演目伝受期）</strong>
+                <strong class="deck-period-title-junior">🌱 ジュニア級（基礎演目伝受期）</strong>
                 <span class="distance-region-ratio-badge">${deck.junior.ingredient_ratio}</span>
               </div>
               ${deck.junior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.junior.raw_ingredients_total}</div>` : ''}
               <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
                 ${deck.junior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
               </div>
-              <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.junior.purpose}</div>
+              <div style="font-size: 0.76rem; color: var(--text-main); line-height: 1.45;">${deck.junior.purpose}</div>
             </div>
 
             <!-- Classic -->
-            <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #3b82f6;">
+            <div class="deck-period-box" style="border-left: 4px solid #3b82f6;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
-                <strong style="font-size: 0.85rem; color: #93c5fd;">⚔️ クラシック級（演目稽古急伸期）</strong>
+                <strong class="deck-period-title-classic">⚔️ クラシック級（演目稽古急伸期）</strong>
                 <span class="distance-region-ratio-badge">${deck.classic.ingredient_ratio}</span>
               </div>
               ${deck.classic.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.classic.raw_ingredients_total}</div>` : ''}
               <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
                 ${deck.classic.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
               </div>
-              <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.classic.purpose}</div>
+              <div style="font-size: 0.76rem; color: var(--text-main); line-height: 1.45;">${deck.classic.purpose}</div>
             </div>
 
             <!-- Senior -->
-            <div style="background: rgba(0,0,0,0.15); border-radius: 8px; padding: 10px; border-left: 3px solid #f59e0b;">
+            <div class="deck-period-box" style="border-left: 4px solid #f59e0b;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
-                <strong style="font-size: 0.85rem; color: #fde047;">👑 シニア級（午式駿大祭本番・カンスト仕上げ）</strong>
+                <strong class="deck-period-title-senior">👑 シニア級（午式駿大祭本番・カンスト仕上げ）</strong>
                 <span class="distance-region-ratio-badge">${deck.senior.ingredient_ratio}</span>
               </div>
               ${deck.senior.raw_ingredients_total ? `<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">📊 ${deck.senior.raw_ingredients_total}</div>` : ''}
               <div style="display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
                 ${deck.senior.selected_regions.map(r => `<span class="region-pill" style="font-size: 0.74rem; padding: 2px 6px;">📍 ${r}</span>`).join('')}
               </div>
-              <div style="font-size: 0.75rem; color: var(--text-main); line-height: 1.4;">${deck.senior.purpose}</div>
+              <div style="font-size: 0.76rem; color: var(--text-main); line-height: 1.45;">${deck.senior.purpose}</div>
             </div>
           </div>
         </div>
