@@ -1239,6 +1239,144 @@
       color: #b45309;
     }
 
+    /* Teachings Strategy Light/Dark Theme Specific Styles */
+    .teaching-box-container {
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      margin-bottom: 8px;
+      border: 2px solid var(--card-border);
+      transition: all 0.2s;
+    }
+    [data-theme="light"] .teaching-box-container {
+      background: #ffffff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border-color: #cbd5e1;
+    }
+
+    /* Headings for Periods */
+    .teaching-title-junior { color: #34d399; }
+    [data-theme="light"] .teaching-title-junior { color: #059669; font-weight: 700; }
+
+    .teaching-title-classic { color: #60a5fa; }
+    [data-theme="light"] .teaching-title-classic { color: #1d4ed8; font-weight: 700; }
+
+    .teaching-title-senior { color: #fde047; }
+    [data-theme="light"] .teaching-title-senior { color: #b45309; font-weight: 700; }
+
+    .teaching-title-tree { color: #fde047; }
+    [data-theme="light"] .teaching-title-tree { color: #b45309; font-weight: 700; }
+
+    /* Concept & Advice Boxes */
+    .teaching-concept-box {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      margin-bottom: 14px;
+      background: rgba(0,0,0,0.28);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+    }
+    [data-theme="light"] .teaching-concept-box {
+      background: #f8fafc;
+      color: #0f172a;
+      border: 1px solid #e2e8f0;
+    }
+
+    .teaching-camp-advice {
+      background: rgba(245, 158, 11, 0.14);
+      border-left: 4px solid var(--accent-gold);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #fde047;
+      line-height: 1.5;
+    }
+    [data-theme="light"] .teaching-camp-advice {
+      background: #fef3c7;
+      border-left: 4px solid #d97706;
+      color: #78350f;
+      font-weight: 600;
+    }
+
+    /* Slot Pill */
+    .teaching-pill {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #fde047;
+      padding: 3px 8px;
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.4);
+      border-radius: 6px;
+    }
+    [data-theme="light"] .teaching-pill {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      color: #92400e;
+    }
+
+    /* Slot Card Sub */
+    .teaching-slot-card {
+      background: var(--card-sub);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px;
+      transition: transform 0.15s ease;
+    }
+    [data-theme="light"] .teaching-slot-card {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+    }
+
+    /* Transmutation Label */
+    .teaching-trans-label {
+      font-size: 0.74rem;
+      color: #6ee7b7;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    [data-theme="light"] .teaching-trans-label {
+      color: #047857;
+    }
+
+    /* Evolution Tree Table Items */
+    .tree-base-title { color: #6ee7b7; }
+    [data-theme="light"] .tree-base-title { color: #047857; font-weight: 700; }
+
+    .tree-evolved-title { color: #fde047; }
+    [data-theme="light"] .tree-evolved-title { color: #b45309; font-weight: 700; }
+
+    .tree-slot-pill {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--highlight);
+      border-radius: 6px;
+    }
+    [data-theme="light"] .tree-slot-pill {
+      background: #e0f2fe;
+      border: 1px solid #0284c7;
+      color: #0369a1;
+      font-weight: 600;
+    }
+
+    /* Rule Banner and Regional Rules in Light Theme */
+    [data-theme="light"] .rule-banner {
+      background: #fefce8;
+      border-color: #facc15;
+      color: #713f12;
+    }
+    [data-theme="light"] .rule-banner h3 {
+      color: #854d0e !important;
+    }
+    [data-theme="light"] .rule-banner div[style*="background: rgba(0,0,0,0.22)"] {
+      background: #fef9c3 !important;
+      color: #713f12 !important;
+      border-left-color: #d97706 !important;
+    }
+
   </style>
 </head>
 <body>
@@ -2562,15 +2700,15 @@
       if (periodKey === 'tree') {
         const tree = strategy.evolution_tree || [];
         container.innerHTML = `
-          <div style="background: rgba(0,0,0,0.22); border-radius: 12px; padding: 16px; border: 2px solid var(--accent-gold); box-shadow: 0 4px 15px rgba(0,0,0,0.25);">
+          <div class="teaching-box-container" style="border-color: var(--accent-gold);">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; border-bottom: 1px solid var(--card-border); padding-bottom: 8px;">
               <div style="display: flex; align-items: center; gap: 8px;">
-                <span class="tier-badge tier-s" style="font-size: 0.8rem; background: linear-gradient(135deg, #8b5cf6, #ec4899);">選択中: 🔄 系統樹</span>
-                <h4 style="font-size: 1rem; color: var(--accent-gold); font-weight: 700; margin: 0;">駿大祭 「教え」転成（進化）系統樹 ＆ Tier早見表</h4>
+                <span class="tier-badge tier-s" style="font-size: 0.8rem; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: white;">選択中: 🔄 系統樹</span>
+                <h4 class="teaching-title-tree" style="font-size: 1.05rem; margin: 0;">駿大祭 「教え」転成（進化）系統樹 ＆ Tier早見表</h4>
               </div>
-              <span class="region-pill" style="font-size: 0.72rem;">クラシック1月・シニア1月 進捗発表会後に転成可能</span>
+              <span class="region-pill" style="font-size: 0.74rem;">クラシック1月・シニア1月 進捗発表会後に転成可能</span>
             </div>
-            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.55;">
               育成中の進捗発表会（クラシック1月・シニア1月）を経て、初期教えを上位教えへパワーアップ転成できます。<strong>一度転成した教えは元に戻せない</strong>ため、育成目標に応じた計画的進化が勝敗を分けます。
             </p>
             <div style="overflow-x: auto;">
@@ -2587,18 +2725,18 @@
                   ${tree.map(t => `
                     <tr>
                       <td>
-                        <strong style="color: #6ee7b7; font-size: 0.88rem;">🌱 ${t.base}</strong>
-                        <div style="font-size: 0.73rem; color: var(--text-muted); margin-top: 3px;">${t.base_effect}</div>
+                        <strong class="tree-base-title" style="font-size: 0.88rem;">🌱 ${t.base}</strong>
+                        <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 3px;">${t.base_effect}</div>
                       </td>
                       <td>
                         <div style="display: flex; align-items: center; gap: 6px;">
                           <span style="font-size: 0.9rem; color: var(--highlight);">➔</span>
-                          <strong style="color: #fde047; font-size: 0.9rem;">✨ ${t.evolves_to}</strong>
+                          <strong class="tree-evolved-title" style="font-size: 0.9rem;">✨ ${t.evolves_to}</strong>
                         </div>
-                        <div style="font-size: 0.75rem; color: var(--text-main); margin-top: 4px; line-height: 1.45;">${t.evolved_effect}</div>
+                        <div style="font-size: 0.76rem; color: var(--text-main); margin-top: 4px; line-height: 1.45;">${t.evolved_effect}</div>
                       </td>
                       <td>
-                        <span class="region-pill" style="font-size: 0.75rem; padding: 3px 8px;">${t.target_slot}</span>
+                        <span class="tree-slot-pill">${t.target_slot}</span>
                       </td>
                       <td>
                         <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
@@ -2620,30 +2758,30 @@
       if (!period) return;
 
       const borderColor = periodKey === 'junior' ? '#10b981' : periodKey === 'classic' ? '#3b82f6' : '#f59e0b';
-      const textColor = periodKey === 'junior' ? '#6ee7b7' : periodKey === 'classic' ? '#93c5fd' : '#fde047';
+      const titleClass = periodKey === 'junior' ? 'teaching-title-junior' : periodKey === 'classic' ? 'teaching-title-classic' : 'teaching-title-senior';
       const periodLabel = periodKey === 'junior' ? '🌱 ジュニア級' : periodKey === 'classic' ? '⚔️ クラシック級' : '👑 シニア級';
 
       container.innerHTML = `
-        <div style="background: rgba(0,0,0,0.22); border-radius: 12px; padding: 16px; border: 2px solid ${borderColor}; box-shadow: 0 4px 15px rgba(0,0,0,0.25); margin-bottom: 8px;">
+        <div class="teaching-box-container" style="border-color: ${borderColor};">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; border-bottom: 1px solid var(--card-border); padding-bottom: 8px;">
             <div style="display: flex; align-items: center; gap: 8px;">
               <span class="tier-badge tier-s" style="font-size: 0.8rem; background: ${borderColor}; color: #fff;">選択中: ${periodLabel}</span>
-              <h4 style="font-size: 1.05rem; color: ${textColor}; font-weight: 700; margin: 0;">${period.period_name}</h4>
+              <h4 class="${titleClass}" style="font-size: 1.05rem; margin: 0;">${period.period_name}</h4>
             </div>
             <span class="tier-badge tier-s" style="font-size: 0.75rem;">🎯 ${period.primary_goal}</span>
           </div>
-          <p style="font-size: 0.82rem; color: var(--text-main); line-height: 1.55; margin-bottom: 14px; background: rgba(0,0,0,0.28); padding: 10px 14px; border-radius: 8px; border-left: 3px solid ${borderColor};">
+          <div class="teaching-concept-box" style="border-left: 4px solid ${borderColor};">
             💡 <strong>立ち回り指針:</strong> ${period.core_concept}
-          </p>
+          </div>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 14px;">
             ${period.slot_allocations.map(slot => `
-              <div style="background: var(--card-sub); border: 1px solid var(--card-border); border-radius: 10px; padding: 12px; transition: transform 0.15s ease;">
+              <div class="teaching-slot-card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                   <strong style="color: var(--highlight); font-size: 0.88rem;">⚡ ${slot.slot}</strong>
-                  <span class="region-pill" style="font-size: 0.76rem; font-weight: 700; color: #fde047; padding: 3px 8px; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3);">${slot.recommended_teaching}</span>
+                  <span class="teaching-pill">${slot.recommended_teaching}</span>
                 </div>
-                ${slot.transmutation_from ? `<div style="font-size: 0.74rem; color: #6ee7b7; margin-bottom: 5px; font-weight: 600;">🔄 転成: ${slot.transmutation_from}</div>` : ''}
+                ${slot.transmutation_from ? `<div class="teaching-trans-label">🔄 転成: ${slot.transmutation_from}</div>` : ''}
                 <div style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
                   ${slot.reason}
                 </div>
@@ -2652,7 +2790,7 @@
           </div>
 
           ${period.camp_advice ? `
-            <div style="background: rgba(245, 158, 11, 0.14); border-left: 4px solid var(--accent-gold); padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; color: #fde047; line-height: 1.5;">
+            <div class="teaching-camp-advice">
               ${period.camp_advice}
             </div>
           ` : ''}
