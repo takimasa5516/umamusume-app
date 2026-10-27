@@ -12,7 +12,7 @@ console.log('🧪 RUNNING UMA APP AUTOMATED VERIFICATION SUITE');
 console.log('========================================================');
 
 // 1. DATA INTEGRITY CHECK
-console.log('\n[TEST 1/3] Checking Data Integrity & Resource Sum 10 Law...');
+console.log('\n[TEST 1/4] Checking Data Integrity, Resource Sum 10 Law & Teachings Strategy...');
 const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
 
 // Verify region sum 10
@@ -30,15 +30,28 @@ if (meta.region_strategies && meta.region_strategies.deck_recommendations) {
     });
   });
 }
-if (regionPass) {
-  console.log('✅ PASS: All regional strategy plans satisfy the Resource Sum 10 Law!');
+
+// Verify teachings strategy
+if (!meta.region_strategies || !meta.region_strategies.teachings_strategy) {
+  console.error('❌ teachings_strategy is missing from meta.region_strategies!');
+  regionPass = false;
 } else {
-  console.error('❌ FAIL: Regional resource law violated.');
+  const ts = meta.region_strategies.teachings_strategy;
+  if (!ts.periods || !ts.periods.junior || !ts.periods.classic || !ts.periods.senior || !ts.evolution_tree) {
+    console.error('❌ teachings_strategy missing required periods or evolution tree!');
+    regionPass = false;
+  }
+}
+
+if (regionPass) {
+  console.log('✅ PASS: All regional strategy plans satisfy the Resource Sum 10 Law and Teachings Strategy is complete!');
+} else {
+  console.error('❌ FAIL: Regional resource law or teachings strategy violated.');
   process.exit(1);
 }
 
 // 2. DOM RENDERING TESTS
-console.log('\n[TEST 2/3] Checking DOM Elements Full Rendering...');
+console.log('\n[TEST 2/4] Checking DOM Elements Full Rendering...');
 const html = fs.readFileSync(htmlPath, 'utf8');
 const dataJs = fs.readFileSync(dataJsPath, 'utf8');
 
@@ -113,7 +126,8 @@ const checkIds = [
   'sources-list',
   'uncap-table-body',
   'builder-result-container',
-  'mybox-cards-grid'
+  'mybox-cards-grid',
+  'teachings-dynamic-content'
 ];
 
 let domPass = true;
@@ -127,7 +141,7 @@ for (const id of checkIds) {
 }
 
 if (domPass) {
-  console.log('✅ PASS: All 15 required DOM containers rendered successfully with rich content!');
+  console.log('✅ PASS: All 16 required DOM containers rendered successfully with rich content!');
 } else {
   console.error('❌ FAIL: Some DOM containers failed to render.');
   process.exit(1);

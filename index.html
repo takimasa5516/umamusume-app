@@ -1554,6 +1554,31 @@
         </div>
       </div>
 
+      <!-- TEACHINGS ALLOCATION & TRANSMUTATION STRATEGY -->
+      <div class="section-card" id="teachings-strategy-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>🎓 ジュニア/クラシック/シニア 時期別「教え」最適スロット割り当て ＆ 転成（進化）戦略</span>
+          </div>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
+          各トレーニング（スピード/スタミナ/パワー/根性/賢さ）にセットする「教え」の時期別最適解です。ジュニア期の基礎5種から、クラシック1月・シニア1月の節目で上位の「特化・協力・研鑽・両道・不屈」へと転成させ、ステータス上限2500突破・カンストを目指します。
+        </p>
+
+        <!-- Teaching Period Tab Buttons -->
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+          <button type="button" class="pill-btn active" id="teach-tab-junior" onclick="switchTeachingPeriod('junior')">🌱 ジュニア級（基礎5種セット）</button>
+          <button type="button" class="pill-btn" id="teach-tab-classic" onclick="switchTeachingPeriod('classic')">⚔️ クラシック級（第1回転成）</button>
+          <button type="button" class="pill-btn" id="teach-tab-senior" onclick="switchTeachingPeriod('senior')">👑 シニア級（第2回転成・極化）</button>
+          <button type="button" class="pill-btn" id="teach-tab-tree" onclick="switchTeachingPeriod('tree')">🔄 転成系統樹・進化早見表</button>
+        </div>
+
+        <!-- Dynamic Content Container -->
+        <div id="teachings-dynamic-content">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
       <!-- Deck-type based Region Combinations -->
       <div class="section-card">
         <div class="section-header">
@@ -2450,6 +2475,124 @@
           </tr>
         `).join('');
       }
+
+      // 4. Teachings Strategy Rendering
+      renderTeachingsStrategy(currentTeachingPeriod);
+    }
+
+    let currentTeachingPeriod = 'junior';
+
+    function switchTeachingPeriod(periodKey) {
+      currentTeachingPeriod = periodKey;
+      ['junior', 'classic', 'senior', 'tree'].forEach(k => {
+        const btn = document.getElementById(`teach-tab-${k}`);
+        if (btn) btn.classList.toggle('active', k === periodKey);
+      });
+      renderTeachingsStrategy(periodKey);
+    }
+
+    function renderTeachingsStrategy(periodKey = 'junior') {
+      const container = document.getElementById('teachings-dynamic-content');
+      if (!container) return;
+      const data = getMetaData().region_strategies;
+      const strategy = data ? data.teachings_strategy : null;
+      if (!strategy) {
+        container.innerHTML = '<p style="color:var(--text-muted); font-size:0.8rem;">教え戦略データを読み込み中...</p>';
+        return;
+      }
+
+      if (periodKey === 'tree') {
+        const tree = strategy.evolution_tree || [];
+        container.innerHTML = `
+          <div style="background: rgba(0,0,0,0.2); border-radius: 10px; padding: 14px; border: 1px solid var(--card-border);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
+              <h4 style="font-size: 0.95rem; color: var(--accent-gold); font-weight: 700;">🔄 駿大祭 「教え」転成（進化）系統樹 ＆ Tier早見表</h4>
+              <span class="tier-badge tier-s" style="font-size: 0.72rem;">クラシック1月・シニア1月 進捗発表会後に転成可能</span>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.45;">
+              育成中の進捗発表会（クラシック1月・シニア1月）を経て、初期教えを上位教えへパワーアップ転成できます。<strong>一度転成した教えは元に戻せない</strong>ため、育成目標に応じた計画的進化が勝敗を分けます。
+            </p>
+            <div style="overflow-x: auto;">
+              <table class="skills-table">
+                <thead>
+                  <tr>
+                    <th style="min-width: 100px;">初期教え (ジュニア)</th>
+                    <th style="min-width: 150px;">上位転成先 (クラシック/シニア)</th>
+                    <th style="min-width: 120px;">推奨配置スロット</th>
+                    <th>転成時期・立ち回り評価</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${tree.map(t => `
+                    <tr>
+                      <td>
+                        <strong style="color: #6ee7b7; font-size: 0.85rem;">🌱 ${t.base}</strong>
+                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 3px;">${t.base_effect}</div>
+                      </td>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                          <span style="font-size: 0.85rem; color: var(--highlight);">➔</span>
+                          <strong style="color: #fde047; font-size: 0.88rem;">✨ ${t.evolves_to}</strong>
+                        </div>
+                        <div style="font-size: 0.74rem; color: var(--text-main); margin-top: 3px; line-height: 1.4;">${t.evolved_effect}</div>
+                      </td>
+                      <td>
+                        <span class="region-pill" style="font-size: 0.74rem; padding: 2px 7px;">${t.target_slot}</span>
+                      </td>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                          <span class="tier-badge ${t.eval_tier.includes('SSS') ? 'tier-s' : 'tier-a'}" style="font-size: 0.72rem;">${t.eval_tier}</span>
+                          <span style="font-size: 0.75rem; color: var(--highlight); font-weight: 700;">⏳ ${t.timing}</span>
+                        </div>
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const period = strategy.periods[periodKey];
+      if (!period) return;
+
+      const borderColor = periodKey === 'junior' ? '#10b981' : periodKey === 'classic' ? '#3b82f6' : '#f59e0b';
+      const textColor = periodKey === 'junior' ? '#6ee7b7' : periodKey === 'classic' ? '#93c5fd' : '#fde047';
+
+      container.innerHTML = `
+        <div style="background: rgba(0,0,0,0.18); border-radius: 12px; padding: 14px; border-left: 4px solid ${borderColor}; border: 1px solid var(--card-border); margin-bottom: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
+            <h4 style="font-size: 1rem; color: ${textColor}; font-weight: 700;">${period.period_name}</h4>
+            <span class="tier-badge tier-s" style="font-size: 0.75rem;">🎯 ${period.primary_goal}</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-main); line-height: 1.5; margin-bottom: 12px; background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 6px;">
+            💡 <strong>立ち回り指針:</strong> ${period.core_concept}
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-bottom: 12px;">
+            ${period.slot_allocations.map(slot => `
+              <div style="background: var(--card-sub); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--highlight); font-size: 0.85rem;">⚡ ${slot.slot}</strong>
+                  <span class="region-pill" style="font-size: 0.74rem; font-weight: 700; color: #fde047; padding: 2px 7px;">${slot.recommended_teaching}</span>
+                </div>
+                ${slot.transmutation_from ? `<div style="font-size: 0.72rem; color: #6ee7b7; margin-bottom: 4px;">🔄 転成: ${slot.transmutation_from}</div>` : ''}
+                <div style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.45;">
+                  ${slot.reason}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          ${period.camp_advice ? `
+            <div style="background: rgba(245, 158, 11, 0.12); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: 6px; font-size: 0.78rem; color: #fde047; line-height: 1.45;">
+              ${period.camp_advice}
+            </div>
+          ` : ''}
+        </div>
+      `;
     }
 
     
